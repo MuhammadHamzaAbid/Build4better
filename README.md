@@ -100,8 +100,8 @@ Clone the repository and install dependencies:
 
 ```bash
 # Clone the repository
-git clone <repo-url>
-cd build4better
+git clone https://github.com/MuhammadHamzaAbid/Build4better.git
+cd Build4better
 
 # Install dependencies for both server and client
 npm --prefix server install
@@ -149,6 +149,9 @@ Open your browser at: **`http://localhost:5173`**
 
 ---
 
-## 7. Final Submission Commit Identifier
+## 7. Final Submission Information
 
-* **Submitted Commit Hash:** `INITIAL_SUBMISSION_CANDIDATE` (See git commit log)
+* **GitHub Repository:** [https://github.com/MuhammadHamzaAbid/Build4better](https://github.com/MuhammadHamzaAbid/Build4better)
+* **Default Branch:** `main`
+* **Status:** Complete & verified for Build4Better judging
+
