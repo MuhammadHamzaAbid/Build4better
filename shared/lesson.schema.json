@@ -1,0 +1,70 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Lesson",
+  "type": "object",
+  "required": ["id", "title", "steps"],
+  "properties": {
+    "id": { "type": "string" },
+    "title": {
+      "type": "object",
+      "required": ["urdu", "roman"],
+      "properties": {
+        "urdu": { "type": "string" },
+        "roman": { "type": "string" }
+      }
+    },
+    "language_default": { "type": "string", "enum": ["urdu", "roman"] },
+    "steps": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "image", "target", "explain", "question", "wrong_tap", "hint_levels"],
+        "properties": {
+          "id": { "type": "string" },
+          "image": { "type": "string" },
+          "target": {
+            "type": "object",
+            "required": ["x", "y", "w", "h"],
+            "properties": {
+              "x": { "type": "number", "minimum": 0, "maximum": 100 },
+              "y": { "type": "number", "minimum": 0, "maximum": 100 },
+              "w": { "type": "number", "minimum": 0, "maximum": 100 },
+              "h": { "type": "number", "minimum": 0, "maximum": 100 }
+            }
+          },
+          "explain": {
+            "type": "object",
+            "required": ["urdu", "roman", "voice"],
+            "properties": {
+              "urdu": { "type": "string" },
+              "roman": { "type": "string" },
+              "voice": { "type": "string" }
+            }
+          },
+          "question": {
+            "type": "object",
+            "required": ["urdu", "roman"],
+            "properties": {
+              "urdu": { "type": "string" },
+              "roman": { "type": "string" }
+            }
+          },
+          "wrong_tap": {
+            "type": "object",
+            "required": ["urdu", "roman"],
+            "properties": {
+              "urdu": { "type": "string" },
+              "roman": { "type": "string" }
+            }
+          },
+          "hint_levels": {
+            "type": "array",
+            "items": { "type": "string" },
+            "minItems": 3,
+            "maxItems": 3
+          }
+        }
+      }
+    }
+  }
+}
