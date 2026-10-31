@@ -48,12 +48,13 @@ export default function HotspotEditor({ imageSrc, value = { x: 10, y: 50, w: 80,
         alignItems: 'center',
         padding: '8px 12px',
         backgroundColor: '#FFFFFF',
-        borderRadius: '10px',
+        borderRadius: 'var(--radius-sm)',
         border: '1px solid var(--border)',
-        fontSize: '14px'
+        fontSize: '13px',
+        fontFamily: 'var(--font-mono)'
       }}>
         <span>
-          Target: <strong>x: {value.x}%, y: {value.y}%, w: {value.w}%, h: {value.h}%</strong>
+          Target: x:{value.x}%, y:{value.y}%, w:{value.w}%, h:{value.h}%
         </span>
         <button
           type="button"
@@ -63,13 +64,13 @@ export default function HotspotEditor({ imageSrc, value = { x: 10, y: 50, w: 80,
             backgroundColor: copied ? 'var(--primary-soft)' : 'var(--surface)',
             color: 'var(--primary)',
             border: '1px solid var(--primary)',
-            borderRadius: '6px',
+            borderRadius: 'var(--radius-sm)',
             cursor: 'pointer',
             fontSize: '12px',
-            fontWeight: 'bold'
+            fontWeight: '700'
           }}
         >
-          {copied ? 'Copied!' : 'Copy JSON'}
+          {copied ? 'Copied' : 'Copy Coordinates'}
         </button>
       </div>
 
@@ -83,8 +84,8 @@ export default function HotspotEditor({ imageSrc, value = { x: 10, y: 50, w: 80,
           width: '100%',
           userSelect: 'none',
           cursor: 'crosshair',
-          border: '2px solid var(--primary)',
-          borderRadius: '16px',
+          border: '1.5px solid var(--primary)',
+          borderRadius: 'var(--radius-md)',
           overflow: 'hidden'
         }}
       >
@@ -94,7 +95,6 @@ export default function HotspotEditor({ imageSrc, value = { x: 10, y: 50, w: 80,
           style={{ width: '100%', display: 'block', pointerEvents: 'none' }}
         />
 
-        {/* Drawn Hotspot Box */}
         <div
           style={{
             position: 'absolute',
@@ -102,15 +102,15 @@ export default function HotspotEditor({ imageSrc, value = { x: 10, y: 50, w: 80,
             top: `${value.y}%`,
             width: `${value.w}%`,
             height: `${value.h}%`,
-            border: '3px solid var(--primary)',
-            backgroundColor: 'rgba(15, 110, 90, 0.25)',
+            border: '2px solid var(--primary)',
+            backgroundColor: 'rgba(15, 94, 78, 0.2)',
             boxSizing: 'border-box',
             pointerEvents: 'none'
           }}
         />
       </div>
-      <p style={{ fontSize: '13px', color: 'var(--muted)', textAlign: 'center' }}>
-        👆 Drag to draw tap area over the image
+      <p style={{ fontSize: '13px', color: 'var(--text-secondary)', textAlign: 'center' }}>
+        Click and drag across the screen to define the tap zone.
       </p>
     </div>
   );

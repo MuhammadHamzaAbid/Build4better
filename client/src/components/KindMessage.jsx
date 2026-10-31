@@ -1,5 +1,6 @@
 import React from 'react';
 import { useLanguage } from '../lib/i18n';
+import { IconLightbulb, IconUndo, IconRotate } from './Icons';
 
 export default function KindMessage({ explanation, onUndo, onRetry }) {
   const { lang, t } = useLanguage();
@@ -7,6 +8,7 @@ export default function KindMessage({ explanation, onUndo, onRetry }) {
 
   return (
     <div
+      role="alert"
       style={{
         position: 'fixed',
         bottom: 0,
@@ -15,45 +17,47 @@ export default function KindMessage({ explanation, onUndo, onRetry }) {
         maxWidth: '430px',
         margin: '0 auto',
         backgroundColor: 'var(--gentle-soft)',
-        borderTop: '3px solid var(--gentle)',
-        borderTopLeftRadius: '24px',
-        borderTopRightRadius: '24px',
+        borderTop: '2px solid var(--gentle)',
+        borderTopLeftRadius: 'var(--radius-xl)',
+        borderTopRightRadius: 'var(--radius-xl)',
         padding: '24px 20px',
-        boxShadow: '0 -8px 24px rgba(0,0,0,0.12)',
+        boxShadow: 'var(--shadow-lg)',
         zIndex: 200,
-        animation: 'slideUp 0.3s ease-out'
+        animation: 'slideUpCard 0.25s cubic-bezier(0.16, 1, 0.3, 1)'
       }}
     >
-      <div style={{ display: 'flex', alignItems: 'flex-start', gap: '14px', marginBottom: '16px' }}>
+      <div style={{ display: 'flex', alignItems: 'flex-start', gap: '14px', marginBottom: '18px' }}>
         <div style={{
-          fontSize: '28px',
-          width: '44px',
-          height: '44px',
-          borderRadius: '50%',
+          width: '42px',
+          height: '42px',
+          borderRadius: 'var(--radius-md)',
           backgroundColor: '#FFFFFF',
+          border: '1px solid var(--gentle-border)',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
+          color: 'var(--gentle-text)',
           flexShrink: 0
         }}>
-          💡
+          <IconLightbulb size={24} />
         </div>
 
         <div style={{ flex: 1 }}>
           <h4 style={{
-            fontSize: isUrdu ? '24px' : '20px',
-            fontFamily: isUrdu ? 'var(--font-urdu)' : 'var(--font-roman)',
-            color: '#8A5200',
-            marginBottom: '6px',
+            fontSize: isUrdu ? '22px' : '18px',
+            fontFamily: isUrdu ? 'var(--font-urdu)' : 'var(--font-sans)',
+            color: 'var(--gentle-text)',
+            marginBottom: '4px',
+            fontWeight: '700',
             direction: isUrdu ? 'rtl' : 'ltr'
           }}>
             {isUrdu ? 'کوئی بات نہیں، یہ سب سے ہوتا ہے!' : 'Koi baat nahi, yeh sab se hota hai!'}
           </h4>
 
           <p style={{
-            fontSize: isUrdu ? '22px' : '18px',
-            fontFamily: isUrdu ? 'var(--font-urdu)' : 'var(--font-roman)',
-            lineHeight: isUrdu ? '1.8' : '1.4',
+            fontSize: isUrdu ? '21px' : '17px',
+            fontFamily: isUrdu ? 'var(--font-urdu)' : 'var(--font-sans)',
+            lineHeight: isUrdu ? '1.9' : '1.45',
             color: 'var(--text)',
             direction: isUrdu ? 'rtl' : 'ltr'
           }}>
@@ -69,17 +73,22 @@ export default function KindMessage({ explanation, onUndo, onRetry }) {
           style={{
             flex: 1,
             minHeight: '52px',
-            borderRadius: '16px',
-            border: '2px solid var(--gentle)',
+            borderRadius: 'var(--radius-md)',
+            border: '1px solid var(--gentle-border)',
             backgroundColor: '#FFFFFF',
-            color: '#8A5200',
-            fontSize: isUrdu ? '20px' : '17px',
-            fontFamily: isUrdu ? 'var(--font-urdu)' : 'var(--font-roman)',
-            fontWeight: 'bold',
-            cursor: 'pointer'
+            color: 'var(--gentle-text)',
+            fontSize: isUrdu ? '19px' : '16px',
+            fontFamily: isUrdu ? 'var(--font-urdu)' : 'var(--font-sans)',
+            fontWeight: '700',
+            cursor: 'pointer',
+            display: 'inline-flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            gap: '8px'
           }}
         >
-          {isUrdu ? 'واپس چلتے ہیں' : 'Wapas Jayein (Undo)'}
+          <IconUndo size={18} />
+          <span>{isUrdu ? 'واپس چلیں' : 'Wapas Jayein (Undo)'}</span>
         </button>
 
         <button
@@ -88,17 +97,22 @@ export default function KindMessage({ explanation, onUndo, onRetry }) {
           style={{
             flex: 1,
             minHeight: '52px',
-            borderRadius: '16px',
+            borderRadius: 'var(--radius-md)',
             border: 'none',
             backgroundColor: 'var(--gentle)',
             color: '#FFFFFF',
-            fontSize: isUrdu ? '20px' : '17px',
-            fontFamily: isUrdu ? 'var(--font-urdu)' : 'var(--font-roman)',
-            fontWeight: 'bold',
-            cursor: 'pointer'
+            fontSize: isUrdu ? '19px' : '16px',
+            fontFamily: isUrdu ? 'var(--font-urdu)' : 'var(--font-sans)',
+            fontWeight: '700',
+            cursor: 'pointer',
+            display: 'inline-flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            gap: '8px'
           }}
         >
-          {isUrdu ? 'دوبارہ کوشش کریں' : 'Dobara Koshish'}
+          <IconRotate size={18} />
+          <span>{isUrdu ? 'دوبارہ کوشش' : 'Dobara Koshish'}</span>
         </button>
       </div>
     </div>

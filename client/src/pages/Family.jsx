@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useLanguage } from '../lib/i18n';
 import LanguageToggle from '../components/LanguageToggle';
+import { IconUsers, IconHome, IconAlertTriangle, IconCheckCircle, IconArrowRight } from '../components/Icons';
 import { fetchFamilyProgress } from '../lib/api';
 
 export default function Family() {
@@ -41,31 +42,44 @@ export default function Family() {
   const activeData = useDemo ? demoData : (data || demoData);
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
+    <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', backgroundColor: 'var(--bg)' }}>
       <LanguageToggle />
 
-      <div style={{ padding: '20px 16px', flex: 1, display: 'flex', flexDirection: 'column', gap: '18px' }}>
+      <div style={{ padding: '20px 16px', flex: 1, display: 'flex', flexDirection: 'column', gap: '16px' }}>
         {/* Header */}
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <div>
-            <span style={{
-              fontSize: '13px',
-              padding: '3px 10px',
-              borderRadius: '10px',
-              backgroundColor: 'var(--primary-soft)',
-              color: 'var(--primary)',
-              fontWeight: 'bold'
-            }}>
-              👨‍👩‍👧 Family Progress View
-            </span>
+          <div style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: '6px',
+            fontSize: '13px',
+            padding: '4px 10px',
+            borderRadius: 'var(--radius-full)',
+            backgroundColor: 'var(--primary-soft)',
+            color: 'var(--primary)',
+            fontWeight: '700'
+          }}>
+            <IconUsers size={16} />
+            <span>FAMILY PROGRESS DASHBOARD</span>
           </div>
 
           <button
             type="button"
             onClick={() => navigate('/')}
-            style={{ border: 'none', background: 'transparent', color: 'var(--muted)', cursor: 'pointer' }}
+            style={{
+              border: 'none',
+              background: 'transparent',
+              color: 'var(--text-secondary)',
+              fontSize: '14px',
+              fontWeight: '600',
+              cursor: 'pointer',
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '4px'
+            }}
           >
-            🏠 Home
+            <IconHome size={16} />
+            <span>Home</span>
           </button>
         </div>
 
@@ -73,27 +87,34 @@ export default function Family() {
         <div style={{
           backgroundColor: 'var(--surface)',
           padding: '16px',
-          borderRadius: '16px',
+          borderRadius: 'var(--radius-lg)',
           border: '1px solid var(--border)',
           display: 'flex',
           justifyContent: 'space-between',
-          alignItems: 'center'
+          alignItems: 'center',
+          boxShadow: 'var(--shadow-sm)'
         }}>
           <div>
-            <div style={{ fontSize: '13px', color: 'var(--muted)' }}>Connected Family:</div>
-            <div style={{ fontSize: '20px', fontWeight: 'bold', color: 'var(--primary)' }}>AMMI-2026</div>
+            <div style={{ fontSize: '12px', color: 'var(--text-secondary)', fontWeight: '600', textTransform: 'uppercase' }}>
+              Family Code:
+            </div>
+            <div style={{ fontSize: '20px', fontWeight: '800', fontFamily: 'var(--font-mono)', color: 'var(--primary)' }}>
+              AMMI-2026
+            </div>
           </div>
 
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
             <span style={{
               fontSize: '11px',
               padding: '4px 8px',
-              borderRadius: '8px',
-              backgroundColor: useDemo ? '#FFF1D9' : '#DFF2EC',
-              color: useDemo ? '#8A5200' : 'var(--primary)',
-              fontWeight: 'bold'
+              borderRadius: 'var(--radius-sm)',
+              backgroundColor: useDemo ? 'var(--gentle-soft)' : 'var(--primary-soft)',
+              color: useDemo ? 'var(--gentle-text)' : 'var(--primary)',
+              fontWeight: '700',
+              border: '1px solid',
+              borderColor: useDemo ? 'var(--gentle-border)' : 'var(--border)'
             }}>
-              {useDemo ? '⚠️ SIMULATED DATA' : '✓ LIVE SESSION'}
+              {useDemo ? 'SIMULATED DATA' : 'LIVE SESSION'}
             </span>
 
             <button
@@ -101,9 +122,12 @@ export default function Family() {
               onClick={() => setUseDemo(prev => !prev)}
               style={{
                 fontSize: '12px',
-                padding: '4px 8px',
-                borderRadius: '8px',
+                padding: '4px 10px',
+                borderRadius: 'var(--radius-sm)',
                 border: '1px solid var(--border)',
+                backgroundColor: 'var(--surface)',
+                color: 'var(--text-secondary)',
+                fontWeight: '600',
                 cursor: 'pointer'
               }}
             >
@@ -112,65 +136,88 @@ export default function Family() {
           </div>
         </div>
 
-        {/* Card 1: Confidence Meter (Before vs After) */}
+        {/* Card 1: Confidence Growth */}
         <div style={{
           backgroundColor: 'var(--surface)',
-          borderRadius: '18px',
+          borderRadius: 'var(--radius-lg)',
           padding: '20px',
           border: '1px solid var(--border)',
-          boxShadow: '0 4px 10px rgba(0,0,0,0.04)'
+          boxShadow: 'var(--shadow-sm)'
         }}>
-          <h3 style={{ fontSize: '18px', fontWeight: 'bold', marginBottom: '14px', color: 'var(--text)' }}>
-            📈 Confidence Growth (Aetmad Mein Izafa)
+          <h3 style={{ fontSize: '17px', fontWeight: '800', marginBottom: '14px', color: 'var(--text)' }}>
+            Confidence Growth (Aetmad Mein Izafa)
           </h3>
 
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-around', padding: '10px 0' }}>
             <div style={{ textAlign: 'center' }}>
-              <div style={{ fontSize: '14px', color: 'var(--muted)', marginBottom: '4px' }}>Pehle</div>
-              <div style={{ fontSize: '32px' }}>😟</div>
-              <div style={{ fontSize: '24px', fontWeight: 'bold', color: '#8A5200' }}>
-                {activeData.confidence.before} / 5
+              <div style={{ fontSize: '13px', color: 'var(--text-secondary)', marginBottom: '4px', fontWeight: '600' }}>
+                Pre-Lesson
+              </div>
+              <div style={{
+                fontSize: '28px',
+                fontWeight: '800',
+                fontFamily: 'var(--font-mono)',
+                color: 'var(--gentle-text)',
+                backgroundColor: 'var(--gentle-soft)',
+                padding: '8px 18px',
+                borderRadius: 'var(--radius-md)'
+              }}>
+                {activeData.confidence.before}/5
               </div>
             </div>
 
-            <div style={{ fontSize: '28px', color: 'var(--primary)', fontWeight: 'bold' }}>➔</div>
+            <div style={{ color: 'var(--primary)' }}>
+              <IconArrowRight size={24} />
+            </div>
 
             <div style={{ textAlign: 'center' }}>
-              <div style={{ fontSize: '14px', color: 'var(--muted)', marginBottom: '4px' }}>Baad Mein</div>
-              <div style={{ fontSize: '32px' }}>🙂</div>
-              <div style={{ fontSize: '24px', fontWeight: 'bold', color: 'var(--primary)' }}>
-                {activeData.confidence.after} / 5
+              <div style={{ fontSize: '13px', color: 'var(--text-secondary)', marginBottom: '4px', fontWeight: '600' }}>
+                Post-Practice
+              </div>
+              <div style={{
+                fontSize: '28px',
+                fontWeight: '800',
+                fontFamily: 'var(--font-mono)',
+                color: 'var(--primary)',
+                backgroundColor: 'var(--primary-soft)',
+                padding: '8px 18px',
+                borderRadius: 'var(--radius-md)'
+              }}>
+                {activeData.confidence.after}/5
               </div>
             </div>
           </div>
 
-          <p style={{
+          <div style={{
             fontSize: '14px',
             color: 'var(--primary)',
             backgroundColor: 'var(--primary-soft)',
             padding: '10px',
-            borderRadius: '10px',
-            marginTop: '10px',
+            borderRadius: 'var(--radius-sm)',
+            marginTop: '12px',
             textAlign: 'center',
-            fontWeight: 'bold'
+            fontWeight: '700'
           }}>
-            Confidence improved by +{activeData.confidence.after - activeData.confidence.before} points!
-          </p>
+            Confidence rating improved by +{activeData.confidence.after - activeData.confidence.before} points with safe practice!
+          </div>
         </div>
 
         {/* Card 2: Hesitation Points */}
         <div style={{
           backgroundColor: 'var(--surface)',
-          borderRadius: '18px',
+          borderRadius: 'var(--radius-lg)',
           padding: '20px',
           border: '1px solid var(--border)',
-          boxShadow: '0 4px 10px rgba(0,0,0,0.04)'
+          boxShadow: 'var(--shadow-sm)'
         }}>
-          <h3 style={{ fontSize: '18px', fontWeight: 'bold', marginBottom: '8px', color: 'var(--text)' }}>
-            ⚠️ Kahan Ruk Gayeen? (Hesitation Points)
-          </h3>
-          <p style={{ fontSize: '13px', color: 'var(--muted)', marginBottom: '14px' }}>
-            Steps where the parent took 2+ attempts or requested assistance hints:
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '6px' }}>
+            <IconAlertTriangle size={18} color="var(--gentle)" />
+            <h3 style={{ fontSize: '17px', fontWeight: '800', color: 'var(--text)' }}>
+              Kahan Ruk Gayeen? (Hesitation Points)
+            </h3>
+          </div>
+          <p style={{ fontSize: '13px', color: 'var(--text-secondary)', marginBottom: '14px' }}>
+            Steps where the parent took 2+ attempts or requested hints:
           </p>
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
@@ -182,27 +229,27 @@ export default function Family() {
                   justifyContent: 'space-between',
                   alignItems: 'center',
                   padding: '10px 14px',
-                  backgroundColor: '#FAF7F2',
-                  borderRadius: '12px',
-                  borderLeft: '4px solid #F4A93D'
+                  backgroundColor: 'var(--surface-muted)',
+                  borderRadius: 'var(--radius-sm)',
+                  borderLeft: '3px solid var(--gentle)'
                 }}
               >
                 <div>
-                  <div style={{ fontSize: '15px', fontWeight: 'bold' }}>
+                  <div style={{ fontSize: '14px', fontWeight: '700', color: 'var(--text)' }}>
                     {h.name || `Step ${h.stepId}`}
                   </div>
-                  <div style={{ fontSize: '13px', color: 'var(--muted)' }}>
-                    {h.attempts} attempts taken
+                  <div style={{ fontSize: '12px', color: 'var(--text-secondary)' }}>
+                    {h.attempts} attempts recorded
                   </div>
                 </div>
 
                 <span style={{
-                  fontSize: '12px',
-                  padding: '3px 8px',
-                  borderRadius: '8px',
-                  backgroundColor: '#FFF1D9',
-                  color: '#8A5200',
-                  fontWeight: 'bold'
+                  fontSize: '11px',
+                  padding: '4px 8px',
+                  borderRadius: 'var(--radius-sm)',
+                  backgroundColor: 'var(--gentle-soft)',
+                  color: 'var(--gentle-text)',
+                  fontWeight: '700'
                 }}>
                   {h.hintsUsed} Hints Used
                 </span>
@@ -214,53 +261,56 @@ export default function Family() {
         {/* Card 3: Mistakes-by-Attempt Chart */}
         <div style={{
           backgroundColor: 'var(--surface)',
-          borderRadius: '18px',
+          borderRadius: 'var(--radius-lg)',
           padding: '20px',
           border: '1px solid var(--border)',
-          boxShadow: '0 4px 10px rgba(0,0,0,0.04)'
+          boxShadow: 'var(--shadow-sm)'
         }}>
-          <h3 style={{ fontSize: '18px', fontWeight: 'bold', marginBottom: '8px', color: 'var(--text)' }}>
-            📊 Learning Curve (Mistakes Drop Over Attempts)
+          <h3 style={{ fontSize: '17px', fontWeight: '800', marginBottom: '6px', color: 'var(--text)' }}>
+            Learning Curve (Attempts Distribution)
           </h3>
+          <p style={{ fontSize: '13px', color: 'var(--text-secondary)', marginBottom: '14px' }}>
+            Mistakes drop significantly across repeated attempts:
+          </p>
 
-          <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-around', height: '140px', paddingTop: '20px' }}>
+          <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-around', height: '140px', paddingTop: '16px' }}>
             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '6px' }}>
-              <div style={{ fontSize: '12px', fontWeight: 'bold', color: 'var(--primary)' }}>
-                {activeData.mistakesByAttempt[1]} steps
+              <div style={{ fontSize: '13px', fontWeight: '800', color: 'var(--primary)', fontFamily: 'var(--font-mono)' }}>
+                {activeData.mistakesByAttempt[1]}
               </div>
               <div style={{
-                width: '44px',
-                height: `${Math.max(25, activeData.mistakesByAttempt[1] * 20)}px`,
+                width: '48px',
+                height: `${Math.max(25, activeData.mistakesByAttempt[1] * 22)}px`,
                 backgroundColor: 'var(--primary)',
-                borderRadius: '8px 8px 0 0'
+                borderRadius: '6px 6px 0 0'
               }} />
-              <div style={{ fontSize: '12px', color: 'var(--muted)' }}>1st Try</div>
+              <div style={{ fontSize: '12px', color: 'var(--text-secondary)', fontWeight: '600' }}>1st Try</div>
             </div>
 
             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '6px' }}>
-              <div style={{ fontSize: '12px', fontWeight: 'bold', color: '#8A5200' }}>
-                {activeData.mistakesByAttempt[2]} steps
+              <div style={{ fontSize: '13px', fontWeight: '800', color: 'var(--gentle-text)', fontFamily: 'var(--font-mono)' }}>
+                {activeData.mistakesByAttempt[2]}
               </div>
               <div style={{
-                width: '44px',
-                height: `${Math.max(25, activeData.mistakesByAttempt[2] * 20)}px`,
+                width: '48px',
+                height: `${Math.max(25, activeData.mistakesByAttempt[2] * 22)}px`,
                 backgroundColor: 'var(--gentle)',
-                borderRadius: '8px 8px 0 0'
+                borderRadius: '6px 6px 0 0'
               }} />
-              <div style={{ fontSize: '12px', color: 'var(--muted)' }}>2nd Try</div>
+              <div style={{ fontSize: '12px', color: 'var(--text-secondary)', fontWeight: '600' }}>2nd Try</div>
             </div>
 
             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '6px' }}>
-              <div style={{ fontSize: '12px', fontWeight: 'bold', color: 'var(--muted)' }}>
-                {activeData.mistakesByAttempt[3]} steps
+              <div style={{ fontSize: '13px', fontWeight: '800', color: 'var(--text-tertiary)', fontFamily: 'var(--font-mono)' }}>
+                {activeData.mistakesByAttempt[3]}
               </div>
               <div style={{
-                width: '44px',
-                height: `${Math.max(25, activeData.mistakesByAttempt[3] * 20)}px`,
-                backgroundColor: '#A0AEC0',
-                borderRadius: '8px 8px 0 0'
+                width: '48px',
+                height: `${Math.max(25, activeData.mistakesByAttempt[3] * 22)}px`,
+                backgroundColor: 'var(--border-strong)',
+                borderRadius: '6px 6px 0 0'
               }} />
-              <div style={{ fontSize: '12px', color: 'var(--muted)' }}>3rd Try</div>
+              <div style={{ fontSize: '12px', color: 'var(--text-secondary)', fontWeight: '600' }}>3rd Try</div>
             </div>
           </div>
         </div>

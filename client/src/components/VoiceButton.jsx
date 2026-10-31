@@ -1,7 +1,8 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useLanguage } from '../lib/i18n';
+import { IconVolume, IconVolumePlaying } from './Icons';
 
-export default function VoiceButton({ text, lessonId, stepId, autoPlay = false }) {
+export default function VoiceButton({ text, stepId, autoPlay = false }) {
   const { lang, voiceEnabled } = useLanguage();
   const [isPlaying, setIsPlaying] = useState(false);
   const audioRef = useRef(null);
@@ -34,7 +35,7 @@ export default function VoiceButton({ text, lessonId, stepId, autoPlay = false }
 
     setIsPlaying(true);
 
-    // Try 1: Call /api/tts endpoint
+    // Call /api/tts endpoint
     try {
       const res = await fetch('/api/tts', {
         method: 'POST',
@@ -53,14 +54,13 @@ export default function VoiceButton({ text, lessonId, stepId, autoPlay = false }
         return;
       }
     } catch {
-      // Proceed to fallback
+      // Fallback
     }
 
     tryFallback();
   };
 
   const tryFallback = () => {
-    // Try 2: Browser SpeechSynthesis
     if ('speechSynthesis' in window && text) {
       const utterance = new SpeechSynthesisUtterance(text);
       utterance.lang = lang === 'urdu' ? 'ur-PK' : 'en-US';
@@ -73,28 +73,31 @@ export default function VoiceButton({ text, lessonId, stepId, autoPlay = false }
     }
   };
 
+  const isUrdu = lang === 'urdu';
+
   return (
     <button
       type="button"
       onClick={handlePlay}
+      aria-label={isPlaying ? 'Aawaz rokein' : 'Aawaz sunein'}
       style={{
         display: 'inline-flex',
         alignItems: 'center',
         gap: '8px',
-        padding: '10px 18px',
-        borderRadius: '24px',
-        border: '2px solid var(--primary)',
+        padding: '8px 16px',
+        borderRadius: 'var(--radius-full)',
+        border: '1.5px solid var(--primary)',
         backgroundColor: isPlaying ? 'var(--primary-soft)' : 'var(--surface)',
         color: 'var(--primary)',
-        fontSize: '18px',
+        fontSize: isUrdu ? '18px' : '15px',
+        fontFamily: isUrdu ? 'var(--font-urdu)' : 'var(--font-sans)',
         fontWeight: 'bold',
         cursor: 'pointer',
-        boxShadow: '0 2px 4px rgba(0,0,0,0.06)',
-        transition: 'all 0.2s ease'
+        boxShadow: 'var(--shadow-sm)'
       }}
     >
-      <span>{isPlaying ? '⏹️' : '🔊'}</span>
-      <span>{isPlaying ? (lang === 'urdu' ? 'روکیں' : 'Ruk Jayein') : (lang === 'urdu' ? 'سنیں' : 'Suno')}</span>
+      {isPlaying ? <IconVolumePlaying size={18} /> : <IconVolume size={18} />}
+      <span>{isPlaying ? (isUrdu ? 'روکیں' : 'Ruk Jayein') : (isUrdu ? 'سنیں' : 'Suno')}</span>
     </button>
   );
 }

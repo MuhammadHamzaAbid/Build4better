@@ -6,7 +6,10 @@ export default function TapHotspot({ target, onCorrectTap, hintLevel }) {
   const isHighlighted = hintLevel >= 3;
 
   return (
-    <div
+    <button
+      type="button"
+      tabIndex={0}
+      aria-label="Tap target area"
       onClick={(e) => {
         e.stopPropagation();
         onCorrectTap();
@@ -19,13 +22,13 @@ export default function TapHotspot({ target, onCorrectTap, hintLevel }) {
         height: `${target.h}%`,
         cursor: 'pointer',
         zIndex: 10,
-        borderRadius: '16px',
-        border: isHighlighted ? '3px solid var(--primary)' : '2px dashed transparent',
-        backgroundColor: isHighlighted ? 'rgba(15, 110, 90, 0.15)' : 'transparent',
-        animation: isHighlighted ? 'pulseGlow 1.8s infinite' : 'none',
-        transition: 'all 0.3s ease'
+        borderRadius: 'var(--radius-lg)',
+        border: isHighlighted ? '2.5px solid var(--primary)' : '2px solid transparent',
+        backgroundColor: isHighlighted ? 'rgba(15, 94, 78, 0.12)' : 'transparent',
+        animation: isHighlighted ? 'pulseHighlight 1.8s infinite' : 'none',
+        outline: 'none',
+        padding: 0
       }}
-      title={isHighlighted ? 'Yahan tap karein' : ''}
     />
   );
 }

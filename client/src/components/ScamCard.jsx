@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useLanguage } from '../lib/i18n';
 import VoiceButton from './VoiceButton';
+import { IconShieldAlert, IconCheckCircle, IconLightbulb, IconArrowRight } from './Icons';
 
 export default function ScamCard({ card, onAnswer, onNext, isLast }) {
   const { lang, t } = useLanguage();
@@ -9,7 +10,6 @@ export default function ScamCard({ card, onAnswer, onNext, isLast }) {
 
   const isUrdu = lang === 'urdu';
   const messageText = isUrdu ? card.message.urdu : card.message.roman;
-  const isScam = card.answer === 'scam';
 
   const handleSelect = (choice) => {
     if (answered) return;
@@ -19,20 +19,17 @@ export default function ScamCard({ card, onAnswer, onNext, isLast }) {
     onAnswer(isCorrect);
   };
 
-  // Render message text with highlighted red flags if answered
   const renderMessageContent = () => {
     if (!answered || !card.red_flags || card.red_flags.length === 0) {
       return messageText;
     }
 
-    // Replace each red flag phrase with highlighted span
     let text = messageText;
     const phrases = card.red_flags.map((rf, idx) => ({
       phrase: isUrdu ? rf.phrase.urdu : rf.phrase.roman,
       idx: idx + 1
     }));
 
-    // Find and highlight
     const parts = [];
     let remaining = text;
 
@@ -46,16 +43,27 @@ export default function ScamCard({ card, onAnswer, onNext, isLast }) {
             key={i}
             style={{
               backgroundColor: 'var(--danger-soft)',
-              color: 'var(--danger)',
+              color: 'var(--danger-text)',
               borderBottom: '2px solid var(--danger)',
-              fontWeight: 'bold',
+              fontWeight: '700',
               padding: '2px 6px',
-              borderRadius: '6px',
+              borderRadius: '4px',
               display: 'inline-block',
               margin: '0 2px'
             }}
           >
-            {p.phrase} <small style={{ fontSize: '11px', background: 'var(--danger)', color: '#fff', borderRadius: '50%', padding: '1px 5px' }}>{p.idx}</small>
+            {p.phrase}{' '}
+            <span style={{
+              fontSize: '11px',
+              backgroundColor: 'var(--danger)',
+              color: '#FFFFFF',
+              borderRadius: 'var(--radius-full)',
+              padding: '1px 6px',
+              fontWeight: 'bold',
+              fontFamily: 'var(--font-mono)'
+            }}>
+              {p.idx}
+            </span>
           </span>
         );
         remaining = remaining.substring(matchIndex + p.phrase.length);
@@ -67,65 +75,72 @@ export default function ScamCard({ card, onAnswer, onNext, isLast }) {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-      {/* WhatsApp Message Bubble */}
+      {/* SMS/Message Container */}
       <div style={{
-        backgroundColor: '#DCF8C6',
-        borderRadius: '18px',
-        borderTopRightRadius: '4px',
-        padding: '18px 20px',
-        maxWidth: '92%',
-        alignSelf: isUrdu ? 'flex-start' : 'flex-end',
-        boxShadow: '0 2px 6px rgba(0,0,0,0.08)',
-        position: 'relative',
+        backgroundColor: '#FFFFFF',
+        borderRadius: 'var(--radius-lg)',
+        border: '1px solid var(--border)',
+        padding: '20px',
+        boxShadow: 'var(--shadow-sm)',
         direction: isUrdu ? 'rtl' : 'ltr'
       }}>
         <div style={{
-          fontSize: '12px',
-          color: '#075E54',
-          fontWeight: 'bold',
-          marginBottom: '6px'
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          marginBottom: '12px',
+          borderBottom: '1px solid var(--border)',
+          paddingBottom: '8px'
         }}>
-          💬 {isUrdu ? 'موصول شدہ پیغام:' : 'Mausool Shuda Message:'}
+          <span style={{
+            fontSize: '12px',
+            color: 'var(--text-secondary)',
+            fontWeight: '700',
+            letterSpacing: '0.5px',
+            textTransform: 'uppercase'
+          }}>
+            {isUrdu ? 'پیغام برائے جائزہ:' : 'SMS Message for Review:'}
+          </span>
+          <span style={{ fontSize: '12px', color: 'var(--text-tertiary)', fontFamily: 'var(--font-mono)' }}>
+            12:45 PM
+          </span>
         </div>
 
         <p style={{
-          fontSize: isUrdu ? '24px' : '20px',
-          fontFamily: isUrdu ? 'var(--font-urdu)' : 'var(--font-roman)',
-          lineHeight: isUrdu ? '2.0' : '1.5',
-          color: '#1F2933'
+          fontSize: isUrdu ? '23px' : '18px',
+          fontFamily: isUrdu ? 'var(--font-urdu)' : 'var(--font-sans)',
+          lineHeight: isUrdu ? '2.1' : '1.5',
+          color: 'var(--text)'
         }}>
           {renderMessageContent()}
         </p>
 
         <div style={{
           display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          marginTop: '10px'
+          justifyContent: 'flex-start',
+          marginTop: '14px'
         }}>
           <VoiceButton text={messageText} stepId={card.id} />
-          <span style={{ fontSize: '12px', color: '#5B6770' }}>12:45 PM ✓✓</span>
         </div>
       </div>
 
-      {/* Answer Buttons (Large, Equal) */}
+      {/* Answer Buttons (Large, Touch Comfort) */}
       {!answered ? (
-        <div style={{ display: 'flex', gap: '12px', marginTop: '10px' }}>
+        <div style={{ display: 'flex', gap: '12px' }}>
           <button
             type="button"
             onClick={() => handleSelect('real')}
             style={{
               flex: 1,
-              minHeight: '62px',
-              borderRadius: '18px',
+              minHeight: '60px',
+              borderRadius: 'var(--radius-md)',
               border: '2px solid var(--primary)',
               backgroundColor: 'var(--surface)',
               color: 'var(--primary)',
-              fontSize: isUrdu ? '24px' : '20px',
-              fontFamily: isUrdu ? 'var(--font-urdu)' : 'var(--font-roman)',
-              fontWeight: 'bold',
-              cursor: 'pointer',
-              boxShadow: '0 4px 10px rgba(0,0,0,0.05)'
+              fontSize: isUrdu ? '22px' : '18px',
+              fontFamily: isUrdu ? 'var(--font-urdu)' : 'var(--font-sans)',
+              fontWeight: '700',
+              cursor: 'pointer'
             }}
           >
             {isUrdu ? 'اصل (Real)' : 'Asli (Real)'}
@@ -136,16 +151,15 @@ export default function ScamCard({ card, onAnswer, onNext, isLast }) {
             onClick={() => handleSelect('scam')}
             style={{
               flex: 1,
-              minHeight: '62px',
-              borderRadius: '18px',
-              border: '2px solid #5B6770',
+              minHeight: '60px',
+              borderRadius: 'var(--radius-md)',
+              border: '2px solid var(--text-secondary)',
               backgroundColor: 'var(--surface)',
-              color: '#1F2933',
-              fontSize: isUrdu ? '24px' : '20px',
-              fontFamily: isUrdu ? 'var(--font-urdu)' : 'var(--font-roman)',
-              fontWeight: 'bold',
-              cursor: 'pointer',
-              boxShadow: '0 4px 10px rgba(0,0,0,0.05)'
+              color: 'var(--text)',
+              fontSize: isUrdu ? '22px' : '18px',
+              fontFamily: isUrdu ? 'var(--font-urdu)' : 'var(--font-sans)',
+              fontWeight: '700',
+              cursor: 'pointer'
             }}
           >
             {isUrdu ? 'فراڈ (Scam)' : 'Fraud (Scam)'}
@@ -155,48 +169,55 @@ export default function ScamCard({ card, onAnswer, onNext, isLast }) {
         /* Explanations & Red Flags Reveal */
         <div style={{
           backgroundColor: 'var(--surface)',
-          borderRadius: '20px',
+          borderRadius: 'var(--radius-lg)',
           padding: '20px',
           border: '1px solid var(--border)',
-          animation: 'slideUp 0.3s ease-out'
+          boxShadow: 'var(--shadow-md)',
+          animation: 'fadeIn 0.2s cubic-bezier(0.16, 1, 0.3, 1)'
         }}>
           {/* Result banner */}
           <div style={{
             display: 'flex',
             alignItems: 'center',
             gap: '10px',
-            marginBottom: '14px',
+            marginBottom: '16px',
             padding: '12px 16px',
-            borderRadius: '14px',
+            borderRadius: 'var(--radius-md)',
             backgroundColor: userChoice === card.answer ? 'var(--primary-soft)' : 'var(--gentle-soft)',
-            color: userChoice === card.answer ? 'var(--primary)' : '#8A5200'
+            color: userChoice === card.answer ? 'var(--primary)' : 'var(--gentle-text)'
           }}>
-            <span style={{ fontSize: '24px' }}>
-              {userChoice === card.answer ? '🎉' : '💡'}
-            </span>
+            {userChoice === card.answer ? <IconCheckCircle size={22} /> : <IconLightbulb size={22} />}
             <span style={{
-              fontSize: isUrdu ? '22px' : '18px',
-              fontFamily: isUrdu ? 'var(--font-urdu)' : 'var(--font-roman)',
-              fontWeight: 'bold'
+              fontSize: isUrdu ? '21px' : '16px',
+              fontFamily: isUrdu ? 'var(--font-urdu)' : 'var(--font-sans)',
+              fontWeight: '700'
             }}>
               {userChoice === card.answer
-                ? (isUrdu ? 'شاباش! آپ کا اندازہ بالکل درست تھا۔' : 'Shabash! Aap ka andaza theek tha.')
-                : (isUrdu ? 'کوئی بات نہیں۔ آئیے دیکھیں اس میں کیا راز ہے۔' : 'Koi baat nahi. Aaiye dekhein isme kya raaz hai.')}
+                ? (isUrdu ? 'شاباش! آپ کا فیصلہ بالکل درست تھا۔' : 'Shabash! Aap ka andaza theek tha.')
+                : (isUrdu ? 'کوئی بات نہیں۔ آئیے دیکھیں اس میں کیا راز ہے۔' : 'Koi baat nahi. Aaiye samjhein isme kya raaz hai.')}
             </span>
           </div>
 
           {/* Red flags list */}
           {card.red_flags && card.red_flags.length > 0 && (
             <div style={{ marginBottom: '16px' }}>
-              <h4 style={{
-                fontSize: isUrdu ? '22px' : '17px',
-                fontFamily: isUrdu ? 'var(--font-urdu)' : 'var(--font-roman)',
-                color: 'var(--danger)',
+              <div style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '8px',
+                color: 'var(--danger-text)',
                 marginBottom: '10px',
                 direction: isUrdu ? 'rtl' : 'ltr'
               }}>
-                🚨 {isUrdu ? 'فراڈ کی نشانیاں (Red Flags):' : 'Fraud Ki Nishaniyan:'}
-              </h4>
+                <IconShieldAlert size={18} />
+                <h4 style={{
+                  fontSize: isUrdu ? '20px' : '16px',
+                  fontFamily: isUrdu ? 'var(--font-urdu)' : 'var(--font-sans)',
+                  fontWeight: '700'
+                }}>
+                  {isUrdu ? 'فراڈ کی نشانیاں (Red Flags):' : 'Fraud Ki Nishaniyan:'}
+                </h4>
+              </div>
 
               <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
                 {card.red_flags.map((rf, idx) => (
@@ -204,7 +225,7 @@ export default function ScamCard({ card, onAnswer, onNext, isLast }) {
                     key={idx}
                     style={{
                       padding: '10px 14px',
-                      borderRadius: '12px',
+                      borderRadius: 'var(--radius-sm)',
                       backgroundColor: 'var(--danger-soft)',
                       borderLeft: isUrdu ? 'none' : '3px solid var(--danger)',
                       borderRight: isUrdu ? '3px solid var(--danger)' : 'none',
@@ -212,19 +233,17 @@ export default function ScamCard({ card, onAnswer, onNext, isLast }) {
                     }}
                   >
                     <span style={{
-                      fontWeight: 'bold',
-                      color: 'var(--danger)',
-                      fontSize: isUrdu ? '20px' : '16px',
-                      fontFamily: isUrdu ? 'var(--font-urdu)' : 'var(--font-roman)'
+                      fontWeight: '700',
+                      color: 'var(--danger-text)',
+                      fontSize: isUrdu ? '19px' : '15px',
+                      fontFamily: isUrdu ? 'var(--font-urdu)' : 'var(--font-sans)'
                     }}>
-                      {idx + 1}. "{t(rf.phrase)}":
+                      {idx + 1}. "{t(rf.phrase)}":{' '}
                     </span>
                     <span style={{
-                      fontSize: isUrdu ? '20px' : '16px',
-                      fontFamily: isUrdu ? 'var(--font-urdu)' : 'var(--font-roman)',
-                      color: 'var(--text)',
-                      marginRight: isUrdu ? '6px' : '0',
-                      marginLeft: isUrdu ? '0' : '6px'
+                      fontSize: isUrdu ? '19px' : '15px',
+                      fontFamily: isUrdu ? 'var(--font-urdu)' : 'var(--font-sans)',
+                      color: 'var(--text)'
                     }}>
                       {t(rf.why)}
                     </span>
@@ -236,20 +255,20 @@ export default function ScamCard({ card, onAnswer, onNext, isLast }) {
 
           {/* Remember Box */}
           <div style={{
-            padding: '14px 16px',
-            borderRadius: '14px',
-            backgroundColor: '#FAF7F2',
-            border: '1px dashed var(--muted)',
-            marginBottom: '18px',
+            padding: '12px 14px',
+            borderRadius: 'var(--radius-sm)',
+            backgroundColor: 'var(--surface-muted)',
+            border: '1px solid var(--border)',
+            marginBottom: '16px',
             direction: isUrdu ? 'rtl' : 'ltr'
           }}>
             <p style={{
-              fontSize: isUrdu ? '20px' : '16px',
-              fontFamily: isUrdu ? 'var(--font-urdu)' : 'var(--font-roman)',
+              fontSize: isUrdu ? '19px' : '15px',
+              fontFamily: isUrdu ? 'var(--font-urdu)' : 'var(--font-sans)',
               color: 'var(--text)',
               lineHeight: isUrdu ? '1.8' : '1.4'
             }}>
-              📌 <strong>{isUrdu ? 'ہمیشہ یاد رکھیں:' : 'Hamesha yaad rakhein:'}</strong> {t(card.remember)}
+              <strong>{isUrdu ? 'ہمیشہ یاد رکھیں:' : 'Hamesha yaad rakhein:'}</strong> {t(card.remember)}
             </p>
           </div>
 
@@ -258,20 +277,23 @@ export default function ScamCard({ card, onAnswer, onNext, isLast }) {
             onClick={onNext}
             style={{
               width: '100%',
-              minHeight: '56px',
-              borderRadius: '16px',
+              minHeight: '54px',
+              borderRadius: 'var(--radius-md)',
               border: 'none',
               backgroundColor: 'var(--primary)',
               color: '#FFFFFF',
-              fontSize: isUrdu ? '22px' : '18px',
-              fontFamily: isUrdu ? 'var(--font-urdu)' : 'var(--font-roman)',
-              fontWeight: 'bold',
-              cursor: 'pointer'
+              fontSize: isUrdu ? '21px' : '17px',
+              fontFamily: isUrdu ? 'var(--font-urdu)' : 'var(--font-sans)',
+              fontWeight: '700',
+              cursor: 'pointer',
+              display: 'inline-flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: '8px'
             }}
           >
-            {isLast
-              ? (isUrdu ? 'نتیجہ دیکھیں ➔' : 'Nateeja Dekhein ➔')
-              : (isUrdu ? 'اگلا پیغام ➔' : 'Agla Message ➔')}
+            <span>{isLast ? (isUrdu ? 'نتیجہ دیکھیں' : 'Nateeja Dekhein') : (isUrdu ? 'اگلا پیغام' : 'Agla Message')}</span>
+            <IconArrowRight size={18} />
           </button>
         </div>
       )}

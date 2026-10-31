@@ -7,9 +7,9 @@ import TapHotspot from '../components/TapHotspot';
 import KindMessage from '../components/KindMessage';
 import SuccessBurst from '../components/SuccessBurst';
 import ConfidenceMeter from '../components/ConfidenceMeter';
+import { IconBook, IconLightbulb, IconArrowRight } from '../components/Icons';
 import { fetchLessonById, postProgress, postConfidence } from '../lib/api';
 
-// Fallback hero lesson if API offline
 import fallbackHeroLesson from '../../public/lessons/bijli-bill-01.json';
 
 export default function Lesson() {
@@ -32,7 +32,6 @@ export default function Lesson() {
       if (data && data.steps) {
         setLesson(data);
       } else {
-        // Fallback to bundled hero lesson
         setLesson(fallbackHeroLesson);
       }
     }
@@ -41,27 +40,37 @@ export default function Lesson() {
 
   if (!lesson) {
     return (
-      <div style={{ padding: '40px', textAlign: 'center' }}>
-        <p>{isUrdu ? 'سبق لوڈ ہو رہا ہے...' : 'Lesson load ho raha hai...'}</p>
+      <div style={{ padding: '60px 20px', textAlign: 'center' }}>
+        <p style={{ color: 'var(--text-secondary)' }}>
+          {isUrdu ? 'سبق لوڈ ہو رہا ہے...' : 'Lesson load ho raha hai...'}
+        </p>
       </div>
     );
   }
 
-  // Pre-lesson confidence check
+  // Pre-lesson confidence rating
   if (!hasRatedBefore) {
     return (
-      <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
+      <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', backgroundColor: 'var(--bg)' }}>
         <LanguageToggle />
-        <div style={{ padding: '24px 20px', flex: 1 }}>
-          <h2 style={{
-            fontSize: isUrdu ? '28px' : '24px',
-            fontFamily: isUrdu ? 'var(--font-urdu)' : 'var(--font-roman)',
+        <div style={{ padding: '24px 20px', flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+          <div style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '8px',
             color: 'var(--primary)',
-            marginBottom: '10px',
+            marginBottom: '6px',
             direction: isUrdu ? 'rtl' : 'ltr'
           }}>
-            📖 {t(lesson.title)}
-          </h2>
+            <IconBook size={24} />
+            <h2 style={{
+              fontSize: isUrdu ? '26px' : '22px',
+              fontFamily: isUrdu ? 'var(--font-urdu)' : 'var(--font-sans)',
+              fontWeight: '800'
+            }}>
+              {t(lesson.title)}
+            </h2>
+          </div>
 
           <ConfidenceMeter
             phase="before"
@@ -76,19 +85,24 @@ export default function Lesson() {
             onClick={() => setHasRatedBefore(true)}
             style={{
               width: '100%',
-              minHeight: '60px',
-              borderRadius: '18px',
+              minHeight: '56px',
+              borderRadius: 'var(--radius-md)',
               border: 'none',
               backgroundColor: 'var(--primary)',
               color: '#FFFFFF',
-              fontSize: isUrdu ? '24px' : '20px',
-              fontFamily: isUrdu ? 'var(--font-urdu)' : 'var(--font-roman)',
-              fontWeight: 'bold',
+              fontSize: isUrdu ? '22px' : '18px',
+              fontFamily: isUrdu ? 'var(--font-urdu)' : 'var(--font-sans)',
+              fontWeight: '700',
               cursor: 'pointer',
-              marginTop: '10px'
+              display: 'inline-flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: '8px',
+              boxShadow: 'var(--shadow-sm)'
             }}
           >
-            {isUrdu ? 'سبق شروع کریں ➔' : 'Sabaq Shuru Karein ➔'}
+            <span>{isUrdu ? 'سبق شروع کریں' : 'Sabaq Shuru Karein'}</span>
+            <IconArrowRight size={20} />
           </button>
         </div>
       </div>
@@ -96,15 +110,12 @@ export default function Lesson() {
   }
 
   const currentStep = lesson.steps[currentStepIndex];
-
-  // Hint level: attempt 1 = 1 (none), attempt 2 = 2 (text hint), attempt >= 3 = 3 (pulse highlight)
   const currentHintLevel = attempts;
 
   const handleCorrectTap = () => {
     setShowSuccess(true);
     setShowKindMessage(false);
 
-    // Save step progress silently
     postProgress({
       familyCode: 'AMMI-2026',
       lessonId: lesson.id,
@@ -133,22 +144,26 @@ export default function Lesson() {
   };
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', position: 'relative' }}>
+    <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', position: 'relative', backgroundColor: 'var(--bg)' }}>
       <LanguageToggle />
 
-      {/* Optional plain-words text hint for attempt 2 */}
+      {/* Attempt 2 text hint */}
       {attempts === 2 && currentStep.hint_levels && currentStep.hint_levels[1] && (
         <div style={{
-          backgroundColor: 'var(--primary-soft)',
-          borderBottom: '2px solid var(--primary)',
+          backgroundColor: 'var(--gentle-soft)',
+          borderBottom: '1px solid var(--gentle-border)',
           padding: '10px 16px',
           textAlign: 'center',
-          fontSize: '16px',
-          fontWeight: 'bold',
-          color: 'var(--primary)',
-          animation: 'slideUp 0.2s ease'
+          fontSize: '15px',
+          fontWeight: '700',
+          color: 'var(--gentle-text)',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          gap: '8px'
         }}>
-          💡 <strong>{isUrdu ? 'اشارہ:' : 'Ishara:'}</strong> {currentStep.hint_levels[1]}
+          <IconLightbulb size={18} />
+          <span><strong>{isUrdu ? 'اشارہ:' : 'Ishara:'}</strong> {currentStep.hint_levels[1]}</span>
         </div>
       )}
 
@@ -166,7 +181,7 @@ export default function Lesson() {
         />
       </StepCard>
 
-      {/* Gentle Kind Message after wrong tap */}
+      {/* Slide-up Kind Message after wrong tap */}
       {showKindMessage && (
         <KindMessage
           explanation={currentStep.wrong_tap}

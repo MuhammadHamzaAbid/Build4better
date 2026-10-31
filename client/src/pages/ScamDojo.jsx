@@ -3,9 +3,9 @@ import { useNavigate } from 'react-router-dom';
 import { useLanguage } from '../lib/i18n';
 import LanguageToggle from '../components/LanguageToggle';
 import ScamCard from '../components/ScamCard';
+import { IconShield, IconRotate, IconHome, IconCheckCircle } from '../components/Icons';
 import { fetchScams } from '../lib/api';
 
-// Fallback scam data if API unreachable
 import fallbackScams from '../../../server/data/scams.json';
 
 export default function ScamDojo() {
@@ -32,8 +32,10 @@ export default function ScamDojo() {
 
   if (cards.length === 0) {
     return (
-      <div style={{ padding: '40px', textAlign: 'center' }}>
-        <p>{isUrdu ? 'لوڈ ہو رہا ہے...' : 'Load ho raha hai...'}</p>
+      <div style={{ padding: '60px 20px', textAlign: 'center' }}>
+        <p style={{ color: 'var(--text-secondary)' }}>
+          {isUrdu ? 'لوڈ ہو رہا ہے...' : 'Load ho raha hai...'}
+        </p>
       </div>
     );
   }
@@ -59,7 +61,7 @@ export default function ScamDojo() {
   };
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
+    <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', backgroundColor: 'var(--bg)' }}>
       <LanguageToggle />
 
       <div style={{ padding: '20px 16px', flex: 1, display: 'flex', flexDirection: 'column' }}>
@@ -70,22 +72,24 @@ export default function ScamDojo() {
           alignItems: 'center',
           marginBottom: '16px'
         }}>
-          <div>
-            <span style={{
-              fontSize: '13px',
-              padding: '3px 10px',
-              borderRadius: '10px',
-              backgroundColor: '#FBE4E1',
-              color: 'var(--danger)',
-              fontWeight: 'bold'
-            }}>
-              🛡️ {isUrdu ? 'فراڈ سے بچاؤ ڈوجو' : 'Scam Dojo'}
-            </span>
+          <div style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: '6px',
+            fontSize: '13px',
+            padding: '4px 10px',
+            borderRadius: 'var(--radius-full)',
+            backgroundColor: 'var(--danger-soft)',
+            color: 'var(--danger-text)',
+            fontWeight: '700'
+          }}>
+            <IconShield size={16} />
+            <span>{isUrdu ? 'فراڈ سے بچاؤ ڈوجو' : 'SCAM DOJO'}</span>
           </div>
 
           {!isFinished && (
-            <span style={{ fontSize: '15px', fontWeight: 'bold', color: 'var(--muted)' }}>
-              {isUrdu ? `پیغام ${currentIndex + 1} از ${cards.length}` : `Message ${currentIndex + 1} / ${cards.length}`}
+            <span style={{ fontSize: '14px', fontWeight: '700', color: 'var(--text-secondary)', fontFamily: 'var(--font-mono)' }}>
+              {isUrdu ? `پیغام ${currentIndex + 1} از ${cards.length}` : `${currentIndex + 1} / ${cards.length}`}
             </span>
           )}
         </div>
@@ -103,69 +107,77 @@ export default function ScamDojo() {
           /* Finished Score Card */
           <div style={{
             backgroundColor: 'var(--surface)',
-            borderRadius: '24px',
-            padding: '28px 20px',
-            border: '2px solid var(--primary)',
+            borderRadius: 'var(--radius-lg)',
+            padding: '32px 20px',
+            border: '1px solid var(--border)',
             textAlign: 'center',
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
             gap: '16px',
-            animation: 'popIn 0.3s ease-out'
+            boxShadow: 'var(--shadow-md)',
+            animation: 'fadeIn 0.25s cubic-bezier(0.16, 1, 0.3, 1)'
           }}>
-            <div style={{ fontSize: '54px' }}>
-              {score >= 10 ? '🥇' : score >= 7 ? '🥈' : '🎖️'}
+            <div style={{ color: 'var(--primary)', marginBottom: '4px' }}>
+              <IconCheckCircle size={52} />
             </div>
 
             <h2 style={{
-              fontSize: isUrdu ? '30px' : '26px',
-              fontFamily: isUrdu ? 'var(--font-urdu)' : 'var(--font-roman)',
+              fontSize: isUrdu ? '28px' : '24px',
+              fontFamily: isUrdu ? 'var(--font-urdu)' : 'var(--font-sans)',
               color: 'var(--primary)',
-              fontWeight: 'bold'
+              fontWeight: '800'
             }}>
               {isUrdu ? 'مشق کا نتیجہ' : 'Mashq Ka Nateeja'}
             </h2>
 
             <div style={{
-              fontSize: '48px',
-              fontWeight: 'bold',
+              fontSize: '44px',
+              fontWeight: '800',
+              fontFamily: 'var(--font-mono)',
               color: 'var(--primary)',
               backgroundColor: 'var(--primary-soft)',
-              padding: '12px 32px',
-              borderRadius: '20px'
+              padding: '12px 36px',
+              borderRadius: 'var(--radius-lg)',
+              border: '1px solid var(--border)'
             }}>
               {score} / {cards.length}
             </div>
 
             <p style={{
-              fontSize: isUrdu ? '22px' : '18px',
-              fontFamily: isUrdu ? 'var(--font-urdu)' : 'var(--font-roman)',
+              fontSize: isUrdu ? '21px' : '17px',
+              fontFamily: isUrdu ? 'var(--font-urdu)' : 'var(--font-sans)',
               color: 'var(--text)',
-              lineHeight: isUrdu ? '1.8' : '1.4'
+              lineHeight: isUrdu ? '1.9' : '1.45'
             }}>
               {score >= 10
                 ? (isUrdu ? 'شاندار! آپ جعلی اور اصلی پیغامات میں فرق بخوبی پہچانتے ہیں۔' : 'Shandar! Aap jaali aur asli messages mein farq samajhte hain.')
                 : (isUrdu ? 'بہت اچھا! دوبارہ مشق کریں تاکہ کوئی دھوکہ باز آپ کو الجھا نہ سکے۔' : 'Bohat acha! Dobara koshish karein taake koi dhoka na de sake.')}
             </p>
 
-            <div style={{ width: '100%', display: 'flex', flexDirection: 'column', gap: '10px', marginTop: '10px' }}>
+            <div style={{ width: '100%', display: 'flex', flexDirection: 'column', gap: '10px', marginTop: '12px' }}>
               <button
                 type="button"
                 onClick={handleRestart}
                 style={{
                   width: '100%',
-                  minHeight: '56px',
-                  borderRadius: '16px',
+                  minHeight: '54px',
+                  borderRadius: 'var(--radius-md)',
                   border: 'none',
                   backgroundColor: 'var(--primary)',
                   color: '#FFFFFF',
-                  fontSize: isUrdu ? '22px' : '18px',
-                  fontFamily: isUrdu ? 'var(--font-urdu)' : 'var(--font-roman)',
-                  fontWeight: 'bold',
-                  cursor: 'pointer'
+                  fontSize: isUrdu ? '21px' : '17px',
+                  fontFamily: isUrdu ? 'var(--font-urdu)' : 'var(--font-sans)',
+                  fontWeight: '700',
+                  cursor: 'pointer',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  gap: '8px'
                 }}
               >
-                🔄 {isUrdu ? 'دوبارہ مشق کریں' : 'Dobara Mashq Karein'}
+                <IconRotate size={18} />
+                <span>{isUrdu ? 'دوبارہ مشق کریں' : 'Dobara Mashq Karein'}</span>
               </button>
 
               <button
@@ -173,17 +185,22 @@ export default function ScamDojo() {
                 onClick={() => navigate('/')}
                 style={{
                   width: '100%',
-                  minHeight: '56px',
-                  borderRadius: '16px',
-                  border: '2px solid var(--border)',
-                  backgroundColor: 'transparent',
-                  color: 'var(--muted)',
-                  fontSize: isUrdu ? '20px' : '17px',
-                  fontWeight: 'bold',
-                  cursor: 'pointer'
+                  minHeight: '50px',
+                  borderRadius: 'var(--radius-md)',
+                  border: '1px solid var(--border)',
+                  backgroundColor: 'var(--surface)',
+                  color: 'var(--text-secondary)',
+                  fontSize: isUrdu ? '19px' : '16px',
+                  fontWeight: '700',
+                  cursor: 'pointer',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  gap: '6px'
                 }}
               >
-                🏠 {isUrdu ? 'مرکزی صفحہ پر جائیں' : 'Home'}
+                <IconHome size={16} />
+                <span>{isUrdu ? 'مرکزی صفحہ پر جائیں' : 'Home'}</span>
               </button>
             </div>
           </div>

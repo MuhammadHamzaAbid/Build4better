@@ -1,31 +1,32 @@
 <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 390 650' width='390' height='650'>
-  <rect width='390' height='650' fill='#FAF7F2'/>
+  <rect width='390' height='650' fill='#F7F5F0'/>
   
-  <rect width='390' height='70' fill='#0F6E5A'/>
-  <circle cx='35' cy='35' r='18' fill='#DFF2EC'/>
-  <text x='35' y='42' font-size='20' text-anchor='middle'>💡</text>
-  <text x='65' y='42' fill='#FFFFFF' font-family='sans-serif' font-size='20' font-weight='bold'>Roshni Bijli</text>
+  <rect width='390' height='68' fill='#0F5E4E'/>
+  <circle cx='34' cy='34' r='16' fill='#177A66'/>
+  <!-- Clean spark icon -->
+  <path d='M34 24L36 31L43 31L37 35L39 42L34 38L29 42L31 35L25 31L32 31Z' fill='#FFFFFF'/>
+  <text x='58' y='40' fill='#FFFFFF' font-family='system-ui, sans-serif' font-size='18' font-weight='700' letter-spacing='-0.2'>Roshni Bijli</text>
 
-  <rect x='250' y='18' width='120' height='26' rx='13' fill='#FFF1D9' stroke='#F4A93D' stroke-width='1.5'/>
-  <text x='310' y='35' fill='#A05E03' font-family='sans-serif' font-size='12' font-weight='bold' text-anchor='middle'>⚡ PRACTICE</text>
+  <rect x='245' y='18' width='125' height='26' rx='13' fill='#FDF5EA' stroke='#C7771E' stroke-width='1'/>
+  <text x='307' y='35' fill='#8A4B06' font-family='system-ui, sans-serif' font-size='11' font-weight='700' letter-spacing='0.5' text-anchor='middle'>PRACTICE MODE</text>
 
 
-  <text x='195' y='110' fill='#1F2933' font-family='sans-serif' font-size='20' font-weight='bold' text-anchor='middle'>Reference Number Darj Karein</text>
-  <text x='195' y='135' fill='#5B6770' font-family='sans-serif' font-size='14' text-anchor='middle'>Bill ke ooper se 14 hindse likhein</text>
+  <text x='195' y='108' fill='#171A1C' font-family='system-ui, sans-serif' font-size='19' font-weight='700' text-anchor='middle'>Reference Number Darj Karein</text>
+  <text x='195' y='132' fill='#57606A' font-family='system-ui, sans-serif' font-size='13' text-anchor='middle'>Bill ke ooper se 14 hindse likhein</text>
 
-  <rect x='20' y='160' width='350' height='65' rx='14' fill='#FFFFFF' stroke='#0F6E5A' stroke-width='2'/>
-  <text x='195' y='202' fill='#1F2933' font-family='sans-serif' font-size='22' font-weight='bold' letter-spacing='3' text-anchor='middle'>42101-9876543-21</text>
+  <rect x='20' y='154' width='350' height='62' rx='12' fill='#FFFFFF' stroke='#0F5E4E' stroke-width='2'/>
+  <text x='195' y='193' fill='#171A1C' font-family='monospace' font-size='20' font-weight='700' letter-spacing='2' text-anchor='middle'>42101-9876543-21</text>
 
-  <!-- Keypad illustration -->
-  <rect x='20' y='245' width='350' height='270' rx='16' fill='#FFFFFF' stroke='#E2DDD5'/>
-  <g fill='#1F2933' font-family='sans-serif' font-size='24' font-weight='bold' text-anchor='middle'>
-    <text x='78' y='295'>1</text><text x='195' y='295'>2</text><text x='312' y='295'>3</text>
-    <text x='78' y='360'>4</text><text x='195' y='360'>5</text><text x='312' y='360'>6</text>
-    <text x='78' y='425'>7</text><text x='195' y='425'>8</text><text x='312' y='425'>9</text>
-    <text x='78' y='490'>C</text><text x='195' y='490'>0</text><text x='312' y='490'>⌫</text>
+  <!-- Keypad -->
+  <rect x='20' y='232' width='350' height='285' rx='14' fill='#FFFFFF' stroke='#E5E1D8'/>
+  <g fill='#171A1C' font-family='system-ui, sans-serif' font-size='22' font-weight='600' text-anchor='middle'>
+    <text x='78' y='285'>1</text><text x='195' y='285'>2</text><text x='312' y='285'>3</text>
+    <text x='78' y='350'>4</text><text x='195' y='350'>5</text><text x='312' y='350'>6</text>
+    <text x='78' y='415'>7</text><text x='195' y='415'>8</text><text x='312' y='415'>9</text>
+    <text x='78' y='480' fill='#8C959F'>C</text><text x='195' y='480'>0</text><text x='312' y='480' fill='#8C959F'>DEL</text>
   </g>
 
   <!-- Target: Next Button (10%, 84%, 80%, 10%) -->
-  <rect x='39' y='546' width='312' height='65' rx='16' fill='#0F6E5A'/>
-  <text x='195' y='587' fill='#FFFFFF' font-family='sans-serif' font-size='22' font-weight='bold' text-anchor='middle'>Aage Barhein ➔</text>
+  <rect x='39' y='546' width='312' height='65' rx='16' fill='#0F5E4E'/>
+  <text x='195' y='586' fill='#FFFFFF' font-family='system-ui, sans-serif' font-size='20' font-weight='700' text-anchor='middle'>Aage Barhein</text>
 </svg>

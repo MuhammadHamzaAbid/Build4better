@@ -2,6 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useLanguage } from '../lib/i18n';
 import LanguageToggle from '../components/LanguageToggle';
+import { IconBook, IconShield, IconSearch, IconPencil, IconUsers, IconArrowRight, IconShieldAlert } from '../components/Icons';
 
 export default function Home() {
   const navigate = useNavigate();
@@ -9,66 +10,81 @@ export default function Home() {
   const isUrdu = lang === 'urdu';
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
+    <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', backgroundColor: 'var(--bg)' }}>
       <LanguageToggle />
 
-      <div style={{ padding: '24px 20px', flex: 1, display: 'flex', flexDirection: 'column', gap: '20px' }}>
-        {/* App Title & Tagline */}
-        <div style={{ textAlign: isUrdu ? 'right' : 'left', direction: isUrdu ? 'rtl' : 'ltr' }}>
+      <main style={{ padding: '24px 20px', flex: 1, display: 'flex', flexDirection: 'column', gap: '22px' }}>
+        {/* App Title & Editorial Tagline */}
+        <section style={{ textAlign: isUrdu ? 'right' : 'left', direction: isUrdu ? 'rtl' : 'ltr' }}>
           <div style={{
-            display: 'inline-block',
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: '6px',
             padding: '4px 12px',
             backgroundColor: 'var(--primary-soft)',
             color: 'var(--primary)',
-            borderRadius: '12px',
-            fontSize: '14px',
-            fontWeight: 'bold',
-            marginBottom: '8px'
+            borderRadius: 'var(--radius-full)',
+            fontSize: '13px',
+            fontWeight: '700',
+            letterSpacing: '0.4px',
+            marginBottom: '12px'
           }}>
-            🌟 {isUrdu ? 'آسان خاندانی اتالیق' : 'Asan Khandani Tutor'}
+            <span>{isUrdu ? 'خاندانی ڈیجیٹل اتالیق' : 'FAMILY DIGITAL TUTOR'}</span>
           </div>
 
           <h1 style={{
-            fontSize: isUrdu ? '36px' : '30px',
-            fontFamily: isUrdu ? 'var(--font-urdu)' : 'var(--font-roman)',
-            fontWeight: 'bold',
+            fontSize: isUrdu ? '38px' : '32px',
+            fontFamily: isUrdu ? 'var(--font-urdu)' : 'var(--font-sans)',
+            fontWeight: '800',
             color: 'var(--text)',
-            marginBottom: '6px'
+            lineHeight: isUrdu ? '1.8' : '1.2',
+            letterSpacing: isUrdu ? 'normal' : '-0.5px',
+            marginBottom: '8px'
           }}>
             {isUrdu ? 'ابو کا ٹیوٹر' : 'Abbu Ka Tutor'}
           </h1>
 
           <p style={{
-            fontSize: isUrdu ? '22px' : '18px',
-            fontFamily: isUrdu ? 'var(--font-urdu)' : 'var(--font-roman)',
-            color: 'var(--muted)',
-            lineHeight: isUrdu ? '1.8' : '1.4'
+            fontSize: isUrdu ? '23px' : '18px',
+            fontFamily: isUrdu ? 'var(--font-urdu)' : 'var(--font-sans)',
+            color: 'var(--text-secondary)',
+            lineHeight: isUrdu ? '2.0' : '1.45'
           }}>
             {isUrdu
               ? 'پہلے سیکھو، پھر کرو، بنا ڈر کے۔'
               : 'Pehle seekho, phir karo, bina dar ke.'}
           </p>
-        </div>
+        </section>
 
-        {/* Practice Ribbon Notice */}
+        {/* Safety Guarantee Strip */}
         <div style={{
-          padding: '12px 16px',
-          backgroundColor: '#FFF1D9',
-          border: '1px solid #F4A93D',
-          borderRadius: '16px',
-          fontSize: isUrdu ? '18px' : '15px',
-          fontFamily: isUrdu ? 'var(--font-urdu)' : 'var(--font-roman)',
-          color: '#8A5200',
+          display: 'flex',
+          alignItems: 'flex-start',
+          gap: '12px',
+          padding: '14px 16px',
+          backgroundColor: 'var(--gentle-soft)',
+          border: '1px solid var(--gentle-border)',
+          borderRadius: 'var(--radius-md)',
           direction: isUrdu ? 'rtl' : 'ltr'
         }}>
-          🛡️ <strong>{isUrdu ? 'محفوظ ماحول:' : 'Mehfooz Mahol:'}</strong>{' '}
-          {isUrdu
-            ? 'یہاں کوئی بھی غلطی نقصان دہ نہیں ہے۔ بے خوف ہو کر مشق کریں۔'
-            : 'Yahan koi galti nuqsan deh nahi. Be-khauf ho kar mashq karein.'}
+          <div style={{ color: 'var(--gentle-text)', marginTop: '2px', flexShrink: 0 }}>
+            <IconShieldAlert size={20} />
+          </div>
+          <div style={{
+            fontSize: isUrdu ? '20px' : '15px',
+            fontFamily: isUrdu ? 'var(--font-urdu)' : 'var(--font-sans)',
+            color: 'var(--gentle-text)',
+            lineHeight: isUrdu ? '1.9' : '1.4'
+          }}>
+            <strong>{isUrdu ? 'محفوظ مشق:' : 'Mehfooz Mashq:'}</strong>{' '}
+            {isUrdu
+              ? 'یہاں غلط دبانے سے کوئی نقصان نہیں ہوتا۔ پرسکون ہو کر خود کوشش کریں۔'
+              : 'Yahan koi galti nuqsan deh nahi hoti. Be-khauf ho kar khud koshish karein.'}
+          </div>
         </div>
 
-        {/* 3 Main Action Tiles */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+        {/* Primary Tiles (Bento / High-Touch) */}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
           {/* Tile 1: Seekhein (Lessons) */}
           <button
             type="button"
@@ -77,54 +93,57 @@ export default function Home() {
               display: 'flex',
               alignItems: 'center',
               gap: '16px',
-              padding: '22px 18px',
-              borderRadius: '20px',
-              border: '2px solid var(--primary)',
+              padding: '20px 18px',
+              borderRadius: 'var(--radius-lg)',
+              border: '1.5px solid var(--primary)',
               backgroundColor: 'var(--surface)',
               cursor: 'pointer',
               textAlign: isUrdu ? 'right' : 'left',
               direction: isUrdu ? 'rtl' : 'ltr',
-              boxShadow: '0 4px 14px rgba(0,0,0,0.06)',
-              transition: 'transform 0.15s ease'
+              boxShadow: 'var(--shadow-sm)'
             }}
           >
             <div style={{
-              width: '58px',
-              height: '58px',
-              borderRadius: '16px',
+              width: '52px',
+              height: '52px',
+              borderRadius: 'var(--radius-md)',
               backgroundColor: 'var(--primary-soft)',
+              color: 'var(--primary)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              fontSize: '30px',
               flexShrink: 0
             }}>
-              💡
+              <IconBook size={26} />
             </div>
 
             <div style={{ flex: 1 }}>
-              <h2 style={{
-                fontSize: isUrdu ? '26px' : '22px',
-                fontFamily: isUrdu ? 'var(--font-urdu)' : 'var(--font-roman)',
-                fontWeight: 'bold',
+              <div style={{
+                fontSize: isUrdu ? '24px' : '19px',
+                fontFamily: isUrdu ? 'var(--font-urdu)' : 'var(--font-sans)',
+                fontWeight: '700',
                 color: 'var(--primary)',
-                marginBottom: '4px'
+                marginBottom: '2px'
               }}>
                 {isUrdu ? 'سیکھیں (Lessons)' : 'Seekhein (Lessons)'}
-              </h2>
-              <p style={{
-                fontSize: isUrdu ? '20px' : '16px',
-                fontFamily: isUrdu ? 'var(--font-urdu)' : 'var(--font-roman)',
-                color: 'var(--muted)'
+              </div>
+              <div style={{
+                fontSize: isUrdu ? '19px' : '15px',
+                fontFamily: isUrdu ? 'var(--font-urdu)' : 'var(--font-sans)',
+                color: 'var(--text-secondary)'
               }}>
                 {isUrdu
                   ? 'بجلی کا بل بھرنا قدم بہ قدم سیکھیں'
                   : 'Bijli ka bill bharna qadam-ba-qadam seekhein'}
-              </p>
+              </div>
+            </div>
+
+            <div style={{ color: 'var(--primary)' }}>
+              <IconArrowRight size={20} />
             </div>
           </button>
 
-          {/* Tile 2: Fraud se Bachein (Scam Dojo) */}
+          {/* Tile 2: Fraud Se Bachein (Scam Dojo) */}
           <button
             type="button"
             onClick={() => navigate('/scams')}
@@ -132,50 +151,53 @@ export default function Home() {
               display: 'flex',
               alignItems: 'center',
               gap: '16px',
-              padding: '22px 18px',
-              borderRadius: '20px',
-              border: '2px solid #5B6770',
+              padding: '20px 18px',
+              borderRadius: 'var(--radius-lg)',
+              border: '1px solid var(--border)',
               backgroundColor: 'var(--surface)',
               cursor: 'pointer',
               textAlign: isUrdu ? 'right' : 'left',
               direction: isUrdu ? 'rtl' : 'ltr',
-              boxShadow: '0 4px 14px rgba(0,0,0,0.06)',
-              transition: 'transform 0.15s ease'
+              boxShadow: 'var(--shadow-sm)'
             }}
           >
             <div style={{
-              width: '58px',
-              height: '58px',
-              borderRadius: '16px',
-              backgroundColor: '#FBE4E1',
+              width: '52px',
+              height: '52px',
+              borderRadius: 'var(--radius-md)',
+              backgroundColor: 'var(--danger-soft)',
+              color: 'var(--danger-text)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              fontSize: '30px',
               flexShrink: 0
             }}>
-              🛡️
+              <IconShield size={26} />
             </div>
 
             <div style={{ flex: 1 }}>
-              <h2 style={{
-                fontSize: isUrdu ? '26px' : '22px',
-                fontFamily: isUrdu ? 'var(--font-urdu)' : 'var(--font-roman)',
-                fontWeight: 'bold',
-                color: '#1F2933',
-                marginBottom: '4px'
+              <div style={{
+                fontSize: isUrdu ? '24px' : '19px',
+                fontFamily: isUrdu ? 'var(--font-urdu)' : 'var(--font-sans)',
+                fontWeight: '700',
+                color: 'var(--text)',
+                marginBottom: '2px'
               }}>
                 {isUrdu ? 'فراڈ سے بچیں (Scam Dojo)' : 'Fraud Se Bachein (Scam Dojo)'}
-              </h2>
-              <p style={{
-                fontSize: isUrdu ? '20px' : '16px',
-                fontFamily: isUrdu ? 'var(--font-urdu)' : 'var(--font-roman)',
-                color: 'var(--muted)'
+              </div>
+              <div style={{
+                fontSize: isUrdu ? '19px' : '15px',
+                fontFamily: isUrdu ? 'var(--font-urdu)' : 'var(--font-sans)',
+                color: 'var(--text-secondary)'
               }}>
                 {isUrdu
-                  ? 'جعلی پیغامات اور کالز کی پہچان کی مشق'
+                  ? 'جعلی پیغامات اور فریب دہی کی پہچان'
                   : 'Jaali messages aur calls pehchanna seekhein'}
-              </p>
+              </div>
+            </div>
+
+            <div style={{ color: 'var(--text-secondary)' }}>
+              <IconArrowRight size={20} />
             </div>
           </button>
 
@@ -187,58 +209,62 @@ export default function Home() {
               display: 'flex',
               alignItems: 'center',
               gap: '16px',
-              padding: '22px 18px',
-              borderRadius: '20px',
-              border: '2px solid #8A5200',
+              padding: '20px 18px',
+              borderRadius: 'var(--radius-lg)',
+              border: '1px solid var(--border)',
               backgroundColor: 'var(--surface)',
               cursor: 'pointer',
               textAlign: isUrdu ? 'right' : 'left',
               direction: isUrdu ? 'rtl' : 'ltr',
-              boxShadow: '0 4px 14px rgba(0,0,0,0.06)',
-              transition: 'transform 0.15s ease'
+              boxShadow: 'var(--shadow-sm)'
             }}
           >
             <div style={{
-              width: '58px',
-              height: '58px',
-              borderRadius: '16px',
+              width: '52px',
+              height: '52px',
+              borderRadius: 'var(--radius-md)',
               backgroundColor: 'var(--gentle-soft)',
+              color: 'var(--gentle-text)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              fontSize: '30px',
               flexShrink: 0
             }}>
-              🔍
+              <IconSearch size={26} />
             </div>
 
             <div style={{ flex: 1 }}>
-              <h2 style={{
-                fontSize: isUrdu ? '26px' : '22px',
-                fontFamily: isUrdu ? 'var(--font-urdu)' : 'var(--font-roman)',
-                fontWeight: 'bold',
-                color: '#8A5200',
-                marginBottom: '4px'
+              <div style={{
+                fontSize: isUrdu ? '24px' : '19px',
+                fontFamily: isUrdu ? 'var(--font-urdu)' : 'var(--font-sans)',
+                fontWeight: '700',
+                color: 'var(--text)',
+                marginBottom: '2px'
               }}>
                 {isUrdu ? 'یہ کیا ہے؟ (Screenshot Coach)' : 'Yeh Kya Hai? (Screenshot Coach)'}
-              </h2>
-              <p style={{
-                fontSize: isUrdu ? '20px' : '16px',
-                fontFamily: isUrdu ? 'var(--font-urdu)' : 'var(--font-roman)',
-                color: 'var(--muted)'
+              </div>
+              <div style={{
+                fontSize: isUrdu ? '19px' : '15px',
+                fontFamily: isUrdu ? 'var(--font-urdu)' : 'var(--font-sans)',
+                color: 'var(--text-secondary)'
               }}>
                 {isUrdu
-                  ? 'مشکل اسکرین بھیجیں اور رہنمائی پائیں'
+                  ? 'مشکل اسکرین کی رہنمائی حاصل کریں'
                   : 'Mushkil screen upload kar ke samjhein'}
-              </p>
+              </div>
+            </div>
+
+            <div style={{ color: 'var(--text-secondary)' }}>
+              <IconArrowRight size={20} />
             </div>
           </button>
         </div>
 
-        {/* Footer Links: Family View & Lesson Builder */}
+        {/* Footer Navigation: Builder & Family View */}
         <div style={{
           marginTop: 'auto',
-          paddingTop: '20px',
+          paddingTop: '16px',
+          borderTop: '1px solid var(--border)',
           display: 'flex',
           justifyContent: 'space-between',
           gap: '10px'
@@ -248,17 +274,23 @@ export default function Home() {
             onClick={() => navigate('/builder')}
             style={{
               flex: 1,
-              padding: '12px',
-              borderRadius: '14px',
+              minHeight: '46px',
+              padding: '8px 14px',
+              borderRadius: 'var(--radius-md)',
               border: '1px solid var(--border)',
-              backgroundColor: '#FFFFFF',
-              color: 'var(--muted)',
-              fontSize: '15px',
-              fontWeight: 'bold',
-              cursor: 'pointer'
+              backgroundColor: 'var(--surface)',
+              color: 'var(--text-secondary)',
+              fontSize: '14px',
+              fontWeight: '700',
+              cursor: 'pointer',
+              display: 'inline-flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: '6px'
             }}
           >
-            ✏️ Builder (Child)
+            <IconPencil size={16} />
+            <span>Builder (Child)</span>
           </button>
 
           <button
@@ -266,20 +298,26 @@ export default function Home() {
             onClick={() => navigate('/family')}
             style={{
               flex: 1,
-              padding: '12px',
-              borderRadius: '14px',
+              minHeight: '46px',
+              padding: '8px 14px',
+              borderRadius: 'var(--radius-md)',
               border: '1px solid var(--border)',
-              backgroundColor: '#FFFFFF',
-              color: 'var(--muted)',
-              fontSize: '15px',
-              fontWeight: 'bold',
-              cursor: 'pointer'
+              backgroundColor: 'var(--surface)',
+              color: 'var(--text-secondary)',
+              fontSize: '14px',
+              fontWeight: '700',
+              cursor: 'pointer',
+              display: 'inline-flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: '6px'
             }}
           >
-            👨‍👩‍👧 Family Progress
+            <IconUsers size={16} />
+            <span>Family Progress</span>
           </button>
         </div>
-      </div>
+      </main>
     </div>
   );
 }

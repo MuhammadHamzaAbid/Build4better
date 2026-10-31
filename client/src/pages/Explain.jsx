@@ -3,15 +3,16 @@ import { useNavigate } from 'react-router-dom';
 import { useLanguage } from '../lib/i18n';
 import LanguageToggle from '../components/LanguageToggle';
 import VoiceButton from '../components/VoiceButton';
+import { IconSearch, IconShieldAlert, IconCheckCircle, IconLightbulb, IconRotate, IconHome } from '../components/Icons';
 import { explainScreen } from '../lib/api';
 
 export default function Explain() {
   const navigate = useNavigate();
-  const { lang, t } = useLanguage();
+  const { lang } = useLanguage();
   const isUrdu = lang === 'urdu';
 
   const [selectedImage, setSelectedImage] = useState('/lessons/bijli/step6.svg');
-  const [stage, setStage] = useState('idle'); // 'idle' | 'start' | 'check'
+  const [stage, setStage] = useState('idle');
   const [loading, setLoading] = useState(false);
   const [startResult, setStartResult] = useState(null);
   const [userAnswer, setUserAnswer] = useState('');
@@ -72,23 +73,25 @@ export default function Explain() {
   };
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
+    <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', backgroundColor: 'var(--bg)' }}>
       <LanguageToggle />
 
       <div style={{ padding: '20px 16px', flex: 1, display: 'flex', flexDirection: 'column', gap: '18px' }}>
         {/* Header */}
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <div>
-            <span style={{
-              fontSize: '13px',
-              padding: '4px 10px',
-              borderRadius: '10px',
-              backgroundColor: 'var(--gentle-soft)',
-              color: '#8A5200',
-              fontWeight: 'bold'
-            }}>
-              🔍 {isUrdu ? 'یہ کیا ہے؟ رہنمائی' : 'Yeh Kya Hai? Coach'}
-            </span>
+          <div style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: '6px',
+            fontSize: '13px',
+            padding: '4px 10px',
+            borderRadius: 'var(--radius-full)',
+            backgroundColor: 'var(--gentle-soft)',
+            color: 'var(--gentle-text)',
+            fontWeight: '700'
+          }}>
+            <IconSearch size={16} />
+            <span>{isUrdu ? 'یہ کیا ہے؟ رہنمائی' : 'SCREENSHOT COACH'}</span>
           </div>
 
           <button
@@ -97,27 +100,33 @@ export default function Explain() {
             style={{
               border: 'none',
               background: 'transparent',
-              color: 'var(--muted)',
+              color: 'var(--text-secondary)',
               fontSize: '14px',
-              cursor: 'pointer'
+              fontWeight: '600',
+              cursor: 'pointer',
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '4px'
             }}
           >
-            🏠 Home
+            <IconHome size={16} />
+            <span>Home</span>
           </button>
         </div>
 
         <p style={{
-          fontSize: isUrdu ? '22px' : '17px',
-          fontFamily: isUrdu ? 'var(--font-urdu)' : 'var(--font-roman)',
+          fontSize: isUrdu ? '21px' : '16px',
+          fontFamily: isUrdu ? 'var(--font-urdu)' : 'var(--font-sans)',
           color: 'var(--text)',
-          direction: isUrdu ? 'rtl' : 'ltr'
+          direction: isUrdu ? 'rtl' : 'ltr',
+          lineHeight: isUrdu ? '1.9' : '1.4'
         }}>
           {isUrdu
-            ? 'اگر موبائل کی کوئی اسکرین سمجھ نہ آئے تو یہاں دیکھیں۔ ہم آسان الفاظ میں سمجھائیں گے۔'
+            ? 'اگر موبائل کی کوئی اسکرین سمجھ نہ آئے تو یہاں دیکھیں۔ ہم آسان الفاظ میں رہنمائی کریں گے۔'
             : 'Agar phone ki koi screen samajh na aaye to yahan dekhein. Hum asan alfaaz mein samjhayenge.'}
         </p>
 
-        {/* Sample Screen Picker */}
+        {/* Sample Screen Selector */}
         <div style={{ display: 'flex', gap: '8px', overflowX: 'auto', paddingBottom: '4px' }}>
           {sampleScreens.map((s, idx) => (
             <button
@@ -131,13 +140,13 @@ export default function Explain() {
               }}
               style={{
                 flexShrink: 0,
-                padding: '8px 12px',
-                borderRadius: '12px',
-                border: selectedImage === s.path ? '2px solid var(--primary)' : '1px solid var(--border)',
+                padding: '8px 14px',
+                borderRadius: 'var(--radius-sm)',
+                border: selectedImage === s.path ? '1.5px solid var(--primary)' : '1px solid var(--border)',
                 backgroundColor: selectedImage === s.path ? 'var(--primary-soft)' : 'var(--surface)',
                 color: selectedImage === s.path ? 'var(--primary)' : 'var(--text)',
                 fontSize: '14px',
-                fontWeight: 'bold',
+                fontWeight: '700',
                 cursor: 'pointer'
               }}
             >
@@ -149,11 +158,12 @@ export default function Explain() {
         {/* Selected Screen Preview */}
         <div style={{
           position: 'relative',
-          borderRadius: '18px',
+          borderRadius: 'var(--radius-lg)',
           overflow: 'hidden',
-          border: '2px solid var(--border)',
+          border: '1px solid var(--border)',
           backgroundColor: '#FFFFFF',
-          maxHeight: '320px'
+          boxShadow: 'var(--shadow-sm)',
+          maxHeight: '300px'
         }}>
           <img
             src={selectedImage}
@@ -170,54 +180,58 @@ export default function Explain() {
             disabled={loading}
             style={{
               width: '100%',
-              minHeight: '58px',
-              borderRadius: '16px',
+              minHeight: '54px',
+              borderRadius: 'var(--radius-md)',
               border: 'none',
               backgroundColor: 'var(--primary)',
               color: '#FFFFFF',
-              fontSize: isUrdu ? '22px' : '18px',
-              fontFamily: isUrdu ? 'var(--font-urdu)' : 'var(--font-roman)',
-              fontWeight: 'bold',
-              cursor: 'pointer'
+              fontSize: isUrdu ? '21px' : '17px',
+              fontFamily: isUrdu ? 'var(--font-urdu)' : 'var(--font-sans)',
+              fontWeight: '700',
+              cursor: 'pointer',
+              boxShadow: 'var(--shadow-sm)'
             }}
           >
             {loading ? (isUrdu ? 'جائزہ لیا جا رہا ہے...' : 'Jaiza liya ja raha hai...') : (isUrdu ? 'اس اسکرین کو سمجھائیں ➔' : 'Yeh Screen Samjhein ➔')}
           </button>
         )}
 
-        {/* Stage Start: Summary & "Aap kya karengi?" Question */}
+        {/* Stage Start: Explanation & Inactive Question */}
         {(stage === 'start' || stage === 'check') && startResult && (
           <div style={{
             backgroundColor: 'var(--surface)',
-            borderRadius: '18px',
+            borderRadius: 'var(--radius-lg)',
             padding: '20px',
             border: '1px solid var(--border)',
+            boxShadow: 'var(--shadow-sm)',
             display: 'flex',
             flexDirection: 'column',
             gap: '14px',
-            animation: 'slideUp 0.3s ease'
+            animation: 'fadeIn 0.2s cubic-bezier(0.16, 1, 0.3, 1)'
           }}>
-            {/* Risk badge */}
-            <div>
-              {startResult.risk === 'scam' && (
-                <span style={{
-                  padding: '4px 10px',
-                  borderRadius: '10px',
-                  backgroundColor: 'var(--danger-soft)',
-                  color: 'var(--danger)',
-                  fontSize: '13px',
-                  fontWeight: 'bold'
-                }}>
-                  🚨 {isUrdu ? 'ہوشیار! یہ مشکوک یا فراڈ ہو سکتا ہے' : 'Hoshiyar! Yeh mushkook ho sakta hai'}
-                </span>
-              )}
-            </div>
+            {startResult.risk === 'scam' && (
+              <div style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '6px',
+                padding: '4px 10px',
+                borderRadius: 'var(--radius-sm)',
+                backgroundColor: 'var(--danger-soft)',
+                color: 'var(--danger-text)',
+                fontSize: '13px',
+                fontWeight: '700',
+                alignSelf: 'flex-start'
+              }}>
+                <IconShieldAlert size={16} />
+                <span>{isUrdu ? 'ہوشیار! یہ مشکوک کال یا پیغام ہے' : 'Hoshiyar! Yeh mushkook ho sakta hai'}</span>
+              </div>
+            )}
 
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
               <p style={{
-                fontSize: isUrdu ? '22px' : '18px',
-                fontFamily: isUrdu ? 'var(--font-urdu)' : 'var(--font-roman)',
-                lineHeight: isUrdu ? '1.8' : '1.5',
+                fontSize: isUrdu ? '21px' : '17px',
+                fontFamily: isUrdu ? 'var(--font-urdu)' : 'var(--font-sans)',
+                lineHeight: isUrdu ? '1.9' : '1.5',
                 color: 'var(--text)',
                 direction: isUrdu ? 'rtl' : 'ltr',
                 flex: 1
@@ -230,20 +244,22 @@ export default function Explain() {
             <div style={{
               padding: '12px 14px',
               backgroundColor: 'var(--primary-soft)',
-              borderRadius: '12px',
+              borderRadius: 'var(--radius-md)',
+              borderLeft: isUrdu ? 'none' : '3px solid var(--primary)',
+              borderRight: isUrdu ? '3px solid var(--primary)' : 'none',
               direction: isUrdu ? 'rtl' : 'ltr'
             }}>
               <p style={{
-                fontSize: isUrdu ? '22px' : '18px',
-                fontFamily: isUrdu ? 'var(--font-urdu)' : 'var(--font-roman)',
-                fontWeight: 'bold',
+                fontSize: isUrdu ? '21px' : '16px',
+                fontFamily: isUrdu ? 'var(--font-urdu)' : 'var(--font-sans)',
+                fontWeight: '700',
                 color: 'var(--primary)'
               }}>
-                ❓ {startResult.question}
+                {startResult.question}
               </p>
             </div>
 
-            {/* Answer Input and Quick Choices */}
+            {/* Answer Input */}
             {stage === 'start' && (
               <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
                 <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap' }}>
@@ -251,46 +267,49 @@ export default function Explain() {
                     type="button"
                     onClick={() => setUserAnswer(isUrdu ? 'میں کبھی او ٹی پی نہیں بتاؤں گی' : 'Main kabhi OTP nahi bataoongi')}
                     style={{
-                      padding: '8px 12px',
-                      borderRadius: '10px',
-                      border: '1px solid var(--primary)',
-                      backgroundColor: '#FFFFFF',
-                      fontSize: '14px',
+                      padding: '6px 12px',
+                      borderRadius: 'var(--radius-sm)',
+                      border: '1px solid var(--border)',
+                      backgroundColor: 'var(--surface-muted)',
+                      fontSize: '13px',
+                      fontWeight: '600',
                       cursor: 'pointer'
                     }}
                   >
-                    🛡️ {isUrdu ? 'او ٹی پی نہیں بتاؤں گی' : 'OTP nahi bataoongi'}
+                    {isUrdu ? 'او ٹی پی نہیں بتاؤں گی' : 'OTP nahi bataoongi'}
                   </button>
 
                   <button
                     type="button"
                     onClick={() => setUserAnswer(isUrdu ? 'میں رقم چیک کر کے بل ادا کروں گی' : 'Main raqam check kar ke ada karoongi')}
                     style={{
-                      padding: '8px 12px',
-                      borderRadius: '10px',
-                      border: '1px solid var(--primary)',
-                      backgroundColor: '#FFFFFF',
-                      fontSize: '14px',
+                      padding: '6px 12px',
+                      borderRadius: 'var(--radius-sm)',
+                      border: '1px solid var(--border)',
+                      backgroundColor: 'var(--surface-muted)',
+                      fontSize: '13px',
+                      fontWeight: '600',
                       cursor: 'pointer'
                     }}
                   >
-                    💳 {isUrdu ? 'رقم چیک کر کے ادا کروں گی' : 'Raqam check kar ke pay'}
+                    {isUrdu ? 'رقم چیک کر کے ادا کروں گی' : 'Raqam check kar ke pay'}
                   </button>
                 </div>
 
                 <textarea
                   value={userAnswer}
                   onChange={(e) => setUserAnswer(e.target.value)}
-                  placeholder={isUrdu ? 'آپ کا جواب یہاں لکھیں...' : 'Apna jawab yahan likhein...'}
+                  placeholder={isUrdu ? 'آپ کا ارادہ یہاں لکھیں...' : 'Apna jawab yahan likhein...'}
                   rows={2}
                   style={{
                     width: '100%',
                     padding: '12px',
-                    borderRadius: '12px',
+                    borderRadius: 'var(--radius-sm)',
                     border: '1px solid var(--border)',
                     fontSize: '16px',
-                    fontFamily: isUrdu ? 'var(--font-urdu)' : 'var(--font-roman)',
-                    direction: isUrdu ? 'rtl' : 'ltr'
+                    fontFamily: isUrdu ? 'var(--font-urdu)' : 'var(--font-sans)',
+                    direction: isUrdu ? 'rtl' : 'ltr',
+                    resize: 'none'
                   }}
                 />
 
@@ -299,14 +318,14 @@ export default function Explain() {
                   onClick={handleCheckAnswer}
                   disabled={loading || !userAnswer.trim()}
                   style={{
-                    minHeight: '52px',
-                    borderRadius: '14px',
+                    minHeight: '50px',
+                    borderRadius: 'var(--radius-md)',
                     border: 'none',
                     backgroundColor: 'var(--primary)',
                     color: '#FFFFFF',
-                    fontSize: isUrdu ? '20px' : '17px',
-                    fontFamily: isUrdu ? 'var(--font-urdu)' : 'var(--font-roman)',
-                    fontWeight: 'bold',
+                    fontSize: isUrdu ? '19px' : '16px',
+                    fontFamily: isUrdu ? 'var(--font-urdu)' : 'var(--font-sans)',
+                    fontWeight: '700',
                     cursor: 'pointer'
                   }}
                 >
@@ -317,25 +336,25 @@ export default function Explain() {
           </div>
         )}
 
-        {/* Stage Check: Feedback Reveal */}
+        {/* Stage Check: Feedback */}
         {stage === 'check' && checkResult && (
           <div style={{
             backgroundColor: 'var(--surface)',
-            borderRadius: '18px',
+            borderRadius: 'var(--radius-lg)',
             padding: '20px',
-            border: '2px solid var(--primary)',
-            animation: 'slideUp 0.3s ease',
+            border: '1.5px solid var(--primary)',
+            boxShadow: 'var(--shadow-sm)',
+            animation: 'fadeIn 0.2s cubic-bezier(0.16, 1, 0.3, 1)',
             display: 'flex',
             flexDirection: 'column',
             gap: '12px'
           }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-              <span style={{ fontSize: '26px' }}>{checkResult.good_choice ? '🌟' : '💡'}</span>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--primary)' }}>
+              <IconCheckCircle size={22} />
               <h3 style={{
-                fontSize: isUrdu ? '24px' : '20px',
-                fontFamily: isUrdu ? 'var(--font-urdu)' : 'var(--font-roman)',
-                color: 'var(--primary)',
-                fontWeight: 'bold'
+                fontSize: isUrdu ? '22px' : '18px',
+                fontFamily: isUrdu ? 'var(--font-urdu)' : 'var(--font-sans)',
+                fontWeight: '800'
               }}>
                 {checkResult.good_choice
                   ? (isUrdu ? 'بہت دانشمندانہ فیصلہ!' : 'Bohat Daneshmandana Faisla!')
@@ -344,10 +363,10 @@ export default function Explain() {
             </div>
 
             <p style={{
-              fontSize: isUrdu ? '22px' : '18px',
-              fontFamily: isUrdu ? 'var(--font-urdu)' : 'var(--font-roman)',
+              fontSize: isUrdu ? '21px' : '16px',
+              fontFamily: isUrdu ? 'var(--font-urdu)' : 'var(--font-sans)',
               color: 'var(--text)',
-              lineHeight: isUrdu ? '1.8' : '1.5',
+              lineHeight: isUrdu ? '1.9' : '1.5',
               direction: isUrdu ? 'rtl' : 'ltr'
             }}>
               {checkResult.feedback}
@@ -362,18 +381,23 @@ export default function Explain() {
                 setUserAnswer('');
               }}
               style={{
-                marginTop: '10px',
-                minHeight: '48px',
-                borderRadius: '12px',
+                marginTop: '8px',
+                minHeight: '46px',
+                borderRadius: 'var(--radius-sm)',
                 border: '1px solid var(--border)',
-                backgroundColor: '#FFFFFF',
-                color: 'var(--muted)',
-                fontSize: '15px',
-                fontWeight: 'bold',
-                cursor: 'pointer'
+                backgroundColor: 'var(--surface)',
+                color: 'var(--text-secondary)',
+                fontSize: '14px',
+                fontWeight: '700',
+                cursor: 'pointer',
+                display: 'inline-flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: '6px'
               }}
             >
-              🔄 {isUrdu ? 'ایک اور اسکرین دیکھیں' : 'Ek Aur Screen Dekhein'}
+              <IconRotate size={16} />
+              <span>{isUrdu ? 'ایک اور اسکرین دیکھیں' : 'Ek Aur Screen Dekhein'}</span>
             </button>
           </div>
         )}

@@ -6,12 +6,12 @@ export default function ConfidenceMeter({ phase = 'after', initialValue = 3, onS
   const [selected, setSelected] = useState(initialValue);
   const isUrdu = lang === 'urdu';
 
-  const faces = [
-    { value: 1, emoji: '😟', roman: 'Bohat Darr Hai', urdu: 'بہت ڈر لگتا ہے' },
-    { value: 2, emoji: '🙁', roman: 'Thora Darr Hai', urdu: 'تھوڑا ڈر ہے' },
-    { value: 3, emoji: '😐', roman: 'Thora Thora Aata Hai', urdu: 'کچھ کچھ آتا ہے' },
-    { value: 4, emoji: '🙂', roman: 'Yaqeen Hai', urdu: 'یقین ہے' },
-    { value: 5, emoji: '😃', roman: 'Pura Yaqeen Hai!', urdu: 'پورا اعتماد ہے!' },
+  const levels = [
+    { value: 1, roman: 'Bohat Darr', urdu: 'بہت خوف' },
+    { value: 2, roman: 'Thora Darr', urdu: 'تھوڑا خوف' },
+    { value: 3, roman: 'Kamyab Koshish', urdu: 'کچھ سمجھ ہے' },
+    { value: 4, roman: 'Pura Itminan', urdu: 'اطمینان ہے' },
+    { value: 5, roman: 'Pura Yaqeen', urdu: 'پورا اعتماد' },
   ];
 
   const handleChoose = (val) => {
@@ -22,63 +22,83 @@ export default function ConfidenceMeter({ phase = 'after', initialValue = 3, onS
   return (
     <div style={{
       backgroundColor: 'var(--surface)',
-      borderRadius: '20px',
-      padding: '24px 16px',
+      borderRadius: 'var(--radius-lg)',
+      padding: '24px 18px',
       border: '1px solid var(--border)',
       textAlign: 'center',
-      margin: '20px 0'
+      margin: '18px 0',
+      boxShadow: 'var(--shadow-sm)'
     }}>
       <h3 style={{
-        fontSize: isUrdu ? '26px' : '22px',
-        fontFamily: isUrdu ? 'var(--font-urdu)' : 'var(--font-roman)',
+        fontSize: isUrdu ? '24px' : '20px',
+        fontFamily: isUrdu ? 'var(--font-urdu)' : 'var(--font-sans)',
         color: 'var(--text)',
-        marginBottom: '16px'
+        marginBottom: '16px',
+        fontWeight: '700'
       }}>
         {phase === 'before'
-          ? (isUrdu ? 'سبق شروع کرنے سے پہلے: کتنا یقین ہے؟' : 'Pehle: Is kaam par kitna yaqeen hai?')
-          : (isUrdu ? 'مشق کے بعد: اب کتنا اعتماد ہے؟' : 'Mashq ke baad: Ab kitna aetmad hai?')}
+          ? (isUrdu ? 'مشق سے پہلے: آپ کا اعتماد کیسا ہے؟' : 'Pehle: Is kaam par kitna yaqeen hai?')
+          : (isUrdu ? 'مشق کے بعد: اب آپ کو کتنا اعتماد ہے؟' : 'Mashq ke baad: Ab kitna aetmad hai?')}
       </h3>
 
       <div style={{ display: 'flex', justifyContent: 'space-between', gap: '8px' }}>
-        {faces.map((f) => (
-          <button
-            key={f.value}
-            type="button"
-            onClick={() => handleChoose(f.value)}
-            style={{
-              flex: 1,
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-              padding: '12px 4px',
-              borderRadius: '16px',
-              border: selected === f.value ? '3px solid var(--primary)' : '2px solid var(--border)',
-              backgroundColor: selected === f.value ? 'var(--primary-soft)' : '#FAFAFA',
-              cursor: 'pointer',
-              transition: 'all 0.2s ease'
-            }}
-          >
-            <span style={{ fontSize: '32px', marginBottom: '6px' }}>{f.emoji}</span>
-            <span style={{
-              fontSize: '14px',
-              fontWeight: 'bold',
-              color: selected === f.value ? 'var(--primary)' : 'var(--muted)'
-            }}>
-              {f.value}
-            </span>
-          </button>
-        ))}
+        {levels.map((lvl) => {
+          const isChosen = selected === lvl.value;
+          return (
+            <button
+              key={lvl.value}
+              type="button"
+              onClick={() => handleChoose(lvl.value)}
+              style={{
+                flex: 1,
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                padding: '12px 4px',
+                borderRadius: 'var(--radius-md)',
+                border: isChosen ? '2px solid var(--primary)' : '1px solid var(--border)',
+                backgroundColor: isChosen ? 'var(--primary-soft)' : 'var(--surface)',
+                cursor: 'pointer'
+              }}
+            >
+              <span style={{
+                fontSize: '22px',
+                fontWeight: '800',
+                color: isChosen ? 'var(--primary)' : 'var(--text-secondary)',
+                marginBottom: '4px'
+              }}>
+                {lvl.value}
+              </span>
+              <span style={{
+                fontSize: isUrdu ? '13px' : '11px',
+                fontFamily: isUrdu ? 'var(--font-urdu)' : 'var(--font-sans)',
+                fontWeight: '600',
+                color: isChosen ? 'var(--primary)' : 'var(--text-tertiary)',
+                whiteSpace: 'nowrap'
+              }}>
+                {isUrdu ? lvl.urdu : lvl.roman}
+              </span>
+            </button>
+          );
+        })}
       </div>
 
-      <p style={{
-        marginTop: '14px',
-        fontSize: isUrdu ? '20px' : '16px',
-        fontFamily: isUrdu ? 'var(--font-urdu)' : 'var(--font-roman)',
-        color: 'var(--primary)',
-        fontWeight: 'bold'
+      <div style={{
+        marginTop: '16px',
+        padding: '8px 12px',
+        borderRadius: 'var(--radius-sm)',
+        backgroundColor: 'var(--surface-muted)',
+        display: 'inline-block'
       }}>
-        {isUrdu ? faces[selected - 1].urdu : faces[selected - 1].roman}
-      </p>
+        <span style={{
+          fontSize: isUrdu ? '18px' : '15px',
+          fontFamily: isUrdu ? 'var(--font-urdu)' : 'var(--font-sans)',
+          color: 'var(--primary)',
+          fontWeight: '700'
+        }}>
+          {isUrdu ? levels[selected - 1].urdu : levels[selected - 1].roman} (درجہ {selected}/5)
+        </span>
+      </div>
     </div>
   );
 }

@@ -3,6 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useLanguage } from '../lib/i18n';
 import LanguageToggle from '../components/LanguageToggle';
 import ConfidenceMeter from '../components/ConfidenceMeter';
+import { IconCheckCircle, IconRotate, IconShield, IconHome } from '../components/Icons';
 import { postConfidence } from '../lib/api';
 
 export default function LessonComplete() {
@@ -16,7 +17,7 @@ export default function LessonComplete() {
   };
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
+    <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', backgroundColor: 'var(--bg)' }}>
       <LanguageToggle />
 
       <div style={{
@@ -29,33 +30,32 @@ export default function LessonComplete() {
         gap: '20px'
       }}>
         <div style={{
-          width: '90px',
-          height: '90px',
-          borderRadius: '50%',
+          width: '76px',
+          height: '76px',
+          borderRadius: 'var(--radius-full)',
           backgroundColor: 'var(--primary-soft)',
+          color: 'var(--primary)',
           display: 'flex',
           alignItems: 'center',
-          justifyContent: 'center',
-          fontSize: '48px',
-          animation: 'popIn 0.3s ease'
+          justifyContent: 'center'
         }}>
-          🏆
+          <IconCheckCircle size={44} />
         </div>
 
         <h1 style={{
-          fontSize: isUrdu ? '34px' : '28px',
-          fontFamily: isUrdu ? 'var(--font-urdu)' : 'var(--font-roman)',
+          fontSize: isUrdu ? '32px' : '26px',
+          fontFamily: isUrdu ? 'var(--font-urdu)' : 'var(--font-sans)',
           color: 'var(--primary)',
-          fontWeight: 'bold'
+          fontWeight: '800'
         }}>
           {isUrdu ? 'بہت خوب! آپ نے مکمل کر لیا' : 'Bohat Khoob! Mukammal Kar Liya'}
         </h1>
 
         <p style={{
-          fontSize: isUrdu ? '22px' : '18px',
-          fontFamily: isUrdu ? 'var(--font-urdu)' : 'var(--font-roman)',
-          color: 'var(--muted)',
-          lineHeight: isUrdu ? '1.8' : '1.5'
+          fontSize: isUrdu ? '22px' : '17px',
+          fontFamily: isUrdu ? 'var(--font-urdu)' : 'var(--font-sans)',
+          color: 'var(--text-secondary)',
+          lineHeight: isUrdu ? '1.9' : '1.5'
         }}>
           {isUrdu
             ? 'آپ نے بجلی کا بل ادا کرنے اور او ٹی پی فراڈ سے بچنے کی کامیاب مشق کی۔'
@@ -74,18 +74,23 @@ export default function LessonComplete() {
             onClick={() => navigate(`/lesson/${id}`)}
             style={{
               width: '100%',
-              minHeight: '56px',
-              borderRadius: '16px',
-              border: '2px solid var(--primary)',
+              minHeight: '54px',
+              borderRadius: 'var(--radius-md)',
+              border: '1.5px solid var(--primary)',
               backgroundColor: 'var(--surface)',
               color: 'var(--primary)',
-              fontSize: isUrdu ? '22px' : '18px',
-              fontFamily: isUrdu ? 'var(--font-urdu)' : 'var(--font-roman)',
-              fontWeight: 'bold',
-              cursor: 'pointer'
+              fontSize: isUrdu ? '21px' : '17px',
+              fontFamily: isUrdu ? 'var(--font-urdu)' : 'var(--font-sans)',
+              fontWeight: '700',
+              cursor: 'pointer',
+              display: 'inline-flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: '8px'
             }}
           >
-            🔄 {isUrdu ? 'دوبارہ مشق کریں' : 'Dobara Mashq Karein'}
+            <IconRotate size={18} />
+            <span>{isUrdu ? 'دوبارہ مشق کریں' : 'Dobara Mashq Karein'}</span>
           </button>
 
           <button
@@ -93,18 +98,24 @@ export default function LessonComplete() {
             onClick={() => navigate('/scams')}
             style={{
               width: '100%',
-              minHeight: '56px',
-              borderRadius: '16px',
+              minHeight: '54px',
+              borderRadius: 'var(--radius-md)',
               border: 'none',
               backgroundColor: 'var(--primary)',
               color: '#FFFFFF',
-              fontSize: isUrdu ? '22px' : '18px',
-              fontFamily: isUrdu ? 'var(--font-urdu)' : 'var(--font-roman)',
-              fontWeight: 'bold',
-              cursor: 'pointer'
+              fontSize: isUrdu ? '21px' : '17px',
+              fontFamily: isUrdu ? 'var(--font-urdu)' : 'var(--font-sans)',
+              fontWeight: '700',
+              cursor: 'pointer',
+              display: 'inline-flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: '8px',
+              boxShadow: 'var(--shadow-sm)'
             }}
           >
-            🛡️ {isUrdu ? 'فراڈ سے بچنے کی مشق کریں ➔' : 'Fraud Se Bachne Ki Mashq ➔'}
+            <IconShield size={18} />
+            <span>{isUrdu ? 'فراڈ سے بچاؤ کی مشق ➔' : 'Fraud Se Bachne Ki Mashq ➔'}</span>
           </button>
 
           <button
@@ -114,12 +125,18 @@ export default function LessonComplete() {
               padding: '12px',
               border: 'none',
               backgroundColor: 'transparent',
-              color: 'var(--muted)',
-              fontSize: '16px',
-              cursor: 'pointer'
+              color: 'var(--text-secondary)',
+              fontSize: '15px',
+              fontWeight: '600',
+              cursor: 'pointer',
+              display: 'inline-flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: '6px'
             }}
           >
-            🏠 {isUrdu ? 'مرکزی صفحہ' : 'Home'}
+            <IconHome size={16} />
+            <span>{isUrdu ? 'مرکزی صفحہ' : 'Home'}</span>
           </button>
         </div>
       </div>

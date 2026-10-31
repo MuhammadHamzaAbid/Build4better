@@ -1,84 +1,97 @@
 import React from 'react';
 import { useLanguage } from '../lib/i18n';
+import { IconVolume, IconVolumePlaying } from './Icons';
 
 export default function LanguageToggle() {
   const { lang, setLang, voiceEnabled, toggleVoice } = useLanguage();
 
   return (
-    <div style={{
-      display: 'flex',
-      gap: '8px',
-      padding: '12px 16px',
-      backgroundColor: 'var(--surface)',
-      borderBottom: '1px solid var(--border)',
-      position: 'sticky',
-      top: 0,
-      zIndex: 100,
-      justifyContent: 'center'
-    }}>
-      <button
-        type="button"
-        onClick={() => setLang('urdu')}
-        style={{
-          flex: 1,
-          height: '46px',
-          borderRadius: '23px',
-          border: '2px solid var(--primary)',
-          backgroundColor: lang === 'urdu' ? 'var(--primary)' : 'var(--surface)',
-          color: lang === 'urdu' ? '#FFFFFF' : 'var(--primary)',
-          fontFamily: 'var(--font-urdu)',
-          fontSize: '20px',
-          cursor: 'pointer',
-          fontWeight: 'bold',
-          transition: 'all 0.2s ease'
-        }}
-      >
-        اردو
-      </button>
+    <nav
+      aria-label="Language and audio selection"
+      style={{
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        padding: '10px 16px',
+        backgroundColor: 'var(--surface)',
+        borderBottom: '1px solid var(--border)',
+        position: 'sticky',
+        top: 0,
+        zIndex: 100,
+        gap: '10px'
+      }}
+    >
+      {/* Language Segmented Control */}
+      <div style={{
+        display: 'inline-flex',
+        padding: '3px',
+        backgroundColor: 'var(--surface-muted)',
+        borderRadius: 'var(--radius-full)',
+        border: '1px solid var(--border)'
+      }}>
+        <button
+          type="button"
+          onClick={() => setLang('urdu')}
+          style={{
+            padding: '6px 18px',
+            borderRadius: 'var(--radius-full)',
+            border: 'none',
+            backgroundColor: lang === 'urdu' ? 'var(--surface)' : 'transparent',
+            color: lang === 'urdu' ? 'var(--primary)' : 'var(--text-secondary)',
+            boxShadow: lang === 'urdu' ? 'var(--shadow-sm)' : 'none',
+            fontFamily: 'var(--font-urdu)',
+            fontSize: '18px',
+            fontWeight: 'bold',
+            cursor: 'pointer'
+          }}
+        >
+          اردو
+        </button>
 
-      <button
-        type="button"
-        onClick={() => setLang('roman')}
-        style={{
-          flex: 1,
-          height: '46px',
-          borderRadius: '23px',
-          border: '2px solid var(--primary)',
-          backgroundColor: lang === 'roman' ? 'var(--primary)' : 'var(--surface)',
-          color: lang === 'roman' ? '#FFFFFF' : 'var(--primary)',
-          fontFamily: 'var(--font-roman)',
-          fontSize: '18px',
-          cursor: 'pointer',
-          fontWeight: 'bold',
-          transition: 'all 0.2s ease'
-        }}
-      >
-        Roman
-      </button>
+        <button
+          type="button"
+          onClick={() => setLang('roman')}
+          style={{
+            padding: '6px 18px',
+            borderRadius: 'var(--radius-full)',
+            border: 'none',
+            backgroundColor: lang === 'roman' ? 'var(--surface)' : 'transparent',
+            color: lang === 'roman' ? 'var(--primary)' : 'var(--text-secondary)',
+            boxShadow: lang === 'roman' ? 'var(--shadow-sm)' : 'none',
+            fontFamily: 'var(--font-sans)',
+            fontSize: '15px',
+            fontWeight: '700',
+            cursor: 'pointer'
+          }}
+        >
+          Roman
+        </button>
+      </div>
 
+      {/* Voice Toggle */}
       <button
         type="button"
         onClick={toggleVoice}
         style={{
-          height: '46px',
-          padding: '0 16px',
-          borderRadius: '23px',
-          border: voiceEnabled ? '2px solid var(--primary)' : '2px solid var(--border)',
-          backgroundColor: voiceEnabled ? 'var(--primary-soft)' : 'var(--surface)',
-          color: voiceEnabled ? 'var(--primary)' : 'var(--muted)',
-          fontSize: '16px',
-          cursor: 'pointer',
-          fontWeight: 'bold',
-          display: 'flex',
+          display: 'inline-flex',
           alignItems: 'center',
-          gap: '6px',
-          transition: 'all 0.2s ease'
+          gap: '7px',
+          height: '38px',
+          padding: '0 14px',
+          borderRadius: 'var(--radius-full)',
+          border: '1px solid',
+          borderColor: voiceEnabled ? 'var(--primary)' : 'var(--border)',
+          backgroundColor: voiceEnabled ? 'var(--primary-soft)' : 'var(--surface)',
+          color: voiceEnabled ? 'var(--primary)' : 'var(--text-secondary)',
+          fontSize: '14px',
+          fontWeight: '700',
+          cursor: 'pointer'
         }}
-        title="Voice audio toggle"
+        title="Toggle voice narration"
       >
-        <span>🔊</span>
-        <span>{voiceEnabled ? 'On' : 'Off'}</span>
+        {voiceEnabled ? <IconVolumePlaying size={17} /> : <IconVolume size={17} />}
+        <span>{voiceEnabled ? 'Aawaz On' : 'Aawaz Off'}</span>
       </button>
-    </div>
+    </nav>
   );
 }
