@@ -83,6 +83,65 @@ export default function Home() {
           </div>
         </div>
 
+        {/* Emergency SOS Banner ("Mujhe Shak Hai!") */}
+        <button
+          type="button"
+          onClick={() => navigate('/sos')}
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '14px',
+            padding: '16px 18px',
+            borderRadius: 'var(--radius-lg)',
+            border: '2px solid var(--danger)',
+            backgroundColor: 'var(--danger-soft)',
+            cursor: 'pointer',
+            textAlign: isUrdu ? 'right' : 'left',
+            direction: isUrdu ? 'rtl' : 'ltr',
+            boxShadow: 'var(--shadow-md)',
+            animation: 'pulseGlow 2.5s infinite ease-in-out'
+          }}
+        >
+          <div style={{
+            width: '46px',
+            height: '46px',
+            borderRadius: 'var(--radius-md)',
+            backgroundColor: 'var(--danger)',
+            color: '#FFFFFF',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            flexShrink: 0
+          }}>
+            <IconShieldAlert size={26} />
+          </div>
+
+          <div style={{ flex: 1 }}>
+            <div style={{
+              fontSize: isUrdu ? '24px' : '18px',
+              fontFamily: isUrdu ? 'var(--font-urdu)' : 'var(--font-sans)',
+              fontWeight: '800',
+              color: 'var(--danger-text)',
+              marginBottom: '2px'
+            }}>
+              {isUrdu ? '🚨 مجھے شک ہے! (فوری فراڈ چیک)' : '🚨 Mujhe Shak Hai! (Emergency SOS)'}
+            </div>
+            <div style={{
+              fontSize: isUrdu ? '17px' : '14px',
+              fontFamily: isUrdu ? 'var(--font-urdu)' : 'var(--font-sans)',
+              color: 'var(--text-secondary)'
+            }}>
+              {isUrdu
+                ? 'مشکوک کال یا میسج آیا ہے؟ ابھی فوراً چیک کریں'
+                : 'Mashkook call ya SMS aaya hai? Abhi foran check karein'}
+            </div>
+          </div>
+
+          <div style={{ color: 'var(--danger-text)' }}>
+            <IconArrowRight size={20} />
+          </div>
+        </button>
+
         {/* Primary Tiles (Bento / High-Touch) */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
           {/* Tile 1: Seekhein (Lessons) */}

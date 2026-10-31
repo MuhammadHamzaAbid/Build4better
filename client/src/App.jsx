@@ -10,6 +10,7 @@ import ScamDojo from './pages/ScamDojo';
 import Explain from './pages/Explain';
 import Builder from './pages/Builder';
 import Family from './pages/Family';
+import ScamSOS from './pages/ScamSOS';
 
 export default function App() {
   return (
@@ -21,6 +22,7 @@ export default function App() {
             <Route path="/lesson/:id" element={<Lesson />} />
             <Route path="/lesson/:id/done" element={<LessonComplete />} />
             <Route path="/scams" element={<ScamDojo />} />
+            <Route path="/sos" element={<ScamSOS />} />
             <Route path="/explain" element={<Explain />} />
             <Route path="/builder" element={<Builder />} />
             <Route path="/family" element={<Family />} />

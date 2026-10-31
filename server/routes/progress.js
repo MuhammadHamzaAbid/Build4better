@@ -83,7 +83,8 @@ router.get('/:familyCode', (req, res) => {
     confidence: fam.confidence || { before: 2, after: 4 },
     hesitations,
     mistakesByAttempt,
-    totalCompletedSteps: sessions.length
+    totalCompletedSteps: sessions.length,
+    sosAlerts: fam.sosAlerts || []
   });
 });
 

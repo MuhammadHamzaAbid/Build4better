@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useLanguage } from '../lib/i18n';
 import LanguageToggle from '../components/LanguageToggle';
 import ScamCard from '../components/ScamCard';
-import { IconShield, IconRotate, IconHome, IconCheckCircle } from '../components/Icons';
+import { IconShield, IconRotate, IconHome, IconCheckCircle, IconShieldAlert } from '../components/Icons';
 import { fetchScams } from '../lib/api';
 
 import fallbackScams from '../../../server/data/scams.json';
@@ -93,6 +93,32 @@ export default function ScamDojo() {
             </span>
           )}
         </div>
+
+        {/* Live Call Emergency SOS Link */}
+        <button
+          type="button"
+          onClick={() => navigate('/sos')}
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            gap: '8px',
+            padding: '10px 14px',
+            borderRadius: 'var(--radius-md)',
+            border: '1.5px solid var(--danger)',
+            backgroundColor: 'var(--danger-soft)',
+            color: 'var(--danger-text)',
+            fontSize: isUrdu ? '17px' : '14px',
+            fontFamily: isUrdu ? 'var(--font-urdu)' : 'var(--font-sans)',
+            fontWeight: '700',
+            cursor: 'pointer',
+            marginBottom: '14px',
+            direction: isUrdu ? 'rtl' : 'ltr'
+          }}
+        >
+          <IconShieldAlert size={18} />
+          <span>{isUrdu ? 'ابھی کسی کال یا میسج پر شک ہے؟ ہنگامی چیک کریں' : 'Abhi call/SMS par shak hai? Emergency SOS Check'}</span>
+        </button>
 
         {/* Dojo Content */}
         {!isFinished ? (

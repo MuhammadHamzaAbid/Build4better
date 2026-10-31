@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useLanguage } from '../lib/i18n';
 import LanguageToggle from '../components/LanguageToggle';
-import { IconUsers, IconHome, IconAlertTriangle, IconCheckCircle, IconArrowRight } from '../components/Icons';
+import { IconUsers, IconHome, IconAlertTriangle, IconCheckCircle, IconArrowRight, IconShieldAlert, IconShield } from '../components/Icons';
 import { fetchFamilyProgress } from '../lib/api';
 
 export default function Family() {
@@ -22,7 +22,16 @@ export default function Family() {
       { stepId: 's6', attempts: 2, hintsUsed: 1, name: 'OTP Scam Trap' }
     ],
     mistakesByAttempt: { 1: 4, 2: 2, 3: 1 },
-    totalCompletedSteps: 7
+    totalCompletedSteps: 7,
+    sosAlerts: [
+      {
+        timestamp: new Date(Date.now() - 1000 * 60 * 35).toISOString(),
+        callerNumber: '0304-9876543',
+        querySummary: 'OTP & ATM Block Dhamki Call',
+        verdict: 'Fraud Attempt Defeated',
+        resolved: true
+      }
+    ]
   };
 
   useEffect(() => {
@@ -313,6 +322,80 @@ export default function Family() {
               <div style={{ fontSize: '12px', color: 'var(--text-secondary)', fontWeight: '600' }}>3rd Try</div>
             </div>
           </div>
+        </div>
+
+        {/* Card 4: Recent Emergency Scam SOS Alerts */}
+        <div style={{
+          backgroundColor: 'var(--surface)',
+          borderRadius: 'var(--radius-lg)',
+          padding: '20px',
+          border: '1px solid var(--border)',
+          boxShadow: 'var(--shadow-sm)'
+        }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '6px' }}>
+            <IconShieldAlert size={20} color="var(--danger)" />
+            <h3 style={{ fontSize: '17px', fontWeight: '800', color: 'var(--text)' }}>
+              Emergency Scam Radar (Hifazat History)
+            </h3>
+          </div>
+          <p style={{ fontSize: '13px', color: 'var(--text-secondary)', marginBottom: '14px' }}>
+            Real-time fraud checks performed by the parent using the "Mujhe Shak Hai" button:
+          </p>
+
+          {activeData.sosAlerts && activeData.sosAlerts.length > 0 ? (
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+              {activeData.sosAlerts.map((alert, idx) => (
+                <div
+                  key={idx}
+                  style={{
+                    padding: '12px 14px',
+                    borderRadius: 'var(--radius-md)',
+                    backgroundColor: 'var(--danger-soft)',
+                    border: '1px solid var(--danger-border, #FCA5A5)',
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'center'
+                  }}
+                >
+                  <div>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '2px' }}>
+                      <span style={{ fontSize: '13px', fontWeight: '800', color: 'var(--danger-text)' }}>
+                        {alert.querySummary || 'Suspicious OTP Call'}
+                      </span>
+                      <span style={{
+                        fontSize: '11px',
+                        padding: '2px 6px',
+                        borderRadius: 'var(--radius-sm)',
+                        backgroundColor: '#15803D',
+                        color: '#FFFFFF',
+                        fontWeight: '700'
+                      }}>
+                        Defeated
+                      </span>
+                    </div>
+                    <div style={{ fontSize: '12px', color: 'var(--text-secondary)' }}>
+                      Caller: <strong style={{ color: 'var(--text)' }}>{alert.callerNumber}</strong> • {new Date(alert.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                    </div>
+                  </div>
+
+                  <div style={{ color: '#15803D' }}>
+                    <IconCheckCircle size={22} />
+                  </div>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div style={{
+              padding: '16px',
+              textAlign: 'center',
+              backgroundColor: 'var(--surface-muted)',
+              borderRadius: 'var(--radius-sm)',
+              fontSize: '13px',
+              color: 'var(--text-secondary)'
+            }}>
+              No active fraud alerts detected. Family is practicing safely!
+            </div>
+          )}
         </div>
       </div>
     </div>
