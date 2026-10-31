@@ -1,13 +1,15 @@
 import React from 'react';
 import { useLanguage } from '../lib/i18n';
 import VoiceButton from './VoiceButton';
+import { IconSparkles } from './Icons';
 
 export default function StepCard({
   step,
   stepIndex,
   totalSteps,
   children,
-  onWrongTap
+  onWrongTap,
+  onOpenAssistant
 }) {
   const { lang, t } = useLanguage();
   const isUrdu = lang === 'urdu';
@@ -110,7 +112,7 @@ export default function StepCard({
           </p>
 
           <VoiceButton
-            text={step.explain?.voice || t(step.explain)}
+            text={isUrdu ? (step.explain?.urdu || t(step.explain)) : (step.explain?.roman || step.explain?.voice || t(step.explain))}
             stepId={step.id}
             autoPlay={true}
           />
@@ -133,6 +135,34 @@ export default function StepCard({
             {t(step.question)}
           </p>
         </div>
+
+        {onOpenAssistant && (
+          <button
+            type="button"
+            onClick={onOpenAssistant}
+            style={{
+              marginTop: '12px',
+              width: '100%',
+              minHeight: '46px',
+              borderRadius: 'var(--radius-md)',
+              border: '1.5px dashed var(--primary)',
+              backgroundColor: 'var(--surface-muted)',
+              color: 'var(--primary)',
+              fontSize: isUrdu ? '18px' : '14px',
+              fontFamily: isUrdu ? 'var(--font-urdu)' : 'var(--font-sans)',
+              fontWeight: '700',
+              cursor: 'pointer',
+              display: 'inline-flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: '8px',
+              transition: 'background 0.15s ease'
+            }}
+          >
+            <IconSparkles size={16} />
+            <span>{isUrdu ? 'مددگار AI سے رہنمائی اور سوالات' : 'Madadgar AI se rehnumai lein'}</span>
+          </button>
+        )}
       </div>
     </div>
   );

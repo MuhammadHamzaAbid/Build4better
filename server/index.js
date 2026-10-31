@@ -9,6 +9,7 @@ import scamsRouter from './routes/scams.js';
 import explainRouter from './routes/explain.js';
 import ttsRouter from './routes/tts.js';
 import progressRouter from './routes/progress.js';
+import assistantRouter from './routes/assistant.js';
 
 dotenv.config();
 
@@ -39,6 +40,7 @@ app.use('/api/explain', explainRouter);
 app.use('/api/tts', ttsRouter);
 app.use('/api/progress', progressRouter);
 app.use('/api/confidence', progressRouter);
+app.use('/api/assistant', assistantRouter);
 
 app.listen(PORT, () => {
   console.log(`Server listening on port ${PORT}`);

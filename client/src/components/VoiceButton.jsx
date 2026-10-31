@@ -9,7 +9,11 @@ export default function VoiceButton({ text, stepId, autoPlay = false }) {
 
   useEffect(() => {
     if (autoPlay && voiceEnabled && text) {
-      handlePlay();
+      // Small timeout to allow render completion
+      const timer = setTimeout(() => {
+        handlePlay(true);
+      }, 350);
+      return () => clearTimeout(timer);
     }
     return () => {
       stopAudio();
@@ -20,27 +24,34 @@ export default function VoiceButton({ text, stepId, autoPlay = false }) {
     if (audioRef.current) {
       audioRef.current.pause();
       audioRef.current.currentTime = 0;
+      audioRef.current = null;
     }
-    if (window.speechSynthesis) {
+    if (typeof window !== 'undefined' && window.speechSynthesis) {
       window.speechSynthesis.cancel();
     }
     setIsPlaying(false);
   };
 
-  const handlePlay = async () => {
-    if (isPlaying) {
+  const handlePlay = async (isAuto = false) => {
+    if (isPlaying && !isAuto) {
       stopAudio();
       return;
     }
 
+    if (!text) return;
+
+    stopAudio();
     setIsPlaying(true);
 
-    // Call /api/tts endpoint
     try {
+      // 1. Direct fetch to our enhanced /api/tts endpoint
       const res = await fetch('/api/tts', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ text, lang: 'ur' })
+        body: JSON.stringify({
+          text,
+          lang: lang === 'urdu' ? 'ur' : 'roman'
+        })
       });
 
       if (res.ok) {
@@ -48,26 +59,63 @@ export default function VoiceButton({ text, stepId, autoPlay = false }) {
         const url = URL.createObjectURL(blob);
         const audio = new Audio(url);
         audioRef.current = audio;
-        audio.onended = () => setIsPlaying(false);
-        audio.onerror = () => tryFallback();
-        await audio.play();
+
+        audio.onended = () => {
+          setIsPlaying(false);
+          URL.revokeObjectURL(url);
+        };
+        audio.onerror = () => {
+          setIsPlaying(false);
+          URL.revokeObjectURL(url);
+          tryFallbackSpeech();
+        };
+
+        await audio.play().catch((err) => {
+          // If browser policy prevents autoplay without interaction
+          console.warn('Playback gesture policy or error:', err.message);
+          setIsPlaying(false);
+          if (!isAuto) {
+            tryFallbackSpeech();
+          }
+        });
         return;
       }
-    } catch {
-      // Fallback
+    } catch (err) {
+      console.warn('API TTS failed:', err.message);
     }
 
-    tryFallback();
+    if (!isAuto) {
+      tryFallbackSpeech();
+    } else {
+      setIsPlaying(false);
+    }
   };
 
-  const tryFallback = () => {
-    if ('speechSynthesis' in window && text) {
-      const utterance = new SpeechSynthesisUtterance(text);
-      utterance.lang = lang === 'urdu' ? 'ur-PK' : 'en-US';
-      utterance.rate = 0.85;
-      utterance.onend = () => setIsPlaying(false);
-      utterance.onerror = () => setIsPlaying(false);
-      window.speechSynthesis.speak(utterance);
+  const tryFallbackSpeech = () => {
+    if (typeof window !== 'undefined' && 'speechSynthesis' in window && text) {
+      try {
+        window.speechSynthesis.cancel();
+        const utterance = new SpeechSynthesisUtterance(text);
+        const isUrduScript = /[\u0600-\u06FF]/.test(text);
+
+        // Try to find an Urdu or Hindi voice
+        const voices = window.speechSynthesis.getVoices();
+        const targetVoice = voices.find(v => v.lang.startsWith('ur') || v.lang.startsWith('hi')) || null;
+        if (targetVoice) {
+          utterance.voice = targetVoice;
+          utterance.lang = targetVoice.lang;
+        } else {
+          utterance.lang = isUrduScript ? 'ur-PK' : 'en-US';
+        }
+
+        utterance.rate = 0.85;
+        utterance.onend = () => setIsPlaying(false);
+        utterance.onerror = () => setIsPlaying(false);
+
+        window.speechSynthesis.speak(utterance);
+      } catch {
+        setIsPlaying(false);
+      }
     } else {
       setIsPlaying(false);
     }
@@ -78,22 +126,24 @@ export default function VoiceButton({ text, stepId, autoPlay = false }) {
   return (
     <button
       type="button"
-      onClick={handlePlay}
-      aria-label={isPlaying ? 'Aawaz rokein' : 'Aawaz sunein'}
+      onClick={() => handlePlay(false)}
+      aria-label={isPlaying ? (isUrdu ? 'آواز بند کریں' : 'Aawaz rokein') : (isUrdu ? 'آواز سنیں' : 'Aawaz sunein')}
       style={{
         display: 'inline-flex',
         alignItems: 'center',
         gap: '8px',
-        padding: '8px 16px',
+        padding: '9px 18px',
+        minHeight: '44px',
         borderRadius: 'var(--radius-full)',
-        border: '1.5px solid var(--primary)',
+        border: isPlaying ? '1.5px solid var(--primary)' : '1.5px solid var(--border)',
         backgroundColor: isPlaying ? 'var(--primary-soft)' : 'var(--surface)',
-        color: 'var(--primary)',
+        color: isPlaying ? 'var(--primary)' : 'var(--text)',
         fontSize: isUrdu ? '18px' : '15px',
         fontFamily: isUrdu ? 'var(--font-urdu)' : 'var(--font-sans)',
-        fontWeight: 'bold',
+        fontWeight: '700',
         cursor: 'pointer',
-        boxShadow: 'var(--shadow-sm)'
+        boxShadow: isPlaying ? 'var(--shadow-md)' : 'var(--shadow-sm)',
+        transition: 'all 0.15s ease'
       }}
     >
       {isPlaying ? <IconVolumePlaying size={18} /> : <IconVolume size={18} />}

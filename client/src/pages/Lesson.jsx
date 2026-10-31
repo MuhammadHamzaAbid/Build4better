@@ -7,7 +7,8 @@ import TapHotspot from '../components/TapHotspot';
 import KindMessage from '../components/KindMessage';
 import SuccessBurst from '../components/SuccessBurst';
 import ConfidenceMeter from '../components/ConfidenceMeter';
-import { IconBook, IconLightbulb, IconArrowRight } from '../components/Icons';
+import AIAssistantModal from '../components/AIAssistantModal';
+import { IconBook, IconLightbulb, IconArrowRight, IconSparkles } from '../components/Icons';
 import { fetchLessonById, postProgress, postConfidence } from '../lib/api';
 
 import fallbackHeroLesson from '../../public/lessons/bijli-bill-01.json';
@@ -25,6 +26,7 @@ export default function Lesson() {
   const [showKindMessage, setShowKindMessage] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
   const [hasRatedBefore, setHasRatedBefore] = useState(false);
+  const [showAssistant, setShowAssistant] = useState(false);
 
   useEffect(() => {
     async function load() {
@@ -167,12 +169,61 @@ export default function Lesson() {
         </div>
       )}
 
+      {/* Floating Madadgar AI Button */}
+      <div style={{
+        position: 'sticky',
+        top: 0,
+        zIndex: 50,
+        backgroundColor: 'var(--surface)',
+        borderBottom: '1px solid var(--border)',
+        padding: '8px 16px',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        boxShadow: 'var(--shadow-xs)'
+      }}>
+        <div style={{
+          display: 'flex',
+          alignItems: 'center',
+          gap: '8px',
+          color: 'var(--text)',
+          fontWeight: '700',
+          fontSize: isUrdu ? '19px' : '15px',
+          fontFamily: isUrdu ? 'var(--font-urdu)' : 'var(--font-sans)'
+        }}>
+          <span>{isUrdu ? 'قدم رہنمائی' : 'Qadam Rehnumai'}</span>
+        </div>
+
+        <button
+          type="button"
+          onClick={() => setShowAssistant(true)}
+          style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: '6px',
+            padding: '6px 14px',
+            borderRadius: 'var(--radius-full)',
+            border: '1.5px solid var(--primary)',
+            backgroundColor: 'var(--primary-soft)',
+            color: 'var(--primary)',
+            fontSize: isUrdu ? '17px' : '13px',
+            fontFamily: isUrdu ? 'var(--font-urdu)' : 'var(--font-sans)',
+            fontWeight: '700',
+            cursor: 'pointer'
+          }}
+        >
+          <IconSparkles size={16} />
+          <span>{isUrdu ? 'مددگار AI' : 'Madadgar AI'}</span>
+        </button>
+      </div>
+
       {/* Step View */}
       <StepCard
         step={currentStep}
         stepIndex={currentStepIndex}
         totalSteps={lesson.steps.length}
         onWrongTap={handleWrongTap}
+        onOpenAssistant={() => setShowAssistant(true)}
       >
         <TapHotspot
           target={currentStep.target}
@@ -187,8 +238,22 @@ export default function Lesson() {
           explanation={currentStep.wrong_tap}
           onUndo={() => setShowKindMessage(false)}
           onRetry={() => setShowKindMessage(false)}
+          onOpenAssistant={() => {
+            setShowKindMessage(false);
+            setShowAssistant(true);
+          }}
         />
       )}
+
+      {/* Interactive Step-by-Step AI Assistant Modal */}
+      <AIAssistantModal
+        isOpen={showAssistant}
+        onClose={() => setShowAssistant(false)}
+        lessonId={lesson.id}
+        stepId={currentStep.id}
+        stepIndex={currentStepIndex}
+        totalSteps={lesson.steps.length}
+      />
 
       {/* Gentle Success Burst */}
       {showSuccess && <SuccessBurst />}

@@ -1,10 +1,14 @@
 import React from 'react';
 import { useLanguage } from '../lib/i18n';
-import { IconLightbulb, IconUndo, IconRotate } from './Icons';
+import VoiceButton from './VoiceButton';
+import { IconLightbulb, IconUndo, IconRotate, IconSparkles } from './Icons';
 
-export default function KindMessage({ explanation, onUndo, onRetry }) {
+export default function KindMessage({ explanation, onUndo, onRetry, onOpenAssistant }) {
   const { lang, t } = useLanguage();
   const isUrdu = lang === 'urdu';
+  const voiceText = isUrdu
+    ? (explanation?.urdu || t(explanation))
+    : (explanation?.roman || t(explanation));
 
   return (
     <div
@@ -26,7 +30,7 @@ export default function KindMessage({ explanation, onUndo, onRetry }) {
         animation: 'slideUpCard 0.25s cubic-bezier(0.16, 1, 0.3, 1)'
       }}
     >
-      <div style={{ display: 'flex', alignItems: 'flex-start', gap: '14px', marginBottom: '18px' }}>
+      <div style={{ display: 'flex', alignItems: 'flex-start', gap: '14px', marginBottom: '14px' }}>
         <div style={{
           width: '42px',
           height: '42px',
@@ -59,12 +63,42 @@ export default function KindMessage({ explanation, onUndo, onRetry }) {
             fontFamily: isUrdu ? 'var(--font-urdu)' : 'var(--font-sans)',
             lineHeight: isUrdu ? '1.9' : '1.45',
             color: 'var(--text)',
-            direction: isUrdu ? 'rtl' : 'ltr'
+            direction: isUrdu ? 'rtl' : 'ltr',
+            marginBottom: '10px'
           }}>
             {t(explanation)}
           </p>
+
+          <VoiceButton text={voiceText} autoPlay={true} />
         </div>
       </div>
+
+      {onOpenAssistant && (
+        <button
+          type="button"
+          onClick={onOpenAssistant}
+          style={{
+            width: '100%',
+            minHeight: '44px',
+            borderRadius: 'var(--radius-md)',
+            border: '1.5px solid var(--primary)',
+            backgroundColor: 'var(--surface)',
+            color: 'var(--primary)',
+            fontSize: isUrdu ? '18px' : '14px',
+            fontFamily: isUrdu ? 'var(--font-urdu)' : 'var(--font-sans)',
+            fontWeight: '700',
+            cursor: 'pointer',
+            display: 'inline-flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            gap: '8px',
+            marginBottom: '10px'
+          }}
+        >
+          <IconSparkles size={16} />
+          <span>{isUrdu ? 'مددگار AI سے مزید رہنمائی لیں' : 'Madadgar AI se mazeed rehnumai lein'}</span>
+        </button>
+      )}
 
       <div style={{ display: 'flex', gap: '12px' }}>
         <button
