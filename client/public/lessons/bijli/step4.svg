@@ -1,0 +1,38 @@
+<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 390 650' width='390' height='650'>
+  <rect width='390' height='650' fill='#FAF7F2'/>
+  
+  <rect width='390' height='70' fill='#0F6E5A'/>
+  <circle cx='35' cy='35' r='18' fill='#DFF2EC'/>
+  <text x='35' y='42' font-size='20' text-anchor='middle'>💡</text>
+  <text x='65' y='42' fill='#FFFFFF' font-family='sans-serif' font-size='20' font-weight='bold'>Roshni Bijli</text>
+
+  <rect x='250' y='18' width='120' height='26' rx='13' fill='#FFF1D9' stroke='#F4A93D' stroke-width='1.5'/>
+  <text x='310' y='35' fill='#A05E03' font-family='sans-serif' font-size='12' font-weight='bold' text-anchor='middle'>⚡ PRACTICE</text>
+
+
+  <text x='195' y='110' fill='#1F2933' font-family='sans-serif' font-size='20' font-weight='bold' text-anchor='middle'>Tareeqa-e-Adaigi Chunein</text>
+  <text x='195' y='135' fill='#5B6770' font-family='sans-serif' font-size='14' text-anchor='middle'>Aap kahan se paise ada karna chahte hain?</text>
+
+  <rect x='20' y='160' width='350' height='80' rx='16' fill='#FFFFFF' stroke='#E2DDD5'/>
+  <text x='40' y='195' fill='#5B6770' font-family='sans-serif' font-size='14'>Bill Amount:</text>
+  <text x='40' y='225' fill='#0F6E5A' font-family='sans-serif' font-size='24' font-weight='bold'>Rs. 4,850</text>
+
+  <!-- Option 1 (Target: 10%, 42%, 80%, 14%) -->
+  <rect x='39' y='273' width='312' height='91' rx='16' fill='#DFF2EC' stroke='#0F6E5A' stroke-width='2'/>
+  <circle cx='70' cy='318' r='20' fill='#0F6E5A'/>
+  <text x='70' y='325' font-size='20' text-anchor='middle'>📱</text>
+  <text x='105' y='310' fill='#0F6E5A' font-family='sans-serif' font-size='18' font-weight='bold'>EasyWallet</text>
+  <text x='105' y='335' fill='#1F2933' font-family='sans-serif' font-size='14'>Balance: Rs. 12,400</text>
+  <circle cx='320' cy='318' r='10' fill='#0F6E5A'/>
+
+  <!-- Option 2 -->
+  <rect x='39' y='385' width='312' height='91' rx='16' fill='#FFFFFF' stroke='#E2DDD5'/>
+  <circle cx='70' cy='430' r='20' fill='#FAF7F2'/>
+  <text x='70' y='437' font-size='20' text-anchor='middle'>🏦</text>
+  <text x='105' y='422' fill='#1F2933' font-family='sans-serif' font-size='18' font-weight='bold'>Bank Account</text>
+  <text x='105' y='447' fill='#5B6770' font-family='sans-serif' font-size='14'>Debit / Credit Card</text>
+  <circle cx='320' cy='430' r='10' fill='none' stroke='#A0AEC0' stroke-width='2'/>
+
+  <rect x='39' y='530' width='312' height='55' rx='14' fill='#FFFFFF' stroke='#E2DDD5'/>
+  <text x='195' y='565' fill='#5B6770' font-family='sans-serif' font-size='18' font-weight='bold' text-anchor='middle'>Cancel</text>
+</svg>

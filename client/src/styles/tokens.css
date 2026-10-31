@@ -1,0 +1,97 @@
+:root {
+  /* Colours */
+  --bg: #FAF7F2;
+  --surface: #FFFFFF;
+  --text: #1F2933;
+  --primary: #0F6E5A;
+  --primary-soft: #DFF2EC;
+  --gentle: #F4A93D;
+  --gentle-soft: #FFF1D9;
+  --danger: #C0392B;
+  --danger-soft: #FBE4E1;
+  --muted: #5B6770;
+  --border: #E2DDD5;
+
+  /* Fonts */
+  --font-roman: 'Nunito', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-urdu: 'Noto Nastaliq Urdu', 'Noto Naskh Arabic', serif;
+
+  /* Typography Sizes */
+  --text-urdu-body: 24px;
+  --line-urdu-body: 2.0;
+  --text-roman-body: 20px;
+  --line-roman-body: 1.5;
+  --text-heading: 28px;
+  --text-btn: 20px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  background-color: #EFECE6;
+  color: var(--text);
+  font-family: var(--font-roman);
+  font-size: var(--text-roman-body);
+  line-height: var(--line-roman-body);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+/* Nastaliq text formatting with RTL */
+.lang-urdu {
+  font-family: var(--font-urdu);
+  font-size: var(--text-urdu-body);
+  line-height: var(--line-urdu-body);
+  direction: rtl;
+  text-align: right;
+}
+
+.lang-roman {
+  font-family: var(--font-roman);
+  font-size: var(--text-roman-body);
+  line-height: var(--line-roman-body);
+  direction: ltr;
+  text-align: left;
+}
+
+/* Animations */
+@keyframes slideUp {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes pulseGlow {
+  0% {
+    box-shadow: 0 0 0 0 rgba(15, 110, 90, 0.6);
+  }
+  70% {
+    box-shadow: 0 0 0 12px rgba(15, 110, 90, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(15, 110, 90, 0);
+  }
+}
+
+@keyframes popIn {
+  0% {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}

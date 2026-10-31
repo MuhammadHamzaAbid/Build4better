@@ -1,0 +1,27 @@
+<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 390 650' width='390' height='650'>
+  <rect width='390' height='650' fill='#2D3748'/>
+  
+  <rect x='20' y='30' width='350' height='590' rx='20' fill='#FFFFFF'/>
+
+  <circle cx='195' cy='100' r='35' fill='#FBE4E1'/>
+  <text x='195' y='112' font-size='35' text-anchor='middle'>🚨</text>
+
+  <text x='195' y='165' fill='#C0392B' font-family='sans-serif' font-size='22' font-weight='bold' text-anchor='middle'>ANJAAN CALLER!</text>
+  <text x='195' y='190' fill='#5B6770' font-family='sans-serif' font-size='15' text-anchor='middle'>Phone: 0312-9844122</text>
+
+  <rect x='40' y='215' width='310' height='130' rx='14' fill='#FFF1D9' stroke='#F4A93D'/>
+  <text x='195' y='245' fill='#A05E03' font-family='sans-serif' font-size='15' font-weight='bold' text-anchor='middle'>Caller Keh Raha Hai:</text>
+  <text x='55' y='275' fill='#1F2933' font-family='sans-serif' font-size='15'>'Main bank se bol raha hoon.</text>
+  <text x='55' y='300' fill='#1F2933' font-family='sans-serif' font-size='15'>Aap ke phone par 4-digit OTP</text>
+  <text x='55' y='325' fill='#1F2933' font-family='sans-serif' font-size='15'>aaya hai, foran bata dein.'</text>
+
+  <!-- Trap Button: Bata dein (10%, 58%, 80%, 11%) -->
+  <rect x='39' y='377' width='312' height='70' rx='16' fill='#FBE4E1' stroke='#C0392B' stroke-width='1.5'/>
+  <text x='195' y='418' fill='#C0392B' font-family='sans-serif' font-size='18' font-weight='bold' text-anchor='middle'>⚠️ Bata dein (Share OTP)</text>
+
+  <!-- Correct Safe Button: Nahi batana (10%, 74%, 80%, 11%) -->
+  <rect x='39' y='481' width='312' height='72' rx='16' fill='#0F6E5A' filter='drop-shadow(0 4px 6px rgba(0,0,0,0.15))'/>
+  <text x='195' y='523' fill='#FFFFFF' font-family='sans-serif' font-size='20' font-weight='bold' text-anchor='middle'>🛡️ Nahi, kisi ko nahi batana</text>
+
+  <text x='195' y='585' fill='#5B6770' font-family='sans-serif' font-size='13' font-weight='600' text-anchor='middle'>OTP ek khufiya code hai jo kisi ko nahi batate</text>
+</svg>
