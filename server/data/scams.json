@@ -1,0 +1,222 @@
+[
+  {
+    "id": "sc-01",
+    "answer": "scam",
+    "message": {
+      "roman": "Mubarak ho! Aap ka 25 laakh ka inaam nikla hai. Abhi is link par click karein aur apna prize claim karein: bit.ly/inaam-2026",
+      "urdu": "مبارک ہو! آپ کا 25 لاکھ کا انعام نکلا ہے۔ ابھی اس لنک پر کلک کریں اور اپنا انعام حاصل کریں: bit.ly/inaam-2026"
+    },
+    "red_flags": [
+      {
+        "phrase": { "roman": "25 laakh ka inaam", "urdu": "25 لاکھ کا انعام" },
+        "why": { "roman": "Aap ne kisi lottery mein hissa nahi liya, achanak inaam nikalna fraud ki nishani hai.", "urdu": "آپ نے کسی لاٹری میں حصہ نہیں لیا، اچانک انعام نکلنا فراڈ کی نشانی ہے۔" }
+      },
+      {
+        "phrase": { "roman": "is link par click karein", "urdu": "اس لنک پر کلک کریں" },
+        "why": { "roman": "Ajnabi link par click karne se phone ka data chori ho sakta hai.", "urdu": "اجنبی لنک پر کلک کرنے سے فون کا ڈیٹا چوری ہو سکتا ہے۔" }
+      }
+    ],
+    "remember": {
+      "roman": "Bina koshish koi inaam nahi nikalta. Anjaan links par kabhi tap na karein.",
+      "urdu": "بغیر کوشش کوئی انعام نہیں نکلتا۔ انجان لنکس پر کبھی ٹیپ نہ کریں۔"
+    }
+  },
+  {
+    "id": "sc-02",
+    "answer": "scam",
+    "message": {
+      "roman": "Ahem itla: Aap ka bank account 2 ghante mein block ho jayega. Account bachanay ke liye foran apna OTP 03001234567 par SMS karein.",
+      "urdu": "اہم اطلاع: آپ کا بینک اکاؤنٹ 2 گھنٹے میں بلاک ہو جائے گا۔ اکاؤنٹ بچانے کے لیے فوراً اپنا او ٹی پی 03001234567 پر میسج کریں۔"
+    },
+    "red_flags": [
+      {
+        "phrase": { "roman": "2 ghante mein block ho jayega", "urdu": "2 گھنٹے میں بلاک ہو جائے گا" },
+        "why": { "roman": "Kauf aur jaldbazi paida karna dhoka baazon ka aam tareeqa hai.", "urdu": "خوف اور جلد بازی پیدا کرنا دھوکے بازوں کا عام طریقہ ہے۔" }
+      },
+      {
+        "phrase": { "roman": "apna OTP", "urdu": "اپنا او ٹی پی" },
+        "why": { "roman": "Bank kabhi bhi aap se OTP nahi maangta. OTP kisi ko nahi batana.", "urdu": "بینک کبھی بھی آپ سے او ٹی پی نہیں مانگتا۔ او ٹی پی کسی کو نہیں بتانا۔" }
+      }
+    ],
+    "remember": {
+      "roman": "Bank kabhi phone ya SMS par OTP nahi maangta.",
+      "urdu": "بینک کبھی فون یا ایس ایم ایس پر او ٹی پی نہیں مانگتا۔"
+    }
+  },
+  {
+    "id": "sc-03",
+    "answer": "real",
+    "message": {
+      "roman": "Moazzaz sarif, aap ke bijli ke bill ki aakhri tareekh 05 November hai. Wapsi tareekh se pehle adaigi yaqeeni banayein. Shukriya.",
+      "urdu": "معزز صارف، آپ کے بجلی کے بل کی آخری تاریخ 05 نومبر ہے۔ مقررہ تاریخ سے پہلے ادائیگی یقینی بنائیں۔ شکریہ۔"
+    },
+    "red_flags": [],
+    "remember": {
+      "roman": "Yeh aam yad-dehani hai. Is mein na koi link hai aur na koi khufiya number manga gaya hai.",
+      "urdu": "یہ عام یاد دہانی ہے۔ اس میں نہ کوئی لنک ہے اور نہ کوئی خفیہ نمبر مانگا گیا ہے۔"
+    }
+  },
+  {
+    "id": "sc-04",
+    "answer": "scam",
+    "message": {
+      "roman": "Bhai galti se mere 10,000 rupay aap ke number par send ho gaye hain. Khuda ke liye is number par wapas bhej dein, meri ammi beemar hain.",
+      "urdu": "بھائی غلطی سے میرے 10،000 روپے آپ کے نمبر پر سینڈ ہو گئے ہیں۔ خدا کے لیے اس نمبر پر واپس بھیج دیں، میری امی بیمار ہیں۔"
+    },
+    "red_flags": [
+      {
+        "phrase": { "roman": "galti se mere 10,000 rupay", "urdu": "غلطی سے میرے 10،000 روپے" },
+        "why": { "roman": "Fraudsters fake SMS bhej kar kehte hain ke paise galti se aa gaye, jabke asli account mein koi paise nahi aaye hote.", "urdu": "فراڈیے جعلی میسج بھیج کر کہتے ہیں کہ پیسے غلطی سے آ گئے، جبکہ اصلی اکاؤنٹ میں کوئی رقم نہیں آئی ہوتی۔" }
+      },
+      {
+        "phrase": { "roman": "wapas bhej dein", "urdu": "واپس بھیج دیں" },
+        "why": { "roman": "Pehle apna bank/wallet balance khud check karein, kisi ke kehne par foran paise wapas na karein.", "urdu": "پہلے اپنا بینک یا والیٹ بیلنس خود چیک کریں، کسی کے کہنے پر فوراً پیسے واپس نہ کریں۔" }
+      }
+    ],
+    "remember": {
+      "roman": "Pehle apna account balance check karein. Agar sach mein paise aaye hon to helpline se rabta karein.",
+      "urdu": "پہلے اپنا اکاؤنٹ بیلنس چیک کریں۔ اگر واقعی پیسے آئے ہوں تو ہیلپ لائن سے رابطہ کریں۔"
+    }
+  },
+  {
+    "id": "sc-05",
+    "answer": "real",
+    "message": {
+      "roman": "Salam Abbu! Main market se doodh aur phal le kar 15 minute mein ghar pohnch raha hoon. Kuch aur mangwana hai?",
+      "urdu": "سلام ابّو! میں مارکیٹ سے دودھ اور پھل لے کر 15 منٹ میں گھر پہنچ رہا ہوں۔ کچھ اور منگوانا ہے؟"
+    },
+    "red_flags": [],
+    "remember": {
+      "roman": "Ghar walon ka aam rabta jismein koi dawab ya mushkook maang nahi hai bilkul theek hota hai.",
+      "urdu": "گھر والوں کا عام رابطہ جس میں کوئی دباؤ یا مشکوک مانگ نہیں ہوتی بالکل محفوظ ہوتا ہے۔"
+    }
+  },
+  {
+    "id": "sc-06",
+    "answer": "scam",
+    "message": {
+      "roman": "Benazir Imdad Program: Aap ke naam 45,000 rupay ki mali imdad aayi hai. Fee 1500 rupay ada karein aur apna CNIC register karein link: imdad-gov.org/reg",
+      "urdu": "بے نظیر امداد پروگرام: آپ کے نام 45،000 روپے کی مالی امداد آئی ہے۔ فیس 1500 روپے ادا کریں اور اپنا شناختی کارڈ رجسٹر کریں: imdad-gov.org/reg"
+    },
+    "red_flags": [
+      {
+        "phrase": { "roman": "Fee 1500 rupay ada karein", "urdu": "فیس 1500 روپے ادا کریں" },
+        "why": { "roman": "Imdad lene ke liye pehle paise maangna 100% fraud hota hai.", "urdu": "امداد لینے کے لیے پہلے فیس مانگنا سو فیصد فراڈ ہوتا ہے۔" }
+      },
+      {
+        "phrase": { "roman": "apna CNIC register karein", "urdu": "اپنا شناختی کارڈ رجسٹر کریں" },
+        "why": { "roman": "Ghair tasdeeq shuda links par apna CNIC daalna identity theft ka sabab banta hai.", "urdu": "غیر تصدیق شدہ لنکس پر شناختی کارڈ نمبر درج کرنا خطرے کا باعث بنتا ہے۔" }
+      }
+    ],
+    "remember": {
+      "roman": "Hukoomat imdad dene ke liye kabhi pehle advance fees nahi maangti.",
+      "urdu": "حکومت امداد دینے کے لیے کبھی پہلے ایڈوانس فیس نہیں مانگتی۔"
+    }
+  },
+  {
+    "id": "sc-07",
+    "answer": "scam",
+    "message": {
+      "roman": "Notice: Aap ka bijli connection aaj shaam 6 baje kaat diya jayega. Fauri connection bachanay ke liye is link par apna bill bharein: k-electric-billpay.me",
+      "urdu": "نوٹس: آپ کا بجلی کنکشن آج شام 6 بجے کاٹ دیا جائے گا۔ فوری کنکشن بچانے کے لیے اس لنک پر اپنا بل بھریں: k-electric-billpay.me"
+    },
+    "red_flags": [
+      {
+        "phrase": { "roman": "aaj shaam 6 baje kaat diya jayega", "urdu": "آج شام 6 بجے کاٹ دیا جائے گا" },
+        "why": { "roman": "Jald-bazi ka dawab bana kar ghalat link par paise mangwana.", "urdu": "فوری کٹوتی کی دھمکی دے کر نقلی ویب سائٹ پر پیسے ہتھیانا۔" }
+      },
+      {
+        "phrase": { "roman": "k-electric-billpay.me", "urdu": "k-electric-billpay.me" },
+        "why": { "roman": "Yeh fake link hai, sarkari ya company ka official domain nahi hai.", "urdu": "یہ جعلی لنک ہے، کسی کمپنی کا باضابطہ پتہ نہیں ہے۔" }
+      }
+    ],
+    "remember": {
+      "roman": "Bill ki adaigi hamesha apni verified app ya bank se karein, anjaan link se nahi.",
+      "urdu": "بل کی ادائیگی ہمیشہ اپنی مستند ایپ یا بینک سے کریں، کسی لنک سے نہیں۔"
+    }
+  },
+  {
+    "id": "sc-08",
+    "answer": "real",
+    "message": {
+      "roman": "TCS Tracking: Aap ka parcel number TCS-9821 Lahore se Karachi rawana kar diya gaya hai. Tawaqqo hai kal pohnch jayega.",
+      "urdu": "ٹی سی ایس ٹریکنگ: آپ کا پارسل نمبر TCS-9821 لاہور سے کراچی روانہ کر دیا گیا ہے۔ توقع ہے کل پہنچ جائے گا۔"
+    },
+    "red_flags": [],
+    "remember": {
+      "roman": "Sirf itla di gayi hai, na koi link kholne ko kaha hai aur na koi raqam mangi gayi hai.",
+      "urdu": "صرف معلومات دی گئی ہیں، نہ کوئی لنک کھولنے کو کہا ہے اور نہ کوئی رقم مانگی ہے۔"
+    }
+  },
+  {
+    "id": "sc-09",
+    "answer": "scam",
+    "message": {
+      "roman": "Abbu main mushkil mein hoon! Mera phone toot gaya hai yeh dost ka number hai. Thori dair mein police pakar legi, foran 20,000 is account par bhej dein.",
+      "urdu": "ابّو میں مشکل میں ہوں! میرا فون ٹوٹ گیا ہے یہ دوست کا نمبر ہے۔ تھوڑی دیر میں پولیس پکڑ لے گی، فوراً 20،000 اس اکاؤنٹ پر بھیج دیں۔"
+    },
+    "red_flags": [
+      {
+        "phrase": { "roman": "dost ka number hai", "urdu": "دوست کا نمبر ہے" },
+        "why": { "roman": "Anjaan number se bachon ka ban kar jazbaati blackmail karna fraud tareeqa hai.", "urdu": "انجان نمبر سے بچوں کا نام لے کر جذباتی بلیک میل کرنا فراڈ کا حربہ ہے۔" }
+      },
+      {
+        "phrase": { "roman": "foran 20,000 is account par bhej dein", "urdu": "فوراً 20،000 اس اکاؤنٹ پر بھیج دیں" },
+        "why": { "roman": "Bina bache ke asal number par call kiye ya aawaz sune kabhi paise na bhejein.", "urdu": "بغیر بچے کے اصل نمبر پر کال ملائے یا تصدیق کیے ہرگز رقم نہ بھیجیں۔" }
+      }
+    ],
+    "remember": {
+      "roman": "Pehle apne bache ke asal number par call kar ke tasdeeq karein.",
+      "urdu": "پہلے اپنے بچے کے اصل نمبر پر خود کال کر کے تسلی کریں۔"
+    }
+  },
+  {
+    "id": "sc-10",
+    "answer": "scam",
+    "message": {
+      "roman": "Online typing job: Ghar bethay rozana 5000 rupay kamayein. Shuru karne ke liye 2000 rupay security deposit jama karwayein.",
+      "urdu": "آن لائن ٹائپنگ نوکری: گھر بیٹھے روزانہ 5000 روپے کمائیں۔ کام شروع کرنے کے لیے 2000 روپے سیکیورٹی فیس جمع کروائیں۔"
+    },
+    "red_flags": [
+      {
+        "phrase": { "roman": "2000 rupay security deposit", "urdu": "2000 روپے سیکیورٹی فیس" },
+        "why": { "roman": "Asal naukri kaam karne ke paise deti hai, shuru mein paise nahi maangti.", "urdu": "اصلی نوکری کام کے بدلے پیسے دیتی ہے، خود ایڈوانس پیسے نہیں مانگتی۔" }
+      }
+    ],
+    "remember": {
+      "roman": "Kaam shuru karne ke liye kabhi kisi ko advance fees na dein.",
+      "urdu": "کام شروع کرنے کے لیے کبھی کسی کو ایڈوانس فیس نہ دیں۔"
+    }
+  },
+  {
+    "id": "sc-11",
+    "answer": "scam",
+    "message": {
+      "roman": "Pakistan Post: Aap ka parcel address theek na hone ki wajah se ruk gaya hai. Re-delivery ke liye 120 rupay ada karein: pak-post-update.com",
+      "urdu": "پاکستان پوسٹ: آپ کا پارسل پتہ نامکمل ہونے کی وجہ سے رک گیا ہے۔ دوبارہ ڈیلیوری کے لیے 120 روپے ادا کریں: pak-post-update.com"
+    },
+    "red_flags": [
+      {
+        "phrase": { "roman": "pak-post-update.com", "urdu": "pak-post-update.com" },
+        "why": { "roman": "Chhoti raqam ke bahaane aap ke card aur bank ki maloomat chori ki jaati hain.", "urdu": "چھوٹی رقم کے بہانے آپ کے بینک کارڈ کی خفیہ تفصیلات چوری کی جاتی ہیں۔" }
+      }
+    ],
+    "remember": {
+      "roman": "Chhoti raqam ka lalach de kar card details mangna phising fraud hai.",
+      "urdu": "چھوٹی رقم کی آڑ میں کارڈ کی معلومات مانگنا بڑا دھوکہ ہے۔"
+    }
+  },
+  {
+    "id": "sc-12",
+    "answer": "real",
+    "message": {
+      "roman": "Aap ke account se 1,500 rupay ki adaigi Utility Stores par kamyabi se ho gayi hai. Baqiya balance 14,200 rupay hai.",
+      "urdu": "آپ کے اکاؤنٹ سے 1،500 روپے کی ادائیگی یوٹیلٹی اسٹورز پر کامیابی سے ہو گئی ہے۔ بقیہ بیلنس 14،200 روپے ہے۔"
+    },
+    "red_flags": [],
+    "remember": {
+      "roman": "Yeh khareedari ke baad bank ki aam rasid hai. Is mein koi link ya OTP nahi manga gaya.",
+      "urdu": "یہ خریداری کے بعد بینک کی عام رسید ہے۔ اس میں کوئی لنک یا او ٹی پی نہیں مانگا گیا۔"
+    }
+  }
+]

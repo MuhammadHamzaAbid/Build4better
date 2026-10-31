@@ -1,0 +1,60 @@
+{
+  "AMMI-2026": {
+    "familyCode": "AMMI-2026",
+    "confidence": {
+      "before": 2,
+      "after": 4
+    },
+    "sessions": [
+      {
+        "lessonId": "bijli-bill-01",
+        "stepId": "s1",
+        "attempts": 1,
+        "hintsUsed": 0,
+        "correct": true
+      },
+      {
+        "lessonId": "bijli-bill-01",
+        "stepId": "s2",
+        "attempts": 3,
+        "hintsUsed": 2,
+        "correct": true
+      },
+      {
+        "lessonId": "bijli-bill-01",
+        "stepId": "s3",
+        "attempts": 1,
+        "hintsUsed": 0,
+        "correct": true
+      },
+      {
+        "lessonId": "bijli-bill-01",
+        "stepId": "s4",
+        "attempts": 2,
+        "hintsUsed": 1,
+        "correct": true
+      },
+      {
+        "lessonId": "bijli-bill-01",
+        "stepId": "s5",
+        "attempts": 1,
+        "hintsUsed": 0,
+        "correct": true
+      },
+      {
+        "lessonId": "bijli-bill-01",
+        "stepId": "s6",
+        "attempts": 2,
+        "hintsUsed": 1,
+        "correct": true
+      },
+      {
+        "lessonId": "bijli-bill-01",
+        "stepId": "s7",
+        "attempts": 1,
+        "hintsUsed": 0,
+        "correct": true
+      }
+    ]
+  }
+}

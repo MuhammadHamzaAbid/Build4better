@@ -1,0 +1,171 @@
+{
+  "id": "bijli-bill-01",
+  "title": {
+    "urdu": "بجلی کا بل ادا کریں",
+    "roman": "Bijli ka bill ada karein"
+  },
+  "language_default": "roman",
+  "steps": [
+    {
+      "id": "s1",
+      "image": "/lessons/bijli/step1.svg",
+      "target": { "x": 10, "y": 56, "w": 80, "h": 12 },
+      "explain": {
+        "urdu": "یہاں سے بل ادا کرنے کا آغاز ہوتا ہے۔ بڑا ہرا بٹن دیکھیں۔",
+        "roman": "Yahan se bill ada karne ka aghaz hota hai. Bara hara button dekhein.",
+        "voice": "Yahan se bill ada karne ka aaghaz hota hai. Bara hara button dekhein."
+      },
+      "question": {
+        "urdu": "آپ کہاں دبائیں گی؟",
+        "roman": "Aap kahan dabayengi?"
+      },
+      "wrong_tap": {
+        "urdu": "کوئی بات نہیں۔ یہ بٹن مدد یا تاریخ کے لیے ہے۔ بل ادا کرنے کے لیے بڑا ہرا بٹن دبائیں۔",
+        "roman": "Koi baat nahi. Yeh button madad ya tareekh ke liye hai. Bill ada karne ke liye bara hara button dabayein."
+      },
+      "hint_levels": [
+        "",
+        "Neeche 'Bill Ada Karein' wala bara hara button dabayein.",
+        "highlight"
+      ]
+    },
+    {
+      "id": "s2",
+      "image": "/lessons/bijli/step2.svg",
+      "target": { "x": 10, "y": 84, "w": 80, "h": 10 },
+      "explain": {
+        "urdu": "اپنے بجلی کے بل سے چودہ ہندسوں کا حوالہ نمبر درج کریں۔ پھر آگے جائیں۔",
+        "roman": "Apne bijli ke bill se chaudah hindson ka hawala number darj karein. Phir aage jayein.",
+        "voice": "Apne bijli ke bill se chaudah hindson ka hawala number darj karein. Phir aage jayein."
+      },
+      "question": {
+        "urdu": "نمبر لکھنے کے بعد آگے بڑھنے کے لیے کہاں دبائیں گی؟",
+        "roman": "Number likhne ke baad aage barhne ke liye kahan dabayengi?"
+      },
+      "wrong_tap": {
+        "urdu": "کوئی بات نہیں، سب سے ہو جاتا ہے۔ نیچے موجود 'آگے' والا بٹن دبائیں۔",
+        "roman": "Koi baat nahi, sab se ho jata hai. Neeche maujood 'Aage' wala button dabayein."
+      },
+      "hint_levels": [
+        "",
+        "Neeche sab se aakhri 'Aage' button par tap karein.",
+        "highlight"
+      ]
+    },
+    {
+      "id": "s3",
+      "image": "/lessons/bijli/step3.svg",
+      "target": { "x": 10, "y": 78, "w": 80, "h": 10 },
+      "explain": {
+        "urdu": "بل کی رقم اور آخری تاریخ اچھی طرح دیکھ لیں۔ تسلی کے بعد ادا کریں۔",
+        "roman": "Bill ki raqam aur aakhri tareekh achi tarah dekh lein. Tasalli ke baad ada karein.",
+        "voice": "Bill ki raqam aur aakhri tareekh achi tarah dekh lein. Tasalli ke baad ada karein."
+      },
+      "question": {
+        "urdu": "رقم ٹھیک ہے تو ادائیگی کے لیے کیا دبائیں گی؟",
+        "roman": "Raqam theek hai to adaigi ke liye kya dabayengi?"
+      },
+      "wrong_tap": {
+        "urdu": "کوئی بات نہیں۔ یہ بل کی تفصیلات کا کارڈ ہے۔ بل ادا کرنے کے لیے نیچے بٹن دبائیں۔",
+        "roman": "Koi baat nahi. Yeh bill ki tafseelat ka card hai. Bill ada karne ke liye neeche button dabayein."
+      },
+      "hint_levels": [
+        "",
+        "Neeche hara button 'Ada Karein' dabayein.",
+        "highlight"
+      ]
+    },
+    {
+      "id": "s4",
+      "image": "/lessons/bijli/step4.svg",
+      "target": { "x": 10, "y": 42, "w": 80, "h": 14 },
+      "explain": {
+        "urdu": "اب منتخب کریں کہ بل کیسے ادا کرنا ہے: موبائل والیٹ یا بینک اکاؤنٹ۔",
+        "roman": "Ab muntakhib karein ke bill kaise ada karna hai: Mobile Wallet ya Bank Account.",
+        "voice": "Ab muntakhib karein ke bill kaise ada karna hai: Mobile Wallet ya Bank Account."
+      },
+      "question": {
+        "urdu": "اپنے موبائل والیٹ سے ادا کرنے کے لیے کہاں دبائیں گی؟",
+        "roman": "Apne mobile wallet se ada karne ke liye kahan dabayengi?"
+      },
+      "wrong_tap": {
+        "urdu": "کوئی بات نہیں۔ موبائل والیٹ کا پہلا خانہ چنیں۔",
+        "roman": "Koi baat nahi. Mobile Wallet ka pehla khana chunein."
+      },
+      "hint_levels": [
+        "",
+        "Pehla option 'EasyWallet' muntakhib karein.",
+        "highlight"
+      ]
+    },
+    {
+      "id": "s5",
+      "image": "/lessons/bijli/step5.svg",
+      "target": { "x": 10, "y": 78, "w": 80, "h": 10 },
+      "explain": {
+        "urdu": "آخری بار اپنا نام اور بل کی رقم دھیان سے پڑھیں۔ پھر تصدیق کریں۔",
+        "roman": "Aakhri baar apna naam aur bill ki raqam dhyan se parhein. Phir tasdeeq karein.",
+        "voice": "Aakhri baar apna naam aur bill ki raqam dhyan se parhein. Phir tasdeeq karein."
+      },
+      "question": {
+        "urdu": "سب درست ہے تو تصدیق کے لیے کہاں دبائیں گی؟",
+        "roman": "Sab durust hai to tasdeeq ke liye kahan dabayengi?"
+      },
+      "wrong_tap": {
+        "urdu": "کوئی بات نہیں، واپس چلتے ہیں۔ تصدیق کے لیے نیچے والا ہرا بٹن دبائیں۔",
+        "roman": "Koi baat nahi, wapas chalte hain. Tasdeeq ke liye neeche wala hara button dabayein."
+      },
+      "hint_levels": [
+        "",
+        "'Tasdeeq Karein' wala button dabayein.",
+        "highlight"
+      ]
+    },
+    {
+      "id": "s6",
+      "image": "/lessons/bijli/step6.svg",
+      "target": { "x": 10, "y": 74, "w": 80, "h": 11 },
+      "explain": {
+        "urdu": "ہوشیار! فون کال آئی ہے اور کال کرنے والا او ٹی پی مانگ رہا ہے۔ او ٹی پی ایک خفیہ کوڈ ہوتا ہے جو کسی کو نہیں بتانا۔",
+        "roman": "Hoshiyar! Phone call aayi hai aur caller OTP maang raha hai. OTP ek khufiya code hota hai jo kisi ko nahi batana.",
+        "voice": "Hoshiyar! Phone call aayi hai aur caller O T P maang raha hai. O T P ek khufiya code hota hai jo kisi ko nahi batana."
+      },
+      "question": {
+        "urdu": "کیا آپ او ٹی پی بتائیں گی؟ محفوظ انتخاب کیا ہے؟",
+        "roman": "Kya aap OTP batayengi? Mehfooz intikhab kya hai?"
+      },
+      "wrong_tap": {
+        "urdu": "رک جائیں! کبھی بھی اپنا او ٹی پی فون پر کسی کو نہ بتائیں۔ چاہے وہ بینک ہی کیوں نہ کہے۔ 'نہیں، کسی کو نہیں بتانا' چنیں۔",
+        "roman": "Ruk jayein! Kabhi bhi apna OTP phone par kisi ko na batayein. Chahe woh bank hi kyun na kahe. 'Nahi, kisi ko nahi batana' chunein."
+      },
+      "hint_levels": [
+        "",
+        "Neeche hara button 'Nahi, kisi ko nahi batana' dabayein.",
+        "highlight"
+      ]
+    },
+    {
+      "id": "s7",
+      "image": "/lessons/bijli/step7.svg",
+      "target": { "x": 10, "y": 76, "w": 80, "h": 10 },
+      "explain": {
+        "urdu": "مبارک ہو! بل کامیابی سے ادا ہو گیا ہے۔ رسید محفوظ کر لیں۔",
+        "roman": "Mubarak ho! Bill kamyabi se ada ho gaya hai. Rasid mehfooz kar lein.",
+        "voice": "Mubarak ho! Bill kamyabi se ada ho gaya hai. Rasid mehfooz kar lein."
+      },
+      "question": {
+        "urdu": "رسید اپنے پاس محفوظ کرنے کے لیے کہاں دبائیں گی؟",
+        "roman": "Rasid apne paas mehfooz karne ke liye kahan dabayengi?"
+      },
+      "wrong_tap": {
+        "urdu": "کوئی بات نہیں۔ رسید اپنے پاس رکھنے کے لیے 'رسید محفوظ کریں' دبائیں۔",
+        "roman": "Koi baat nahi. Rasid apne paas rakhne ke liye 'Rasid Mehfooz Karein' dabayein."
+      },
+      "hint_levels": [
+        "",
+        "'Rasid Mehfooz Karein' par tap karein.",
+        "highlight"
+      ]
+    }
+  ]
+}
