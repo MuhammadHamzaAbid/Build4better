@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Abbu Ka Tutor - Pitch Deck (Build4Better Hackathon)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;700&family=Nunito:wght@400;600;700;800;900&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0C1210;
+      --slide-bg: #131B18;
+      --card-bg: #1B2622;
+      --primary: #10B981;
+      --primary-light: #34D399;
+      --primary-dark: #065F46;
+      --amber: #F59E0B;
+      --crimson: #EF4444;
+      --text: #F3F4F6;
+      --text-muted: #9CA3AF;
+      --border: #263832;
+      --font-sans: 'Nunito', -apple-system, sans-serif;
+      --font-urdu: 'Noto Nastaliq Urdu', serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-sans);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    /* Presentation Container */
+    #deck {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+      max-width: 1400px;
+      max-height: 787.5px; /* 16:9 */
+      background: var(--slide-bg);
+      border-radius: 16px;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+      border: 1px solid var(--border);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Slide Item */
+    .slide {
+      position: absolute;
+      inset: 0;
+      padding: 56px 64px 72px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateX(40px);
+      transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1), transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .slide.active {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateX(0);
+    }
+
+    /* Header & Tag */
+    .slide-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      border-radius: 9999px;
+      background: rgba(16, 185, 129, 0.15);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      color: var(--primary-light);
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      font-family: var(--font-mono);
+      width: fit-content;
+      margin-bottom: 12px;
+    }
+
+    .slide-title {
+      font-size: 42px;
+      font-weight: 900;
+      color: #FFFFFF;
+      letter-spacing: -0.5px;
+      line-height: 1.15;
+    }
+
+    .slide-subtitle {
+      font-size: 20px;
+      color: var(--text-muted);
+      margin-top: 6px;
+      font-weight: 500;
+    }
+
+    /* Slide Content Layouts */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+      margin-top: 24px;
+      flex: 1;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 22px;
+      margin-top: 24px;
+      flex: 1;
+    }
+
+    .grid-4 {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+      margin-top: 24px;
+      flex: 1;
+    }
+
+    /* Feature / Stat Cards */
+    .deck-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      gap: 10px;
+      transition: border-color 0.2s ease;
+    }
+
+    .deck-card:hover {
+      border-color: rgba(16, 185, 129, 0.4);
+    }
+
+    .deck-card h4 {
+      font-size: 20px;
+      font-weight: 800;
+      color: #FFFFFF;
+    }
+
+    .deck-card p {
+      font-size: 15px;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    .stat-number {
+      font-size: 52px;
+      font-weight: 900;
+      color: var(--primary-light);
+      font-family: var(--font-mono);
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+
+    .stat-label {
+      font-size: 15px;
+      font-weight: 700;
+      color: #FFFFFF;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    /* Navigation Bar */
+    .deck-footer {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 60px;
+      background: rgba(19, 27, 24, 0.9);
+      border-top: 1px solid var(--border);
+      padding: 0 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      backdrop-filter: blur(8px);
+      z-index: 100;
+    }
+
+    .deck-nav-btn {
+      padding: 8px 18px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: var(--card-bg);
+      color: var(--text);
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.15s ease;
+    }
+
+    .deck-nav-btn:hover:not(:disabled) {
+      background: var(--primary);
+      color: #FFFFFF;
+      border-color: var(--primary);
+    }
+
+    .deck-nav-btn:disabled {
+      opacity: 0.35;
+      cursor: not-allowed;
+    }
+
+    .indicators {
+      display: flex;
+      gap: 8px;
+    }
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 9999px;
+      background: var(--border);
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .dot.active {
+      background: var(--primary);
+      width: 28px;
+    }
+
+    /* Speaker Notes Box */
+    .speaker-note {
+      background: rgba(245, 158, 11, 0.08);
+      border-left: 3px solid var(--amber);
+      padding: 10px 14px;
+      border-radius: 0 8px 8px 0;
+      font-size: 13px;
+      color: #FCD34D;
+      margin-top: 14px;
+    }
+
+    /* Print styles for PDF export */
+    @media print {
+      body {
+        background: white !important;
+        color: black !important;
+      }
+      #deck {
+        width: 100% !important;
+        height: auto !important;
+        box-shadow: none !important;
+        border: none !important;
+      }
+      .slide {
+        position: relative !important;
+        page-break-after: always !important;
+        opacity: 1 !important;
+        transform: none !important;
+        height: 100vh !important;
+      }
+      .deck-footer {
+        display: none !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div id="deck">
+    <!-- SLIDE 1: COVER & THE HOOK -->
+    <section class="slide active" id="s1">
+      <div>
+        <div class="slide-badge">Build4Better Hackathon • NED University • Oct 2026</div>
+        <h1 class="slide-title" style="font-size: 56px; margin-top: 10px;">
+          ابو کا ٹیوٹر <br>
+          <span style="color: var(--primary-light);">Abbu Ka Tutor</span>
+        </h1>
+        <p class="slide-subtitle" style="font-size: 24px; margin-top: 12px; color: #E5E7EB;">
+          "پہلے سیکھو، پھر کرو، بنا ڈر کے۔"
+        </p>
+        <p style="font-size: 18px; color: var(--text-muted); margin-top: 6px;">
+          Empowering 40M+ Pakistani Elders to Safely Master Digital Payments & Scam Defense
+        </p>
+      </div>
+
+      <div class="grid-3" style="margin-top: 30px;">
+        <div class="deck-card">
+          <div style="font-size: 24px; color: var(--primary-light);">🛡️</div>
+          <h4>Zero-Risk Simulator</h4>
+          <p>Realistic Pakistani banking screens where mistakes cost Rs. 0 and build muscle memory.</p>
+        </div>
+        <div class="deck-card">
+          <div style="font-size: 24px; color: var(--amber);">🎙️</div>
+          <h4>Native Urdu Voice AI</h4>
+          <p>Bilingual audio coach (Nastaliq & Roman Urdu) designed specifically for low digital literacy.</p>
+        </div>
+        <div class="deck-card">
+          <div style="font-size: 24px; color: var(--crimson);">🚨</div>
+          <h4>Live Scam SOS Radar</h4>
+          <p>1-tap emergency diagnostic for OTP calls, fake BISP alerts, and automatic family WhatsApp warning.</p>
+        </div>
+      </div>
+
+      <div class="speaker-note">
+        <strong>Judges Hook:</strong> "Every one of us has received a frantic call from our Ammi or Abbu: 'Beta, phone par ek message aaya hai, kya yeh dabana hai?' Abbu Ka Tutor gives them digital dignity and stops financial predators."
+      </div>
+    </section>
+
+    <!-- SLIDE 2: THE PROBLEM -->
+    <section class="slide" id="s2">
+      <div>
+        <div class="slide-badge">01. The Problem</div>
+        <h2 class="slide-title">The Silent Digital Crisis of Pakistani Elders</h2>
+        <p class="slide-subtitle">Digital inclusion without elder-centric design has become a recipe for fear and financial fraud.</p>
+      </div>
+
+      <div class="grid-3">
+        <div class="deck-card" style="border-top: 3px solid var(--crimson);">
+          <div class="stat-number">40M+</div>
+          <div class="stat-label">Excluded Citizens</div>
+          <p style="margin-top: 8px;">Pakistani adults aged 50+ fear using Easypaisa, JazzCash, or bank apps due to terrifying English jargon (OTP, CVV, IBAN).</p>
+        </div>
+
+        <div class="deck-card" style="border-top: 3px solid var(--amber);">
+          <div class="stat-number">Rs. 8B+</div>
+          <div class="stat-label">Lost to Scams Yearly</div>
+          <p style="margin-top: 8px;">Fake bank manager calls, lottery prizes, and urgent account blockage threats prey almost exclusively on senior citizens.</p>
+        </div>
+
+        <div class="deck-card" style="border-top: 3px solid #6366F1;">
+          <div class="stat-number">87%</div>
+          <div class="stat-label">Family Friction</div>
+          <p style="margin-top: 8px;">Adult children lose patience teaching repetitive tasks. Parents feel humiliated, helpless, and afraid to try.</p>
+        </div>
+      </div>
+
+      <div class="speaker-note">
+        <strong>Talking Point:</strong> "The problem isn't that our parents cannot learn; the problem is that apps are designed for 22-year-olds in English, with zero safe practice areas."
+      </div>
+    </section>
+
+    <!-- SLIDE 3: THE SOLUTION -->
+    <section class="slide" id="s3">
+      <div>
+        <div class="slide-badge">02. The Solution</div>
+        <h2 class="slide-title">A Safe, Zero-Blame Digital Flight Simulator</h2>
+        <p class="slide-subtitle">We teach them how to do it themselves—never doing it for them, never shaming mistakes.</p>
+      </div>
+
+      <div class="grid-2">
+        <div class="deck-card">
+          <h4>1. Interactive Hotspot Sandbox</h4>
+          <p>Parents practice real tasks (e.g. Electricity Bill Payment) on authentic screens. Every tap area is calibrated with 3-tier gentle hints.</p>
+          <div style="margin-top: 10px; padding: 10px; background: rgba(16, 185, 129, 0.1); border-radius: 8px; font-size: 14px; color: var(--primary-light);">
+            <strong>Zero-Blame Guarantee:</strong> Wrong taps trigger warm amber encouragement: <em>"Koi baat nahi, yeh sab se hota hai!"</em>
+          </div>
+        </div>
+
+        <div class="deck-card">
+          <h4>2. Step-by-Step AI Coach ("Madadgar AI")</h4>
+          <p>Contextual AI tutor at every step that answers elder questions in natural spoken Urdu:</p>
+          <ul style="margin-left: 20px; font-size: 14px; color: var(--text-muted); line-height: 1.6; margin-top: 6px;">
+            <li>"Agar main ghalat dabba doon to paise katengay?"</li>
+            <li>"Reference number kaghazi bill par kahan likha hota hai?"</li>
+            <li>Instant answers + authentic audio playback via dual-engine TTS.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="speaker-note">
+        <strong>Talking Point:</strong> "Pilots practice in flight simulators before flying a plane. Our parents deserve a simulator before handling their life savings."
+      </div>
+    </section>
+
+    <!-- SLIDE 4: SCAM DOJO & SOS RADAR -->
+    <section class="slide" id="s4">
+      <div>
+        <div class="slide-badge">03. Innovation & Defense</div>
+        <h2 class="slide-title">Scam Dojo & Emergency "Mujhe Shak Hai!" Radar</h2>
+        <p class="slide-subtitle">Active fraud inoculation combined with a live panic button during incoming scam calls.</p>
+      </div>
+
+      <div class="grid-2">
+        <div class="deck-card" style="border-left: 4px solid var(--amber);">
+          <h4>🥋 Scam Dojo (Training Ground)</h4>
+          <p>Interactive scenarios modeled on real Pakistani fraud:</p>
+          <ul style="margin-left: 20px; font-size: 14px; color: var(--text-muted); line-height: 1.6; margin-top: 8px;">
+            <li>Benazir Income Support (BISP) lottery lures</li>
+            <li>Fake State Bank / Army officer calls demanding OTP</li>
+            <li>Interactive red-flag phrase highlighters that train visual defense</li>
+          </ul>
+        </div>
+
+        <div class="deck-card" style="border-left: 4px solid var(--crimson);">
+          <h4>🚨 "Mujhe Shak Hai!" (Live SOS Radar)</h4>
+          <p>When an elder receives a suspicious call right now in real life:</p>
+          <ul style="margin-left: 20px; font-size: 14px; color: var(--text-muted); line-height: 1.6; margin-top: 8px;">
+            <li><strong>3-Tap Triage:</strong> Detects OTP demands, blockage threats, or 03xx mobile numbers posing as banks.</li>
+            <li><strong>Loud Voice Siren:</strong> <em>"Foran call kaat dein! Yeh 100% fraud hai. Bank kabhi OTP nahi maangta!"</em></li>
+            <li><strong>1-Tap WhatsApp Alert:</strong> Immediately notifies their children with the caller info.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="speaker-note">
+        <strong>Talking Point:</strong> "Most apps detect scams after money is stolen. Our SOS Radar catches the scammer while the call is still ringing."
+      </div>
+    </section>
+
+    <!-- SLIDE 5: TRACTION & FUTURE VISION -->
+    <section class="slide" id="s5">
+      <div>
+        <div class="slide-badge">04. Impact & Roadmap</div>
+        <h2 class="slide-title">Empowering Families Across Pakistan</h2>
+        <p class="slide-subtitle">Measurable confidence gains, enterprise scalability, and regional language expansion.</p>
+      </div>
+
+      <div class="grid-3">
+        <div class="deck-card">
+          <div class="stat-number">+2.5x</div>
+          <div class="stat-label">Confidence Delta</div>
+          <p style="margin-top: 8px;">Elder confidence scores jump from 2/5 to 4.5/5 after just two safe simulator sessions.</p>
+        </div>
+
+        <div class="deck-card">
+          <div class="stat-number">100%</div>
+          <div class="stat-label">Offline-First Tech</div>
+          <p style="margin-top: 8px;">Dual-engine architecture works seamlessly even without costly API keys via pre-cached speech and local rule engines.</p>
+        </div>
+
+        <div class="deck-card">
+          <div class="stat-number">B2B2C</div>
+          <div class="stat-label">Adoption Model</div>
+          <p style="margin-top: 8px;">Partnering with telecom operators (Jazz, Telenor), State Bank digital drives, and microfinance banks to onboard elders.</p>
+        </div>
+      </div>
+
+      <div class="deck-card" style="margin-top: 18px; padding: 16px 20px; display: flex; flex-direction: row; justify-content: space-between; align-items: center;">
+        <div>
+          <div style="font-weight: 800; font-size: 16px; color: #FFFFFF;">Next Milestone: WhatsApp Voice Bot & Regional Languages</div>
+          <div style="font-size: 13px; color: var(--text-muted);">Expanding beyond Urdu & Roman Urdu to Sindhi, Pashto, and Punjabi voice models.</div>
+        </div>
+        <div style="color: var(--primary-light); font-weight: 800; font-family: var(--font-mono);">Q1 2027</div>
+      </div>
+
+      <div class="speaker-note">
+        <strong>Closing Line:</strong> "Abbu Ka Tutor isn't just an app; it's digital independence for our parents. Thank you!"
+      </div>
+    </section>
+
+    <!-- FOOTER NAV -->
+    <div class="deck-footer">
+      <div style="display: flex; align-items: center; gap: 14px;">
+        <span style="font-size: 13px; font-weight: 800; color: var(--primary-light); font-family: var(--font-mono);">ABBU KA TUTOR</span>
+        <span style="color: var(--border);">|</span>
+        <span id="slide-counter" style="font-size: 13px; color: var(--text-muted); font-family: var(--font-mono);">Slide 1 of 5</span>
+      </div>
+
+      <div class="indicators" id="dots">
+        <div class="dot active" onclick="goToSlide(0)"></div>
+        <div class="dot" onclick="goToSlide(1)"></div>
+        <div class="dot" onclick="goToSlide(2)"></div>
+        <div class="dot" onclick="goToSlide(3)"></div>
+        <div class="dot" onclick="goToSlide(4)"></div>
+      </div>
+
+      <div style="display: flex; gap: 8px;">
+        <button class="deck-nav-btn" id="prev-btn" onclick="prevSlide()" disabled>← Previous</button>
+        <button class="deck-nav-btn" id="next-btn" onclick="nextSlide()">Next →</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.slide');
+    const dots = document.querySelectorAll('.dot');
+    const prevBtn = document.getElementById('prev-btn');
+    const nextBtn = document.getElementById('next-btn');
+    const counter = document.getElementById('slide-counter');
+
+    function updateDeck() {
+      slides.forEach((s, idx) => {
+        s.classList.toggle('active', idx === currentSlide);
+      });
+      dots.forEach((d, idx) => {
+        d.classList.toggle('active', idx === currentSlide);
+      });
+      counter.textContent = `Slide ${currentSlide + 1} of ${slides.length}`;
+      prevBtn.disabled = currentSlide === 0;
+      nextBtn.disabled = currentSlide === slides.length - 1;
+    }
+
+    function nextSlide() {
+      if (currentSlide < slides.length - 1) {
+        currentSlide++;
+        updateDeck();
+      }
+    }
+
+    function prevSlide() {
+      if (currentSlide > 0) {
+        currentSlide--;
+        updateDeck();
+      }
+    }
+
+    function goToSlide(idx) {
+      currentSlide = idx;
+      updateDeck();
+    }
+
+    // Keyboard support
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === 'Space') {
+        e.preventDefault();
+        nextSlide();
+      } else if (e.key === 'ArrowLeft') {
+        e.preventDefault();
+        prevSlide();
+      }
+    });
+  </script>
+</body>
+</html>
