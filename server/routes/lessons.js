@@ -94,14 +94,26 @@ router.post('/generate', async (req, res) => {
 router.post('/save', (req, res) => {
   try {
     const lesson = req.body;
-    if (!lesson || !lesson.id) {
-      return res.status(400).json({ error: 'Invalid lesson data' });
+    if (!lesson || !lesson.id || typeof lesson.id !== 'string') {
+      return res.status(400).json({ error: 'Invalid lesson data: id is required' });
     }
-    const savePath = path.join(LESSONS_DIR, `${lesson.id}.json`);
-    fs.writeFileSync(savePath, JSON.stringify(lesson, null, 2), 'utf8');
-    res.json({ ok: true, id: lesson.id });
+
+    // Strictly sanitize lesson.id to prevent arbitrary file write / path traversal
+    const safeId = path.basename(lesson.id).replace(/[^a-zA-Z0-9_-]/g, '');
+    if (!safeId) {
+      return res.status(400).json({ error: 'Invalid lesson id characters' });
+    }
+
+    const resolvedDir = path.resolve(LESSONS_DIR);
+    const savePath = path.resolve(resolvedDir, `${safeId}.json`);
+    if (!savePath.startsWith(resolvedDir)) {
+      return res.status(403).json({ error: 'Access denied: path traversal detected' });
+    }
+
+    fs.writeFileSync(savePath, JSON.stringify({ ...lesson, id: safeId }, null, 2), 'utf8');
+    res.json({ ok: true, id: safeId });
   } catch (err) {
-    res.status(500).json({ error: err.message });
+    res.status(500).json({ error: 'Failed to save lesson safely', details: err.message });
   }
 });
 

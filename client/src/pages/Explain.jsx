@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useLanguage } from '../lib/i18n';
 import LanguageToggle from '../components/LanguageToggle';
 import VoiceButton from '../components/VoiceButton';
-import { IconSearch, IconShieldAlert, IconCheckCircle, IconLightbulb, IconRotate, IconHome } from '../components/Icons';
+import { IconSearch, IconShieldAlert, IconCheckCircle, IconLightbulb, IconRotate, IconHome, IconArrowRight } from '../components/Icons';
 import { explainScreen } from '../lib/api';
 
 export default function Explain() {
@@ -189,10 +189,15 @@ export default function Explain() {
               fontFamily: isUrdu ? 'var(--font-urdu)' : 'var(--font-sans)',
               fontWeight: '700',
               cursor: 'pointer',
+              display: 'inline-flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: '8px',
               boxShadow: 'var(--shadow-sm)'
             }}
           >
-            {loading ? (isUrdu ? 'جائزہ لیا جا رہا ہے...' : 'Jaiza liya ja raha hai...') : (isUrdu ? 'اس اسکرین کو سمجھائیں ➔' : 'Yeh Screen Samjhein ➔')}
+            <span>{loading ? (isUrdu ? 'جائزہ لیا جا رہا ہے...' : 'Jaiza liya ja raha hai...') : (isUrdu ? 'اس اسکرین کو سمجھائیں' : 'Yeh Screen Samjhein')}</span>
+            {!loading && <IconArrowRight size={18} />}
           </button>
         )}
 
@@ -326,10 +331,15 @@ export default function Explain() {
                     fontSize: isUrdu ? '19px' : '16px',
                     fontFamily: isUrdu ? 'var(--font-urdu)' : 'var(--font-sans)',
                     fontWeight: '700',
-                    cursor: 'pointer'
+                    cursor: 'pointer',
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    gap: '8px'
                   }}
                 >
-                  {loading ? (isUrdu ? 'رہنمائی لائی جا رہی ہے...' : 'Jawab check ho raha hai...') : (isUrdu ? 'جواب چیک کریں ➔' : 'Jawab Check Karein ➔')}
+                  <span>{loading ? (isUrdu ? 'رہنمائی لائی جا رہی ہے...' : 'Jawab check ho raha hai...') : (isUrdu ? 'جواب چیک کریں' : 'Jawab Check Karein')}</span>
+                  {!loading && <IconArrowRight size={18} />}
                 </button>
               </div>
             )}

@@ -90,8 +90,8 @@ export default function ScamSOS() {
         isScam: isDanger,
         dangerLevel: isDanger ? 'high' : 'low',
         headline: isUrdu
-          ? (isDanger ? '🚨 خبردار! یہ ۱۰۰ فیصد فراڈ کال یا پیغام ہے' : 'بظاہر محفوظ لگتا ہے')
-          : (isDanger ? '🚨 KHABARDAR! Yeh 100% Fraud Call ya SMS Hai' : 'Bazahir Mehfooz Lagta Hai'),
+          ? (isDanger ? 'خبردار! یہ ۱۰۰ فیصد فراڈ کال یا پیغام ہے' : 'بظاہر محفوظ لگتا ہے')
+          : (isDanger ? 'KHABARDAR! Yeh 100% Fraud Call ya SMS Hai' : 'Bazahir Mehfooz Lagta Hai'),
         explanation: isUrdu
           ? (isDanger
               ? 'اصلی بینک کا کوئی ملازم کبھی فون یا واٹس ایپ پر او ٹی پی یا پن کوڈ نہیں مانگتا۔ آپ کے پیسے محفوظ ہیں، بالکل نہ ڈریں۔ فوراً کال کاٹ دیں!'
@@ -173,7 +173,7 @@ export default function ScamSOS() {
               lineHeight: '1.2',
               marginBottom: '4px'
             }}>
-              {isUrdu ? '🚨 مجھے شک ہے! (فوری فراڈ چیک)' : '🚨 Mujhe Shak Hai! (Emergency SOS)'}
+              {isUrdu ? 'مجھے شک ہے! (فوری فراڈ چیک)' : 'Mujhe Shak Hai! (Emergency SOS)'}
             </h2>
             <p style={{
               fontSize: isUrdu ? '18px' : '14px',
@@ -488,7 +488,8 @@ export default function ScamSOS() {
                   boxShadow: 'var(--shadow-sm)'
                 }}
               >
-                <span>📱 {isUrdu ? 'بچوں کو واٹس ایپ پر الرٹ بھیجیں' : 'Bachon ko WhatsApp Alert Bhejein'}</span>
+                <IconPhoneCall size={18} />
+                <span>{isUrdu ? 'بچوں کو واٹس ایپ پر الرٹ بھیجیں' : 'Bachon ko WhatsApp Alert Bhejein'}</span>
               </button>
             )}
 

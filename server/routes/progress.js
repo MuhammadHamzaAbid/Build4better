@@ -22,9 +22,20 @@ function writeProgress(data) {
   fs.writeFileSync(PROGRESS_FILE, JSON.stringify(data, null, 2), 'utf8');
 }
 
+function sanitizeCode(code) {
+  if (!code || typeof code !== 'string') return 'AMMI-2026';
+  const clean = code.replace(/[^a-zA-Z0-9_-]/g, '').slice(0, 32);
+  if (!clean || clean === '__proto__' || clean === 'constructor' || clean === 'prototype') {
+    return 'AMMI-2026';
+  }
+  return clean;
+}
+
 // POST /api/progress
 router.post('/', (req, res) => {
-  const { familyCode = 'AMMI-2026', lessonId, stepId, attempts = 1, hintsUsed = 0, correct = true } = req.body;
+  const rawCode = req.body.familyCode || 'AMMI-2026';
+  const familyCode = sanitizeCode(rawCode);
+  const { lessonId, stepId, attempts = 1, hintsUsed = 0, correct = true } = req.body;
   const data = readProgress();
   if (!data[familyCode]) {
     data[familyCode] = { familyCode, confidence: { before: 2, after: 4 }, sessions: [] };
@@ -43,7 +54,8 @@ router.post('/', (req, res) => {
 
 // POST /api/confidence
 router.post('/confidence', (req, res) => {
-  const { familyCode = 'AMMI-2026', phase = 'after', value = 4 } = req.body;
+  const familyCode = sanitizeCode(req.body.familyCode);
+  const { phase = 'after', value = 4 } = req.body;
   const data = readProgress();
   if (!data[familyCode]) {
     data[familyCode] = { familyCode, confidence: { before: 2, after: 4 }, sessions: [] };
@@ -51,14 +63,14 @@ router.post('/confidence', (req, res) => {
   if (!data[familyCode].confidence) {
     data[familyCode].confidence = { before: 2, after: 4 };
   }
-  data[familyCode].confidence[phase] = Number(value);
+  data[familyCode].confidence[phase] = Math.max(1, Math.min(5, Number(value) || 3));
   writeProgress(data);
   res.json({ ok: true });
 });
 
 // GET /api/progress/:familyCode
 router.get('/:familyCode', (req, res) => {
-  const { familyCode } = req.params;
+  const familyCode = sanitizeCode(req.params.familyCode);
   const data = readProgress();
   const fam = data[familyCode] || data['AMMI-2026'] || {
     familyCode,

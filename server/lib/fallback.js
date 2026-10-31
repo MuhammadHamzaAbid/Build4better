@@ -21,10 +21,20 @@ export function getLessonsList() {
 }
 
 export function getLessonById(id) {
-  const filePath = path.join(DATA_DIR, 'lessons', `${id}.json`);
+  if (!id || typeof id !== 'string') return null;
+  // Sanitize id to strictly prevent directory traversal attacks
+  const safeId = path.basename(id).replace(/[^a-zA-Z0-9_-]/g, '');
+  if (!safeId) return null;
+
+  const lessonsDir = path.resolve(DATA_DIR, 'lessons');
+  const filePath = path.resolve(lessonsDir, `${safeId}.json`);
+  if (!filePath.startsWith(lessonsDir)) {
+    return null;
+  }
+
   if (!fs.existsSync(filePath)) {
     // Return the hero lesson as default fallback
-    const fallbackPath = path.join(DATA_DIR, 'lessons', 'bijli-bill-01.json');
+    const fallbackPath = path.join(lessonsDir, 'bijli-bill-01.json');
     if (fs.existsSync(fallbackPath)) {
       return JSON.parse(fs.readFileSync(fallbackPath, 'utf8'));
     }

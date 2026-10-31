@@ -3,7 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useLanguage } from '../lib/i18n';
 import LanguageToggle from '../components/LanguageToggle';
 import ConfidenceMeter from '../components/ConfidenceMeter';
-import { IconCheckCircle, IconRotate, IconShield, IconHome } from '../components/Icons';
+import { IconCheckCircle, IconRotate, IconShield, IconHome, IconArrowRight } from '../components/Icons';
 import { postConfidence } from '../lib/api';
 
 export default function LessonComplete() {
@@ -115,7 +115,8 @@ export default function LessonComplete() {
             }}
           >
             <IconShield size={18} />
-            <span>{isUrdu ? 'فراڈ سے بچاؤ کی مشق ➔' : 'Fraud Se Bachne Ki Mashq ➔'}</span>
+            <span>{isUrdu ? 'فراڈ سے بچاؤ کی مشق' : 'Fraud Se Bachne Ki Mashq'}</span>
+            <IconArrowRight size={18} />
           </button>
 
           <button

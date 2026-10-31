@@ -46,7 +46,13 @@ async function getOrGenerateAudio(text, lang) {
     throw new Error('Valid text is required');
   }
 
-  const hash = crypto.createHash('md5').update(`${text}_${lang}`).digest('hex');
+  const cleanText = text.trim().slice(0, 500);
+  if (!cleanText) {
+    throw new Error('Text cannot be empty');
+  }
+
+  const cleanLang = (lang === 'urdu' || lang === 'ur') ? 'ur' : 'roman';
+  const hash = crypto.createHash('md5').update(`${cleanText}_${cleanLang}`).digest('hex');
   const cachedFile = path.join(CACHE_DIR, `${hash}.mp3`);
 
   if (fs.existsSync(cachedFile)) {
@@ -56,7 +62,7 @@ async function getOrGenerateAudio(text, lang) {
   // 1. Try OpenAI if configured
   if (isAiAvailable()) {
     try {
-      const audioBuffer = await generateSpeech(text);
+      const audioBuffer = await generateSpeech(cleanText);
       fs.writeFileSync(cachedFile, audioBuffer);
       return { buffer: audioBuffer, hit: false };
     } catch (err) {
@@ -65,7 +71,7 @@ async function getOrGenerateAudio(text, lang) {
   }
 
   // 2. High-reliability Urdu/Hindi TTS engine fallback
-  const buffer = await fetchGoogleTTS(text, lang);
+  const buffer = await fetchGoogleTTS(cleanText, cleanLang);
   fs.writeFileSync(cachedFile, buffer);
   return { buffer, hit: false };
 }

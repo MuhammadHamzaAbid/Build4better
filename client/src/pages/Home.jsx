@@ -124,7 +124,7 @@ export default function Home() {
               color: 'var(--danger-text)',
               marginBottom: '2px'
             }}>
-              {isUrdu ? '🚨 مجھے شک ہے! (فوری فراڈ چیک)' : '🚨 Mujhe Shak Hai! (Emergency SOS)'}
+              {isUrdu ? 'مجھے شک ہے! (فوری فراڈ چیک)' : 'Mujhe Shak Hai! (Emergency SOS)'}
             </div>
             <div style={{
               fontSize: isUrdu ? '17px' : '14px',
